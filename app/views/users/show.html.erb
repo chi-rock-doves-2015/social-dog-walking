@@ -1,2 +1,9 @@
-<h1> Hello <%= @user.petname %>!</h1>
-<%= @user.breed %>
+<h1>
+  <% if @user.id == session[:id] %>
+    Hello
+  <% end %>
+  <%= @user.petname %>
+</h1>
+<h1>Breed: <%= @user.breed %></h1>
+
+
