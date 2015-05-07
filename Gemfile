@@ -26,9 +26,22 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
+group :development, :test do
 
+  gem 'factory_girl_rails'
+  gem 'faker'
+end
+
+# group :test do
+
+#   gem 'selenium-webdriver'
+
+#   gem 'shoulda-matchers'
+# end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -37,6 +50,8 @@ group :development, :test do
   gem 'byebug'
 
   gem 'jasmine-rails'
+
+  gem 'database_cleaner', '~> 1.4.1'
 
   gem 'capybara'
 
