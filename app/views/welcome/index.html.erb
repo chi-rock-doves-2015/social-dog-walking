@@ -1,1 +1,13 @@
 <h1>Welcome!</h1>
+
+
+
+<% if session[:id] == nil %>
+  <%= link_to 'login', login_path  %>
+  <%= link_to 'register', new_user_path %>
+<% end %>
+
+<% if session[:id] %>
+  <%= link_to 'logout', logout_path  %>
+<% end %>
+
