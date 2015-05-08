@@ -3,22 +3,7 @@ $(window).load(function() {
 });
 
 var map;
-///////////
-var success = function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                        position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Josh is typing on the computer.'
-      });
-
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    };
-////////
 function initialize() {
 
   var mapOptions = {
@@ -33,14 +18,32 @@ function initialize() {
         // initializing map
         map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success(position);
-  } else {
+  if (navigator.geolocation) {
+   navigator.geolocation.getCurrentPosition(onSuccess, onError)
+   } else {
     // Browser doesn't support Geolocation
   handleNoGeolocation(false);
   }
+};
 
+function onSuccess(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+                                        position.coords.longitude);
+
+      var infowindow = new google.maps.InfoWindow({
+        map: map,
+        position: pos,
+        content: 'Josh is typing on the computer.'
+      });
+
+      map.setCenter(pos);
 }
+
+
+function onError() {
+      handleNoGeolocation(true);
+}
+
 
 function loadScript() {
 	console.log("map loading ...");
