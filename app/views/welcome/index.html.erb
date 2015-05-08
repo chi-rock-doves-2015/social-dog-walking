@@ -1,6 +1,9 @@
 <h1>Welcome!</h1>
 
 
+<%= button_to "Start a walk!", :walks, action: "post" %>
+
+
 
 <% if session[:id] == nil %>
   <%= link_to 'login', login_path  %>
@@ -10,4 +13,3 @@
 <% if session[:id] %>
   <%= link_to 'logout', logout_path  %>
 <% end %>
-
