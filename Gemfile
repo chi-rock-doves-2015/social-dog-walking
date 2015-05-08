@@ -32,6 +32,7 @@ gem 'rails_12factor', group: :production
 # Foundation front-end framework
 gem 'foundation-rails'
 
+gem "paperclip", "~> 4.2"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
