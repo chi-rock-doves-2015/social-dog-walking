@@ -2,5 +2,5 @@ language: ruby
 
 before_script:
  - psql -c 'create database social_dog_walking_test;' -U postgres
-rake:
+script:
  - bundle exec rake db:schema:load

@@ -1,5 +1,5 @@
 require "spec_helper"
-describe User do
+RSpec.describe User, type: :model do
 
   let!(:gaber) {User.create!(petname: "Gaber", breed: "pomeranian", email: 'gaber@gaber.com', password: 'password')}
 
