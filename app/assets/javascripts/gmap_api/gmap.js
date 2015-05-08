@@ -27,6 +27,11 @@ function initialize() {
 };
 
 function onSuccess(position) {
+  displayMap(position);
+  ajaxGeolocation(position);
+}
+
+function displayMap(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                         position.coords.longitude);
 
@@ -39,6 +44,22 @@ function onSuccess(position) {
       map.setCenter(pos);
 }
 
+function ajaxGeolocation(position) {
+  var geolocationData, serializedData;
+  geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  serializedData = geolocationData;
+  var geolocationPost = $.ajax({
+                            url: '/walks/1/marks',
+                            type: 'post',
+                            data: serializedData,
+
+                          });
+  geolocationPost.done(function(response){
+    $('body').css('background', 'red');
+    console.log(response['response']);
+  });
+
+}
 
 function onError() {
       handleNoGeolocation(true);
