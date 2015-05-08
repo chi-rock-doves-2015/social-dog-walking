@@ -39,14 +39,14 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'factory_girl_rails'
-  gem 'faker'
+#   gem 'factory_girl_rails'
+#   gem 'faker'
 
-  gem 'jasmine-rails'
+  # gem 'jasmine-rails'
 
-  gem 'database_cleaner'
+  # gem 'database_cleaner'
 
-  gem 'capybara'
+  # gem 'capybara'
 
   gem 'rspec-rails'
   # gem 'selenium-webdriver'
