@@ -86,24 +86,29 @@ RSpec.configure do |config|
 =end
   #things we added
 
-  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  # require 'rspec/autorun' #deprecation notice in testing
 
-  # config.use_transactional_fixtures = true
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  # config.infer_base_class_for_anonymous_controllers = false
+  config.use_transactional_fixtures = true
 
-  # config.order = "random"
+  config.infer_base_class_for_anonymous_controllers = false
 
-  # config.before(:suite) do
-  #   DatabaseCleaner.strategy = :truncation
-  # end
+  config.order = "random"
 
-  # config.before(:each) do
-  #   DatabaseCleaner.start
-  # end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
 
-  # config.after(:each) do
-  #   DatabaseCleaner.clean
-  # end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
 end
