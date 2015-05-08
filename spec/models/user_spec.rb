@@ -1,4 +1,5 @@
-require "spec_helper"
+require "rails_helper"
+
 RSpec.describe User, type: :model do
 
   let!(:gaber) {User.create!(petname: "Gaber", breed: "pomeranian", email: 'gaber2@gaber.com', password: 'password')}
