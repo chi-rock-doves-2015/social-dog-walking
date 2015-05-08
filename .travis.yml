@@ -1,0 +1,4 @@
+language: ruby
+
+before_script:
+ - psql -c 'create database social-dog-walking_test' -U postgres
