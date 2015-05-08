@@ -30,32 +30,28 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-group :development, :test do
-
-  gem 'factory_girl_rails'
-  gem 'faker'
-end
 
 # group :test do
 
-#   gem 'selenium-webdriver'
 
-#   gem 'shoulda-matchers'
 # end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'factory_girl_rails'
+  gem 'faker'
 
   gem 'jasmine-rails'
 
-  gem 'database_cleaner', '~> 1.4.1'
+  gem 'database_cleaner'
 
   gem 'capybara'
 
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails'
+  # gem 'selenium-webdriver'
+
+  gem 'shoulda-matchers'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
