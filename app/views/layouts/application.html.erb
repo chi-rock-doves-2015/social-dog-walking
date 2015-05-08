@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SocialDogWalking</title>
+  <title>Social Dog Walking</title>
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag 'application'%>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCR_ZOsj0P5_-j5UoT-L50l3ynij4eoY4c" %>
   <%= csrf_meta_tags %>
 </head>
+
+
 <body>
 
 <%= yield %>
 
 </body>
+
+
 </html>
