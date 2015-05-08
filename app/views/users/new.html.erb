@@ -1,18 +1,35 @@
 <%= form_for @user do |f| %>
 
-  <%= f.label :petname %>
-  <%= f.text_field :petname %>
+  <div class = "row">
+    <div class = "large-6 medium-8 <!-- medium-centered --> columns">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
+ <!--  </div> -->
 
-  <%= f.label :breed %>
-  <%= f.text_field :breed %>
+  <!-- <div class = "row"> -->
+    <div class = "large-6 medium-8 <!--  medium-centered  --> columns">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+  </div>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+  <div class = "row">
+    <div class = "medium-3 columns">
+      <%= f.label :password %>
+      <%= f.text_field :password %>
+    </div>
+  </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <div class = "row">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
 
-  <%= f.submit "register" %>
+  <div class = "row">
+    <%= f.submit "register" %>
+  </div>
+
 <% end %>
 
 <% if @errors %>
