@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
 
   get '/map-sandbox' => 'welcome#map_sandbox'
-
+  get '/map-sandbox_dog_pictures' => 'welcome#map_sandbox'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
