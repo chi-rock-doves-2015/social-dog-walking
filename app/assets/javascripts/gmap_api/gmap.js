@@ -75,11 +75,11 @@ function displayMap(position) {
 function ajaxGeolocation(position) {
   var geolocationData, serializedData;
   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  serializedData = geolocationData;
+  // serializedData = geolocationData;
   var geolocationPost = $.ajax({
                             url: "/walks/1/marks",
                             type: "post",
-                            data: serializedData,
+                            data: geolocationData,
 
                           });
   geolocationPost.done(function(response){
