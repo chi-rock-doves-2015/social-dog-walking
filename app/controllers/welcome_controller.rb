@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+
   def map_sandbox
   	unless Rails.env.development?
   		flash[:alert] = "Production area only"

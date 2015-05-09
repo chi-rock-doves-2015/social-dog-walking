@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :walks do
+  resources :walks, only: [:index] do
     resources :marks, only: [:create]
   end
 
   resources :users, except: [:index] do
     resources :dogs
-    resources :walks, only: [:create, :index]
+    resources :walks, only: [:create, :index, :new]
   end
 
   # get 'walks/in-progress' => 'walks#in_progress'
