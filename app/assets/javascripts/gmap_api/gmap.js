@@ -146,5 +146,11 @@ function onSuccessBeginWalk(position){
     //   $('#status').append(response);
     // })
   })
-});
+
+// // MARK BUTTON
+//   $(".mark").on('click', $(".mark").find('input'), function(evengt){
+//     event.preventDefault();
+//     console.log("yay");
+//   })
+// });
 
