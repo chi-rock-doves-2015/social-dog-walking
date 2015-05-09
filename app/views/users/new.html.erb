@@ -1,14 +1,11 @@
 <%= form_for @user do |f| %>
 
   <div class = "row">
-    <div class = "large-6 medium-8 <!-- medium-centered --> columns">
+    <div class = "large-4 medium-8 columns">
       <%= f.label :username %>
       <%= f.text_field :username %>
-    </div>
- <!--  </div> -->
 
-  <!-- <div class = "row"> -->
-    <div class = "large-6 medium-8 <!--  medium-centered  --> columns">
+    <div class = "large-4 medium-8 columns">
       <%= f.label :email %>
       <%= f.text_field :email %>
     </div>
@@ -22,12 +19,13 @@
   </div>
 
   <div class = "row">
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
-  </div>
-
-  <div class = "row">
-    <%= f.submit "register" %>
+    <div class='medium-3 columns'>
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar %>
+    </div>
+    <div class='medium-3 columns'>
+      <%= f.submit "register", {class: "button"} %>
+    </div>
   </div>
 
 <% end %>
