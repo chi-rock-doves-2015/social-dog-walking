@@ -164,7 +164,7 @@ $(document).ready(function(){
   // })
 
 // MARK BUTTON
-  $("#status").on('click', '.mark', function(event){
+  $(".mark").on('click', function(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
   })
