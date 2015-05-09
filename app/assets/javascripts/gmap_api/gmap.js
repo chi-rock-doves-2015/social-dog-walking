@@ -28,7 +28,8 @@ function initialize() {
 
 function onSuccess(position) {
   displayMap(position);
-  ajaxGeolocation(position);
+  console.log(position.coords);
+  // ajaxGeolocation(position);
 }
 
 function displayMap(position) {
@@ -38,12 +39,11 @@ function displayMap(position) {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'Josh is typing on the computer.'
+        content: 'Josh is typing on this computer.'
       });
 
       map.setCenter(pos);
 }
-
 function ajaxGeolocation(position) {
   var geolocationData, serializedData;
   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
@@ -67,7 +67,7 @@ function onError() {
 
 
 function loadScript() {
-	console.log("map loading ...");
+  console.log("map loading ...");
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
@@ -94,4 +94,70 @@ function handleNoGeolocation(errorFlag) {
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
 }
+
+
+
+
+$(document).ready(function(){
+
+// added for create walk button
+function ajaxInitialGeolocationData(position){
+  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  // first we need to get the walk id that was just created so that we can send the next ajax request to the server
+  var geolocationPost = $.ajax({
+                            url: '/walks',
+                            type: 'post',
+                            data: geolocationData
+  })
+
+  geolocationPost.done(function(response){
+    console.log(response);
+    $('#status').children().remove();
+    $('#status').append(response);
+  })
+}
+
+function ajaxMarkGeolocation(position){
+  //get current walk id as a string
+  var currentWalk = $('.mark').attr('action')
+  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  var geolocationMarkPost = $.ajax({
+                            url: currentWalk,
+                            type: 'post',
+                            data: geolocationData
+  })
+  geolocationMarkPost.done(function(response){
+    console.log(response);
+    alert('this mark has been saved'); 
+  })
+}
+// added for create walk & mark buttons
+function onSuccessBeginWalk(position){
+  displayMap(position);
+  ajaxInitialGeolocationData(position); 
+}
+
+function onSuccessMark(position){
+  displayMap(position);
+  ajaxMarkGeolocation(position);
+}
+//
+//
+
+// AJAXIFYING BUTTONS
+
+// START WALK BUTTON
+
+
+  $('.button_to').on('click', function(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(onSuccessBeginWalk, onError);
+  })
+
+// MARK BUTTON
+  $("#status").on('click', '.mark', function(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
+  })
+});
 
