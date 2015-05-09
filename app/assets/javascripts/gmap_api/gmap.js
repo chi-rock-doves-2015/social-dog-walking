@@ -28,7 +28,7 @@ function initialize() {
 
 function onSuccess(position) {
   displayMap(position);
-  ajaxGeolocation(position);
+  // ajaxGeolocation(position);
 }
 
 function displayMap(position) {
@@ -44,22 +44,22 @@ function displayMap(position) {
       map.setCenter(pos);
 }
 
-function ajaxGeolocation(position) {
-  var geolocationData, serializedData;
-  geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  serializedData = geolocationData;
-  var geolocationPost = $.ajax({
-                            url: '/walks/1/marks',
-                            type: 'post',
-                            data: serializedData,
+// function ajaxGeolocation(position) {
+//   var geolocationData, serializedData;
+//   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+//   serializedData = geolocationData;
+//   var geolocationPost = $.ajax({
+//                             url: '/walks/1/marks',
+//                             type: 'post',
+//                             data: serializedData,
 
-                          });
-  geolocationPost.done(function(response){
-    $('body').css('background', 'red');
-    console.log(response['response']);
-  });
+//                           });
+//   geolocationPost.done(function(response){
+//     $('body').css('background', 'red');
+//     console.log(response['response']);
+//   });
 
-}
+// }
 
 function onError() {
       handleNoGeolocation(true);
@@ -67,7 +67,7 @@ function onError() {
 
 
 function loadScript() {
-	console.log("map loading ...");
+  console.log("map loading ...");
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
@@ -94,4 +94,20 @@ function handleNoGeolocation(errorFlag) {
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
 }
+
+
+
+// AJAXIFYING BUTTONS
+
+// START WALK BUTTON
+
+$(document).ready(function(){
+
+  $('.button_to').on('click', function(event){
+    event.preventDefault();
+    
+
+    
+  })
+});
 
