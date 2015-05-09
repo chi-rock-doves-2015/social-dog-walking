@@ -4,7 +4,7 @@ $(window).load(function() {
 
 var map, marker;
 
-function getYogaStudios (callback) {
+function getMarks (callback) {
   $.getJSON("url for JSON", callback)
 }
 
@@ -29,13 +29,13 @@ function initialize() {
   handleNoGeolocation(false);
   }
 
-  getYogaStudios(function (data) {
-    var studios = data.studios;
-    var studio, latLng;
+  getMarks(function (data) {
+    var marks = data.marks;
+    var mark, latLng;
 
-    for (i in studios) {
-      studio = studios[i];
-      latLng = new google.maps.LatLng(studio.latitude, studio.longitude);
+    for (i in marks) {
+      mark = marks[i];
+      latLng = new google.maps.LatLng(mark.latitude, mark.longitude);
 
       marker = new google.maps.Marker({
         position: latLng,

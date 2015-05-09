@@ -5,6 +5,9 @@ class WalksController < ActionController::Base
   end
 
   def show
+    walk = Walk.find_by(id: params[:id])
+    marks = walk.marks
 
+    render json: emails
   end
 end
