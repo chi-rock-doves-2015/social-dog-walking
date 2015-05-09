@@ -1,6 +1,9 @@
 <div id='status'>
 	<h1>Welcome!</h1>
+
+  <%= current_user %>
 	<%= button_to "Start a walk!", :walks, action: "post" %>
+  <%= link_to "Start a walk!", user_walks_path(current_user), action: "post", class: "button" %>
 </div>
 <div class='row'>
   <div id="map-canvas" class='small-12 medium-8 medium-centered'></div>
