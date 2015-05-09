@@ -116,10 +116,30 @@ function ajaxInitialGeolocationData(position){
     $('#status').append(response);
   })
 }
-// added for create walk button
+
+function ajaxMarkGeolocation(position){
+  //get current walk id as a string
+  var currentWalk = $('#status').find('h1').attr('data-walk-id')
+  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  var geolocationMarkPost = $.ajax({
+                            url: '/walks/' + currentWalk + '/marks',
+                            type: 'post',
+                            data: geolocationData
+  })
+  geolocationMarkPost.done(function(response){
+    console.log(response);
+    alert('this mark has been saved'); 
+  })
+}
+// added for create walk & mark buttons
 function onSuccessBeginWalk(position){
   displayMap(position);
   ajaxInitialGeolocationData(position); 
+}
+
+function onSuccessMark(position){
+  displayMap(position);
+  ajaxMarkGeolocation(position);
 }
 //
 //
@@ -132,25 +152,12 @@ function onSuccessBeginWalk(position){
   $('.button_to').on('click', function(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(onSuccessBeginWalk, onError);
-    // console.log(geolocationData);
-    // createWalk = $.ajax({
-    //   url: '/walks',
-    //   type: 'post',
-      
-    // })
-
-    // // // need to get location... this could end up in a lot of repetative code that needs to be refactored
-
-    // createWalk.done(function(response){
-    //   $('#status').children().remove();
-    //   $('#status').append(response);
-    // })
   })
 
-// // MARK BUTTON
-//   $(".mark").on('click', $(".mark").find('input'), function(evengt){
-//     event.preventDefault();
-//     console.log("yay");
-//   })
-// });
+// MARK BUTTON
+  $("#status").on('click', '.mark', function(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
+  })
+});
 

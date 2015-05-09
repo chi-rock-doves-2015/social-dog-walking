@@ -5,7 +5,7 @@ class MarksController < ActionController::Base
       @mark = Mark.new(mark_params)
       if @walk.marks << @mark
         {response: 'mark has been saved'}.to_json
-        render '/welcome/index'
+        render nothing
       else
         {response: 'mark has not been saved'}.to_json
       end
