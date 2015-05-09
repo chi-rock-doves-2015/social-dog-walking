@@ -105,9 +105,14 @@ $(document).ready(function(){
 
   $('.button_to').on('click', function(event){
     event.preventDefault();
-    
-
-    
+    createWalk = $.ajax({
+      url: '/walks',
+      type: 'post',
+    })
+    createWalk.done(function(response){
+      $('#status').children().remove();
+      $('#status').append(response);
+    })
   })
 });
 

@@ -1,0 +1,5 @@
+<h1> The walk is in progress </h1>
+
+<%= button_to "Take a mark!", walk_marks_path(:walk_id => @walk.id), action: "post" %>
+
+<%= button_to "End walk!", walk_marks_path(:walk_id => @walk.id, :end =>"true"), action: "post" %>
