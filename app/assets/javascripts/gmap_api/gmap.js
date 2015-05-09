@@ -119,10 +119,10 @@ function ajaxInitialGeolocationData(position){
 
 function ajaxMarkGeolocation(position){
   //get current walk id as a string
-  var currentWalk = $('#status').find('h1').attr('data-walk-id')
+  var currentWalk = $('.mark').attr('action')
   var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
   var geolocationMarkPost = $.ajax({
-                            url: '/walks/' + currentWalk + '/marks',
+                            url: currentWalk,
                             type: 'post',
                             data: geolocationData
   })
