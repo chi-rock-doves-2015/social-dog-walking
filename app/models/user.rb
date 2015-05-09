@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   :storage => :s3,
   :default_url => '/images/:attachment/missing_:style.png',
   :path => "users/:id/avatar/:style.:extension",
-  :bucket => "bucket name",
+  :bucket => "scoutdoves",
   :s3_credentials => {
     :access_key_id => "AKIAIR7ATUOM3FV5GDDQ",
     :secret_access_key => "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"
