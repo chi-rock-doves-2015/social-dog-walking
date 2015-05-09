@@ -1,11 +1,11 @@
 class WalksController < ActionController::Base
   def create
   	# user = User.find_by(id: session[:id])
-    @walk = Walk.new(user: params[:user_id])
+    @walk = Walk.new(user_id: params[:user_id])
     # keeps user who created walk logged into walk until walk
     # is ended.
     if @walk.save
-      @walk.marks << Mark.create!(mark_params)
+      # @walk.marks << Mark.create!(mark_params)
 
     session[:walk_id] = @walk.id
 
@@ -26,8 +26,8 @@ class WalksController < ActionController::Base
     @walk = Walk.find(params[:id])
   end
 
-  private
-    def mark_params
-      params.require(:mark).permit(:accuracy, :latitude, :longitude)
-    end
+  # private
+  #   def mark_params
+  #     params.require(:mark).permit(:accuracy, :latitude, :longitude)
+  #   end
 end

@@ -6,9 +6,14 @@
   <div class='row'>
     <div class='button-bar'>
       <ul class='button-group'>
-        <li><%= link_to "End", walk_marks_path(:walk_id => @walk.id), action: "post", class: "button" %></li>
-        <li><%= link_to "Mark", walk_marks_path(:walk_id => @walk.id), action: "post", class: "button" %></li>
+        <li><%= button_to "End", walk_marks_path(:walk_id => @walk.id), action: "post", class: "button", form_class: 'end' %></li>
+        <li><%= button_to "Mark", walk_marks_path(:walk_id => @walk.id), action: "post", class: "button", form_class: 'mark' %></li>
       </ul>
     </div>
   </div>
 <% end %>
+
+
+
+
+<%= button_to "End walk!", walk_marks_path(:walk_id => @walk.id, :end =>"true"), action: "post", form_class: "end_walk" %>
