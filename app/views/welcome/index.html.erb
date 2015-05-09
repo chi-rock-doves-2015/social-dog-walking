@@ -1,15 +1,5 @@
-<h1>Welcome!</h1>
+<div id='status'>
+	<h1>Welcome!</h1>
+	<p>Social Dog Walking is the hottest augmented reality dog walking game in Chicago.</p>
+</div>
 
-
-<%= button_to "Start a walk!", :walks, action: "post" %>
-<div id="map-canvas"></div>
-
-
-<% if session[:id] == nil %>
-  <%= link_to 'login', login_path  %>
-  <%= link_to 'register', new_user_path %>
-<% end %>
-
-<% if session[:id] %>
-  <%= link_to 'logout', logout_path  %>
-<% end %>

@@ -4,10 +4,6 @@ $(window).load(function() {
 
 var map;
 
-// function getMarks (callback) {
-//   $.getJSON("/walks/1", callback)
-// }
-
 function initialize() {
 
   var defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
@@ -31,32 +27,14 @@ function initialize() {
   handleNoGeolocation(false);
   };
 
-  // getMarks(function (data) {
-  //   debugger;
-  //   console.log(data.marks)
-  //
-  //   var marks = data.marks;
-  //   var mark, latLng;
-  //
-  //   for (i in marks) {
-  //     mark = marks[i];
-  //     latLng = new google.maps.LatLng(mark.latitude, mark.longitude);
-  //
-  //     var marker = new google.maps.Marker({
-  //       position: latLng,
-  //       map: map,
-  //       title: mark.created_at
-  //     });
-  //   }
-  // })
-
   map.data.loadGeoJson("/walks/1");
 
 };
 
 function onSuccess(position) {
   displayMap(position);
-  ajaxGeolocation(position);
+  console.log(position.coords);
+  // ajaxGeolocation(position);
 }
 
 function displayMap(position) {
@@ -71,7 +49,6 @@ function displayMap(position) {
 
       map.setCenter(pos);
 }
-
 function ajaxGeolocation(position) {
   var geolocationData, serializedData;
   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
@@ -94,7 +71,7 @@ function onError() {
 
 
 function loadScript() {
-	console.log("map loading ...");
+  console.log("map loading ...");
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
@@ -121,4 +98,37 @@ function handleNoGeolocation(errorFlag) {
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+$(document).ready(function(){
+
+function ajaxMarkGeolocation(position){
+  //get current walk id as a string
+  var currentWalk = $('.mark').attr('action')
+  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  var geolocationMarkPost = $.ajax({
+                            url: currentWalk,
+                            type: 'post',
+                            data: geolocationData
+  })
+  geolocationMarkPost.done(function(response){
+    console.log(response);
+    alert('this mark has been saved');
+  })
+}
+
+function onSuccessMark(position){
+  displayMap(position);
+  ajaxMarkGeolocation(position);
+}
+//
+//
+
+// AJAXIFYING BUTTONS
+
+// MARK BUTTON
+  $("#status").on('click', '.mark', function(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
+  })
+});
 
