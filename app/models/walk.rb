@@ -15,7 +15,7 @@ class Walk < ActiveRecord::Base
     # return self.complete
   end
 
-  def valid?
+  def fair_walk?
     # return whether the game followed our rules
     # (no impossible walks, obvious motor vehicle travel, etc)
   end

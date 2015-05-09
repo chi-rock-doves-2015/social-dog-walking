@@ -2,9 +2,9 @@
 	<h1>Welcome!</h1>
 	<%= button_to "Start a walk!", :walks, action: "post" %>
 </div>
-
-<div id="map-canvas"></div>
-
+<div class='row'>
+  <div id="map-canvas" class='small-12 medium-8 medium-centered'></div>
+</div>
 
 <% if session[:id] == nil %>
   <%= link_to 'login', login_path  %>
