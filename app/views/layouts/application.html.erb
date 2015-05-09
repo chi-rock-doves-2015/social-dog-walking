@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Social Dog Walking</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%= stylesheet_link_tag    'application', media: 'all'%>
-  <%= javascript_include_tag 'application'%>
-  <!-- must decide where to load gmaps api -->
-   <!-- javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCR_ZOsj0P5_-j5UoT-L50l3ynij4eoY4c" -->
-  <%= javascript_include_tag "vendor/modernizr" %>
-  <%= csrf_meta_tags %>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application"%>
+    <!-- Google Maps API? -->
+    <%= csrf_meta_tags %>
+  </head>
 
 
-<body>
-<%= render 'shared/header' %>
-<%= render 'shared/errors' if @errors %>
+  <body>
+  <%= render 'shared/header' %>
+  <%= render 'shared/errors' if @errors %>
+  <div class="container">
+    <%= yield %>
+  </div>
 
-<div class="container small-11 small-centered medium-10 large-9">
-<%= yield %>
-</div>
-
-</body>
+  </body>
 
 
 </html>

@@ -6,6 +6,7 @@ class WalksController < ActionController::Base
     # is ended.
     if @walk.save
       @walk.marks << Mark.create!(mark_params)
+
     session[:walk_id] = @walk.id
 
       if request.xhr?
