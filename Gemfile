@@ -37,9 +37,6 @@ gem "paperclip", "~> 4.2"
 
 #Alows for S3 capabailities"
 gem "aws-sdk"
-=======
-# For file attachments
-gem "paperclip", "~> 4.2"
 
 # to enable respond_to
 gem 'responders', '~> 2.0'
