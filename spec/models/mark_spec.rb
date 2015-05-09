@@ -22,4 +22,8 @@ RSpec.describe Mark, type: :model do
   it 'is an instance of mark' do
     expect(mark_one).to be_instance_of(Mark)
   end
+
+  it 'has an active record relation called walk that returns the walk that the mark belongs to' do 
+  	expect(mark_one.walk).to eq(walk_one)
+  end
 end
