@@ -128,13 +128,13 @@ function ajaxMarkGeolocation(position){
   })
   geolocationMarkPost.done(function(response){
     console.log(response);
-    alert('this mark has been saved'); 
+    alert('this mark has been saved');
   })
 }
 // added for create walk & mark buttons
 function onSuccessBeginWalk(position){
   displayMap(position);
-  ajaxInitialGeolocationData(position); 
+  ajaxInitialGeolocationData(position);
 }
 
 function onSuccessMark(position){

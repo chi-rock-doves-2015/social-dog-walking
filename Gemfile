@@ -32,7 +32,11 @@ gem 'rails_12factor', group: :production
 # Foundation front-end framework
 gem 'foundation-rails'
 
+# For file attachments
 gem "paperclip", "~> 4.2"
+
+# to enable respond_to
+gem 'responders', '~> 2.0'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
