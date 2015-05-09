@@ -1,11 +1,15 @@
 class DogsController < ApplicationController
 
   def new
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
     @dog = Dog.new
+    @dog.owner_id = params[:user_id]
   end
 
   def create
+    puts "DOG PARAMS"
+    puts params
+
     @dog = Dog.new(dog_params)
     @dog.owner_id = params[:user_id]
     if @dog.save
