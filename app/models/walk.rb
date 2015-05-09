@@ -7,4 +7,13 @@ class Walk < ActiveRecord::Base
   def duration
     updated_at - created_at
   end
+
+  # def self.ordered_json
+  #   order("created_at").to_json(methods: :mark_ids)
+  # end
+
+  # def mark_ids
+  #   self.marks.pluck(:id)
+  # end
+
 end

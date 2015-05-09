@@ -2,22 +2,24 @@ $(window).load(function() {
   loadScript();
 });
 
-var map, marker;
+var map;
 
-function getMarks (callback) {
-  $.getJSON("url for JSON", callback)
-}
+// function getMarks (callback) {
+//   $.getJSON("/walks/1", callback)
+// }
 
 function initialize() {
 
+  var defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
+
   var mapOptions = {
-          center: new google.maps.LatLng(30.055487, 31.279766),
-          zoom: 30,
+          zoom: 15,
+          center: defaultLatLng,
           mapTypeId: google.maps.MapTypeId.NORMAL,
-          panControl: true,
-          scaleControl: false,
-          streetViewControl: true,
-          overviewMapControl: true
+          // panControl: true,
+          // scaleControl: false,
+          // streetViewControl: true,
+          // overviewMapControl: true
         };
         // initializing map
         map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
@@ -27,23 +29,29 @@ function initialize() {
    } else {
     // Browser doesn't support Geolocation
   handleNoGeolocation(false);
-  }
+  };
 
-  getMarks(function (data) {
-    var marks = data.marks;
-    var mark, latLng;
+  // getMarks(function (data) {
+  //   debugger;
+  //   console.log(data.marks)
+  //
+  //   var marks = data.marks;
+  //   var mark, latLng;
+  //
+  //   for (i in marks) {
+  //     mark = marks[i];
+  //     latLng = new google.maps.LatLng(mark.latitude, mark.longitude);
+  //
+  //     var marker = new google.maps.Marker({
+  //       position: latLng,
+  //       map: map,
+  //       title: mark.created_at
+  //     });
+  //   }
+  // })
 
-    for (i in marks) {
-      mark = marks[i];
-      latLng = new google.maps.LatLng(mark.latitude, mark.longitude);
+  map.data.loadGeoJson("/walks/1");
 
-      marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: studio.name
-      });
-    }
-  })
 };
 
 function onSuccess(position) {
@@ -58,7 +66,7 @@ function displayMap(position) {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'Josh is typing on the computer.'
+        content: "Wherever you go, there you are."
       });
 
       map.setCenter(pos);
@@ -69,14 +77,13 @@ function ajaxGeolocation(position) {
   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
   serializedData = geolocationData;
   var geolocationPost = $.ajax({
-                            url: '/walks/1/marks',
-                            type: 'post',
+                            url: "/walks/1/marks",
+                            type: "post",
                             data: serializedData,
 
                           });
   geolocationPost.done(function(response){
     $('body').css('background', 'red');
-    console.log(response['response']);
   });
 
 }
