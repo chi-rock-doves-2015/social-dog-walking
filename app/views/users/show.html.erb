@@ -1,9 +1,13 @@
 <h1>
-  <% if @user.id == session[:id] %>
+  <% if @user.id == session[:user_id] %>
     Hello
   <% end %>
   <%= @user.username %>
 </h1>
+
+
+<%= image_tag @user.avatar.url %>
+
 
 
 
