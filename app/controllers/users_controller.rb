@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts "PARAMS"
-    puts params
     @user = User.new(user_params)
     if @user.save
       session[:id] = @user.id
