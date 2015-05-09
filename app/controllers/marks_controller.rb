@@ -1,7 +1,7 @@
 class MarksController < ActionController::Base
-  respond_to :json, 
+  respond_to :json
   def create
-  @walk = Walk.find_by(id: params[:walk_id])
+    @walk = Walk.find_by(id: params[:walk_id])
     if request.xhr?
       @mark = Mark.new(mark_params)
       if @walk.marks << @mark
