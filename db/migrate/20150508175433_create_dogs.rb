@@ -5,7 +5,6 @@ class CreateDogs < ActiveRecord::Migration
       t.string  :name
       t.string  :breed
       t.datetime  :birthday
-      t.string  :image_url
 
       t.timestamps null: false
     end
