@@ -4,9 +4,9 @@ class WalksController < ActionController::Base
     @walk = Walk.create(user: user)
     # keeps user who created walk logged into walk until walk
     # is ended. 
+    @walk.marks << Mark.create!(mark_params)
     session[:walk_id] = @walk.id
 
-    puts @walk
     # redirect_to @walk
     render '_buttons'
   end
@@ -14,4 +14,8 @@ class WalksController < ActionController::Base
   def show
 
   end
+  private
+    def mark_params
+      params.require(:mark).permit(:accuracy, :latitude, :longitude)
+    end
 end

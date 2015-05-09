@@ -1,4 +1,4 @@
-<h1> The walk is in progress </h1>
+<h1 data-walk-id= "<%= @walk.id %>"> The walk is in progress </h1>
 
 <%= button_to "Take a mark!", walk_marks_path(:walk_id => @walk.id), action: "post" %>
 

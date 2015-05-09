@@ -28,6 +28,7 @@ function initialize() {
 
 function onSuccess(position) {
   displayMap(position);
+  console.log(position.coords);
   // ajaxGeolocation(position);
 }
 
@@ -38,28 +39,27 @@ function displayMap(position) {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'Josh is typing on the computer.'
+        content: 'Josh is typing on this computer.'
       });
 
       map.setCenter(pos);
 }
+function ajaxGeolocation(position) {
+  var geolocationData, serializedData;
+  geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  serializedData = geolocationData;
+  var geolocationPost = $.ajax({
+                            url: '/walks/1/marks',
+                            type: 'post',
+                            data: serializedData,
 
-// function ajaxGeolocation(position) {
-//   var geolocationData, serializedData;
-//   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-//   serializedData = geolocationData;
-//   var geolocationPost = $.ajax({
-//                             url: '/walks/1/marks',
-//                             type: 'post',
-//                             data: serializedData,
+                          });
+  geolocationPost.done(function(response){
+    $('body').css('background', 'red');
+    console.log(response['response']);
+  });
 
-//                           });
-//   geolocationPost.done(function(response){
-//     $('body').css('background', 'red');
-//     console.log(response['response']);
-//   });
-
-// }
+}
 
 function onError() {
       handleNoGeolocation(true);
@@ -97,22 +97,54 @@ function handleNoGeolocation(errorFlag) {
 
 
 
+
+$(document).ready(function(){
+
+// added for create walk button
+function ajaxInitialGeolocationData(position){
+  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  // first we need to get the walk id that was just created so that we can send the next ajax request to the server
+  var geolocationPost = $.ajax({
+                            url: '/walks',
+                            type: 'post',
+                            data: geolocationData
+  })
+
+  geolocationPost.done(function(response){
+    console.log(response);
+    $('#status').children().remove();
+    $('#status').append(response);
+  })
+}
+// added for create walk button
+function onSuccessBeginWalk(position){
+  displayMap(position);
+  ajaxInitialGeolocationData(position); 
+}
+//
+//
+
 // AJAXIFYING BUTTONS
 
 // START WALK BUTTON
 
-$(document).ready(function(){
 
   $('.button_to').on('click', function(event){
     event.preventDefault();
-    createWalk = $.ajax({
-      url: '/walks',
-      type: 'post',
-    })
-    createWalk.done(function(response){
-      $('#status').children().remove();
-      $('#status').append(response);
-    })
+    navigator.geolocation.getCurrentPosition(onSuccessBeginWalk, onError);
+    // console.log(geolocationData);
+    // createWalk = $.ajax({
+    //   url: '/walks',
+    //   type: 'post',
+      
+    // })
+
+    // // // need to get location... this could end up in a lot of repetative code that needs to be refactored
+
+    // createWalk.done(function(response){
+    //   $('#status').children().remove();
+    //   $('#status').append(response);
+    // })
   })
 });
 
