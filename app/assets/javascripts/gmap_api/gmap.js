@@ -2,7 +2,11 @@ $(window).load(function() {
   loadScript();
 });
 
-var map;
+var map, marker;
+
+function getYogaStudios (callback) {
+  $.getJSON("url for JSON", callback)
+}
 
 function initialize() {
 
@@ -24,6 +28,22 @@ function initialize() {
     // Browser doesn't support Geolocation
   handleNoGeolocation(false);
   }
+
+  getYogaStudios(function (data) {
+    var studios = data.studios;
+    var studio, latLng;
+
+    for (i in studios) {
+      studio = studios[i];
+      latLng = new google.maps.LatLng(studio.latitude, studio.longitude);
+
+      marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: studio.name
+      });
+    }
+  })
 };
 
 function onSuccess(position) {
