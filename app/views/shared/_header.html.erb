@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <div>
 	<a href="idOfLeftMenu" role="button" class="left-off-canvas-toggle">Left Menu</a>
   <h1>Social Dog Walking App</h1>
@@ -18,11 +18,11 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
-      <li class="active"><a href="#">Right Button Active</a></li>
+      <li class="active"><a onclick="startWalk()" >Take a walk</a></li>
       <li class="has-dropdown">
         <a href="#">Right Button Dropdown</a>
         <% if current_user %>
-        	
+
 	        <%= render "shared/user_nav" %>
 	      <% else %>
 	      	<%= render "shared/no_user_nav" %>

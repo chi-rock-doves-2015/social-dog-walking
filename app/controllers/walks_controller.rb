@@ -1,9 +1,10 @@
 class WalksController < ActionController::Base
 
   def index
-    current_user stuff
+    # recent walks will be in this route
+    # current_user stuff
     walks = Array.new
-    
+
   end
 
   def create
