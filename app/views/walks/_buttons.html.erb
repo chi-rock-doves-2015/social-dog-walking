@@ -3,7 +3,7 @@
     <ul class="button-group">
 
       <li>
-        <form action = "/walks/<%= @walk.id %>/delete_session" method = "post">
+        <form action = "/walks/<%= @walk.id %>/end_walk" method = "post">
           <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
           <input type = "submit" class = "button" value = "End Walk">
         </form>
