@@ -1,9 +1,6 @@
 require 'rails_helper'
 
-feature "User visits login page" do
-  # before do
-  #     allow_any_instance_of(Game).to receive(:computer_throw).and_return("scissors")
-  # end
+feature "login functionality" do
   let!(:user) {User.create!(username: "user", email: 'user@user.com', password: 'password')}
 
   scenario "upon page load user sees login header" do
@@ -34,11 +31,4 @@ feature "User visits login page" do
     end
     expect(page).to have_content "Hello"
   end
-
 end
-
-# feature "User visits website" do
-#   scenario "sees a list of games and can view them"
-
-#   scenario "can start a new game"
-# end

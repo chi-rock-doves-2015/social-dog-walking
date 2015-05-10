@@ -12,12 +12,13 @@ class User < ActiveRecord::Base
   }
 
 
+  validates :email, uniqueness: true, presence: true 
+  validates :username, presence: true
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   has_many :walks
   has_many :marks, through: :walks
   has_many :dogs, foreign_key: "owner_id"
-  validates :email, uniqueness: true
 
   has_secure_password
 
