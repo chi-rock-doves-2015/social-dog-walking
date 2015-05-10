@@ -5,11 +5,17 @@
   </div>
 </div>
 
+
+<div class = "row">
+  <div class = "medium-10 medium-centered columns large-8">
   <h2><%= @user.username %>'s dogs:</h2>
 
   <% @user.dogs.each do |dog| %>
-    <%= dog.name %>
-    <%= image_tag dog.avatar.url(:medium) %>
+    <div>
+      <a href = "/dogs/<%=dog.id%>"><%= dog.name %></a>
+      <p><%= dog.name %>'s birthday <%= dog.birthday.strftime("%B %d, %Y") %></p>
+      <%= image_tag dog.avatar.url(:medium) %>
+    </div>
   <% end %>
   </div>
 </div>
