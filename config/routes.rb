@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   get '/map-sandbox' => 'welcome#map_sandbox'
 
-  post 'walks/:walk_id/delete_session' => 'walks#delete_session'
+  post 'walks/:walk_id/delete_session' => 'walks#delete_session', as: :delete_session
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

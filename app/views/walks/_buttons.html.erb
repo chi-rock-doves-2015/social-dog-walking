@@ -1,11 +1,14 @@
 <div class='row' id='walk-buttons'>
   <div class="button-bar small-centered column">
     <ul class="button-group">
-      <li><a href="/walks/<%= @walk.id %>/delete_session" action = "post" class="button" id='mark-button' onClick="markWalk(event)"> "End Walk."</a> </li>
+
+      <li>
+        <form action = "/walks/<%= @walk.id %>/delete_session" method = "post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+          <input type = "submit" class = "button" value = "End Walk">
+        </form>
+      </li>
       <li><a href="/walks/<%= @walk.id %>/marks" class="button" id='mark-button' onClick="markWalk(event)"> "Mark."</a> </li>
     </ul>
   </div>
 </div>
-
-
-      <li><%= button_to "End Walk Fake", walk_marks_path(:walk_id => @walk.id, :end =>"true"), action: "post", class: "button", form_class: "end_walk", onClick:"endWalk(event)" %></li>
