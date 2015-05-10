@@ -12,5 +12,9 @@ RSpec.describe Mark, type: :model do
   it 'has an association called walk' do 
   	expect(mark_one.walk).to eq(walk_one)
   end
+
+  it 'will return an ordered string of marks in json' do 
+  	expect(JSON.parse(Mark.ordered_json)).to be_instance_of(Array)
+  end
 end
 
