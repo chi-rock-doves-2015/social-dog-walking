@@ -9,8 +9,8 @@ module MarksHelper
           type: "Point",
           coordinates: [mark.longitude.to_f, mark.latitude.to_f]
         },
-        # properties: {
-        # }
+        properties: {
+        }
       }
     end
 

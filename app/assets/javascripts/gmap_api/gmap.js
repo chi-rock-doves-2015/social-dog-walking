@@ -23,24 +23,23 @@ function initialize() {
           // streetViewControl: true,
           // overviewMapControl: true
         };
-        // initializing map
-        map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+
+  map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
   if (navigator.geolocation) {
    navigator.geolocation.getCurrentPosition(onSuccess, onError)
    } else {
-    // Browser doesn't support Geolocation
   handleNoGeolocation(false);
   };
 
-  map.data.loadGeoJson("/walks/1");
+  map.data.loadGeoJson("https://storage.googleapis.com/maps-devrel/google.json://storage.googleapis.com/maps-devrel/google.json");
+  // map.data.loadGeoJson("/walks/1");
 
 };
 
+google.maps.event.addDomListener(window, 'load', initialize);
 
 // RECENT WALKS
-
-
 
 function onSuccess(position) {
   displayMap(position);
@@ -137,6 +136,12 @@ function onSuccessMark(position){
 
 
 
+// // BUTTON : RECENT WALKS
+//   $("#test-btn").on('click', function(event){
+//     map.data.loadGeoJson("/walks/1");
+//     debugger;
+//   })
+//
 // BUTTON : RECENT WALKS
   $("#recent-walks-btn").on('click', function(event){
     event.preventDefault();
