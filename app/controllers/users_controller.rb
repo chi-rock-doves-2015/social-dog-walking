@@ -26,6 +26,15 @@ class UsersController < ApplicationController
   def delete
   end
 
+  def dashboard
+    @user = User.find_by(id:session[:user_id])
+    if session[:user_id]
+      render 'dashboard'
+    else
+      redirect_to '/'
+    end
+  end
+
   private
     def user_params
        params.require(:user).permit(:username, :email, :avatar, :password)
