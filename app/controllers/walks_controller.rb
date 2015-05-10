@@ -1,18 +1,29 @@
 class WalksController < ActionController::Base
   def create
-  	user = User.find_by(id: session[:id])
-    @walk = Walk.create(user: user)
+  	# user = User.find_by(id: session[:id])
+    @walk = Walk.new(user_id: params[:user_id])
     # keeps user who created walk logged into walk until walk
     # is ended.
-    @walk.marks << Mark.create!(mark_params)
+    if @walk.save
+      # @walk.marks << Mark.create!(mark_params)
+
     session[:walk_id] = @walk.id
 
-    # redirect_to @walk
-    render '_buttons'
-  end
+      if request.xhr?
+
 
   def show
     walk = Walk.find_by(id: params[:id])
+
+        # redirect_to @walk
+        render '_buttons'
+      end
+      redirect_to walk_path(@walk)
+    else
+      @errors = @walk.errors
+      redirect_to :back
+    end
+
 
     if walk
       features = Array.new
@@ -47,7 +58,6 @@ class WalksController < ActionController::Base
       render :nothing => true, status: 404
     end
   end
-
   # private
   #   def mark_params
   #     params.require(:mark).permit(:accuracy, :latitude, :longitude)

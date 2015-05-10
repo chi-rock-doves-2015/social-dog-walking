@@ -1,5 +1,22 @@
 <div id='status'>
 	<h1>Welcome!</h1>
+
+  <%= button_to "Start a walk!", user_walks_path(current_user), action: "post", class: "button" %>
+</div>
+<div class='row'>
+  <div id="map-canvas" class='small-12 medium-8 medium-centered'></div>
+</div>
+
+<% if session[:id] == nil %>
+  <%= link_to 'login', login_path  %>
+  <%= link_to 'register', new_user_path %>
+<% end %>
+
+<% if session[:id] %>
+  <%= link_to 'logout', logout_path  %>
+<% end %>
+
 	<p>Social Dog Walking is the hottest augmented reality dog walking game in Chicago.</p>
 </div>
+
 

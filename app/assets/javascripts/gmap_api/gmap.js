@@ -101,32 +101,27 @@ function handleNoGeolocation(errorFlag) {
 //////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function(){
 
-function ajaxMarkGeolocation(position){
-  //get current walk id as a string
-  var currentWalk = $('.mark').attr('action')
-  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  var geolocationMarkPost = $.ajax({
-                            url: currentWalk,
-                            type: 'post',
-                            data: geolocationData
-  })
-  geolocationMarkPost.done(function(response){
-    console.log(response);
-    alert('this mark has been saved');
-  })
-}
 
-function onSuccessMark(position){
-  displayMap(position);
-  ajaxMarkGeolocation(position);
-}
-//
-//
+// added for create walk button
+  function ajaxInitialGeolocationData(position){
+    var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+    // first we need to get the walk id that was just created so that we can send the next ajax request to the server
+    var geolocationPost = $.ajax({
+                              url: '/walks',
+                              type: 'post',
+                              data: geolocationData
+    })
 
-// AJAXIFYING BUTTONS
+    geolocationPost.done(function(response){
+      console.log(response);
+      $('#status').children().remove();
+      $('#status').append(response);
+    })
+  }
+
 
 // MARK BUTTON
-  $("#status").on('click', '.mark', function(event){
+  $(".mark").on('click', function(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
   })
