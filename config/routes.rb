@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index] do
     resources :dogs
+    resources :walks, only: [:create, :index]
   end
 
   # get 'walks/in-progress' => 'walks#in_progress'
