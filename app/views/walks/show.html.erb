@@ -1,6 +1,10 @@
 <h1> The walk is in progress </h1>
 
-<% @walk = Walk.find(params[:id]) %>
+
+
+<div class='row'>
+  <div id="map-canvas"></div>
+</div>
 
 <%= button_to "Take a mark!", walk_marks_path(:walk_id => @walk.id), action: "post" %>
 
