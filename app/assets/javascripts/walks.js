@@ -1,12 +1,14 @@
 function startWalk() {
   console.log("Starting walk!")
-  var startWalk = $.ajax({
+  var createWalk = $.ajax({
     url: "/walks",
     type: "post",
   })
 
-  startWalk.done(function(response){
+  createWalk.done(function(response){
     debugger;
-    $("#the-yield").html(response)
+    $("#the-yield").html(response);
+    setMapCanvasMobileHeight();
+    initializeMap();
   })
 }

@@ -10,6 +10,35 @@ $(window).load(function() {
 
 var map;
 
+//using this to initialize map when starting a walk
+function initializeMap(){
+  if (navigator.geolocation) {
+   navigator.geolocation.getCurrentPosition(function(position){
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    var acc = position.coords.accuracy;
+    var center = new google.maps.LatLng(lat, lon)
+    var mapOptions = {
+            zoom: 15,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.NORMAL,
+            panControl: true,
+            // scaleControl: false,
+            // streetViewControl: true,
+            // overviewMapControl: true
+          };
+          // initializing map
+          map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    }, console.log("failed to get position"))
+  } else {
+    // Browser doesn't support Geolocation
+    console.log("position not supported");
+  };
+
+
+
+}
+
 function initialize() {
 
   var defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)

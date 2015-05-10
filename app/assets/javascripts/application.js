@@ -16,6 +16,4 @@
 //= require_tree .
 //= require foundation
 
-$(function(){ $(document).foundation(){
-  hamgburger :
-});
+$(function(){ $(document).foundation(); });
