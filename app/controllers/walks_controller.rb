@@ -20,6 +20,9 @@ class WalksController < ApplicationController
     if request.xhr?
       render "walk_in_progress", layout: false
     end
+
+    # redirect_to ""
+    # A restful route could be added here
   end
 
   def show

@@ -6,7 +6,6 @@ function startWalk() {
   })
 
   createWalk.done(function(response){
-    debugger;
     $("#the-yield").html(response);
     setMapCanvasMobileHeight();
     initializeMap();

@@ -1,5 +1,6 @@
-<h1 data-walk-id= "<%= @walk.id %>"> The walk is in progress </h1>
-
-<%= button_to "Mark", walk_marks_path(:walk_id => @walk.id), action: "post", form_class: "mark" %>
-
-<%= button_to "End Walk", walk_marks_path(:walk_id => @walk.id, :end =>"true"), action: "post", form_class: "end_walk" %>
+<div class="button-bar">
+  <ul class="button-group">
+    <li><%= button_to "Mark", walk_marks_path(:walk_id => @walk.id), action: "post", class: "button", form_class: "mark" %></li>
+    <li><%= button_to "End Walk", walk_marks_path(:walk_id => @walk.id, :end =>"true"), action: "post", class: "button", form_class: "end_walk" %></li>
+  </ul>
+</div>
