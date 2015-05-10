@@ -61,7 +61,7 @@ class WalksController < ApplicationController
     # end
   end
 
-  def delete_session
+  def end_walk
     puts "WORD I AM IN THE DELETE SESSION"
     @walk = Walk.find_by(id: session[:walk_id])
     session[:walk_id] = nil
