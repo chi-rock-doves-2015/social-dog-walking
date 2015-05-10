@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   get '/map-sandbox' => 'welcome#map_sandbox'
 
+  post 'walks/:walk_id/end_walk' => 'walks#end_walk', as: :end_walk
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
