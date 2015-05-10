@@ -35,6 +35,7 @@ gem 'foundation-rails'
 
 #Alows for S3 capabailities"
 gem "aws-sdk"
+
 # For file attachments
 gem "paperclip", "~> 4.2"
 
@@ -63,6 +64,7 @@ group :development, :test do
   gem 'capybara'
 
   gem 'rspec-rails'
+
   # gem 'selenium-webdriver'
 
   gem 'shoulda-matchers'
