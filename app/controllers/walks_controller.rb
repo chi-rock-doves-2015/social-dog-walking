@@ -9,6 +9,7 @@ class WalksController < ApplicationController
 
   def create
     @walk = Walk.create(user: current_user)
+    session[:walk_id] = @walk.id
 
     # Not plotting a mark on start for the time being
     # @walk.marks << Mark.create!(mark_params)
@@ -25,38 +26,45 @@ class WalksController < ApplicationController
 
   def show
     #!needs current user validation
-    walk = Walk.find_by(id: params[:id])
+    @walk = Walk.find_by(id: params[:id])
 
-    if walk
-      features = Array.new
-      walk.marks.each do |mark|
-         features << {
-          type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [mark.longitude.to_f, mark.latitude.to_f]
-          },
-          properties: {
-            # name:
-            # address:
-            :"marker-color" => "#00607d",
-            :"marker-symbol" => "circle",
-            :"marker-size" => "medium"
-          }
-        }
-      end
+    # if walk
+    #   features = Array.new
+    #   walk.marks.each do |mark|
+    #      features << {
+    #       type: "Feature",
+    #       geometry: {
+    #         type: "Point",
+    #         coordinates: [mark.longitude.to_f, mark.latitude.to_f]
+    #       },
+    #       properties: {
+    #         # name:
+    #         # address:
+    #         :"marker-color" => "#00607d",
+    #         :"marker-symbol" => "circle",
+    #         :"marker-size" => "medium"
+    #       }
+    #     }
+    #   end
 
-      geojson = {
-        type: "FeatureCollection",
-        features: features
-      }
+    #   geojson = {
+    #     type: "FeatureCollection",
+    #     features: features
+    #   }
 
-      puts geojson
+    #   puts geojson
 
-      render json: geojson
+    #   render json: geojson
 
-    else
-      render :nothing => true, status: 404
-    end
+    # else
+    #   render :nothing => true, status: 404
+    # end
+  end
+
+  def end_walk
+    puts "WORD I AM IN THE DELETE SESSION"
+    @walk = Walk.find_by(id: session[:walk_id])
+    session[:walk_id] = nil
+    redirect_to @walk
   end
 end

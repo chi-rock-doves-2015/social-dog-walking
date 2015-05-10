@@ -10,13 +10,13 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      @errors = "Invalid email or password"
+      @errors = ["Invalid email or password"]
       render '_login'
     end
   end
 
   def destroy
-    session[:id] = nil
+    session[:user_id] = nil
     redirect_to '/'
   end
 

@@ -15,12 +15,19 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts "PARAPAAMAS"
-    puts params
+    # puts "PARAPAAMAS"
+    # puts params
+    @user = User.find_by(id: params[:id])
+  end
+
+  def edit
     @user = User.find_by(id: params[:id])
   end
 
   def update
+    @user = User.find_by(id: params[:id])
+    @user = @user.update(user_params)
+    redirect_to user_path
   end
 
   def delete
@@ -36,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-       params.require(:user).permit(:username, :email, :avatar, :password)
-    end
+  def user_params
+     params.require(:user).permit(:username, :email, :avatar, :password)
+  end
 end

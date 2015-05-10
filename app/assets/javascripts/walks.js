@@ -5,7 +5,7 @@ function startWalk() {
   console.log("Starting walk!")
   var createWalk = $.ajax({
     url: "/walks",
-    type: "post",
+    type: "post"
   })
 
   createWalk.done(function(response){
@@ -18,8 +18,6 @@ function startWalk() {
 
 // End a Walk
 function endWalk(event){
-  event.preventDefault();
-  debugger;
 }
 
 
