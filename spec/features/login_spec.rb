@@ -3,12 +3,10 @@ require 'rails_helper'
 user_show_page_message = "Hello"
 
 feature "login functionality" do
-  let!(:user) {User.create!(username: "user", email: 'user@user.com', password: 'password')}
+ let!(:user) {User.create!(username: "user", email: 'user@user.com', password: 'password')}
 
   scenario "upon page load user sees login header" do
     visit '/login'
-
-
     expect(page).to have_content "Log in"
   end
 
