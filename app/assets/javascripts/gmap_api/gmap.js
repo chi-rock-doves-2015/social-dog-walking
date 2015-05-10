@@ -101,21 +101,22 @@ function handleNoGeolocation(errorFlag) {
 $(document).ready(function(){
 
 // added for create walk button
-function ajaxInitialGeolocationData(position){
-  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  // first we need to get the walk id that was just created so that we can send the next ajax request to the server
-  var geolocationPost = $.ajax({
-                            url: '/walks',
-                            type: 'post',
-                            data: geolocationData
-  })
+  function ajaxInitialGeolocationData(position){
+    var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+    // first we need to get the walk id that was just created so that we can send the next ajax request to the server
+    var geolocationPost = $.ajax({
+                              url: '/walks',
+                              type: 'post',
+                              data: geolocationData
+    })
 
-  geolocationPost.done(function(response){
-    console.log(response);
-    $('#status').children().remove();
-    $('#status').append(response);
-  })
-}
+    geolocationPost.done(function(response){
+      console.log(response);
+      $('#status').children().remove();
+      $('#status').append(response);
+    })
+  }
+
 
 function ajaxMarkGeolocation(position){
   //get current walk id as a string
@@ -137,10 +138,11 @@ function onSuccessBeginWalk(position){
   ajaxInitialGeolocationData(position);
 }
 
-function onSuccessMark(position){
-  displayMap(position);
-  ajaxMarkGeolocation(position);
-}
+
+  function onSuccessMark(position){
+    displayMap(position);
+    ajaxMarkGeolocation(position);
+  }
 //
 //
 
@@ -148,14 +150,23 @@ function onSuccessMark(position){
 
 // START WALK BUTTON
 
+// now we need to get location when button is pushed and add it to the hidden params on the button
+  // function onSuccessAddParamsToButton(position){
 
-  $('.button_to').on('click', function(event){
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(onSuccessBeginWalk, onError);
-  })
+  // var accuracy = position.coords.accuracy; 
+  // var longitude = position.coords.longitude;
+  // var latitude = position.coords.latitude; 
+  // $('.button_to').append('<input type="hidden" name="mark" value="accuracy=' + accuracy + '" ></input>', '<input type="hidden" name="mark" value="longitude=' + longitude + '" ></input>', '<input type="hidden" name="mark" value="latitu' + latitude + '" ></input>');
+  // }
+
+
+  // navigator.geolocation.getCurrentPosition(onSuccessAddParamsToButton, onError);
+
+  // $('.button_to').on('click', function(event){
+  // })
 
 // MARK BUTTON
-  $("#status").on('click', '.mark', function(event){
+  $(".mark").on('click', function(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
   })
