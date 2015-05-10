@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @user = User.find_by(id:session[:user_id])
+    @user = User.find_by(id: session[:user_id])
     if session[:user_id]
       render 'dashboard'
     else
