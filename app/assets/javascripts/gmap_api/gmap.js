@@ -6,14 +6,16 @@ var map;
 
 function initialize() {
 
+  var defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
+
   var mapOptions = {
-          center: new google.maps.LatLng(30.055487, 31.279766),
-          zoom: 30,
+          zoom: 15,
+          center: defaultLatLng,
           mapTypeId: google.maps.MapTypeId.NORMAL,
-          panControl: true,
-          scaleControl: false,
-          streetViewControl: true,
-          overviewMapControl: true
+          // panControl: true,
+          // scaleControl: false,
+          // streetViewControl: true,
+          // overviewMapControl: true
         };
         // initializing map
         map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
@@ -23,7 +25,10 @@ function initialize() {
    } else {
     // Browser doesn't support Geolocation
   handleNoGeolocation(false);
-  }
+  };
+
+  map.data.loadGeoJson("/walks/1");
+
 };
 
 function onSuccess(position) {
@@ -39,7 +44,7 @@ function displayMap(position) {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'Josh is typing on this computer.'
+        content: "Wherever you go, there you are."
       });
 
       map.setCenter(pos);
@@ -47,16 +52,15 @@ function displayMap(position) {
 function ajaxGeolocation(position) {
   var geolocationData, serializedData;
   geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  serializedData = geolocationData;
+  // serializedData = geolocationData;
   var geolocationPost = $.ajax({
-                            url: '/walks/1/marks',
-                            type: 'post',
-                            data: serializedData,
+                            url: "/walks/1/marks",
+                            type: "post",
+                            data: geolocationData,
 
                           });
   geolocationPost.done(function(response){
     $('body').css('background', 'red');
-    console.log(response['response']);
   });
 
 }
@@ -94,11 +98,9 @@ function handleNoGeolocation(errorFlag) {
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
 }
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function(){
+
 
 // added for create walk button
   function ajaxInitialGeolocationData(position){
@@ -117,53 +119,6 @@ $(document).ready(function(){
     })
   }
 
-
-function ajaxMarkGeolocation(position){
-  //get current walk id as a string
-  var currentWalk = $('.mark').attr('action')
-  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  var geolocationMarkPost = $.ajax({
-                            url: currentWalk,
-                            type: 'post',
-                            data: geolocationData
-  })
-  geolocationMarkPost.done(function(response){
-    console.log(response);
-    alert('this mark has been saved');
-  })
-}
-// added for create walk & mark buttons
-function onSuccessBeginWalk(position){
-  displayMap(position);
-  ajaxInitialGeolocationData(position);
-}
-
-
-  function onSuccessMark(position){
-    displayMap(position);
-    ajaxMarkGeolocation(position);
-  }
-//
-//
-
-// AJAXIFYING BUTTONS
-
-// START WALK BUTTON
-
-// now we need to get location when button is pushed and add it to the hidden params on the button
-  // function onSuccessAddParamsToButton(position){
-
-  // var accuracy = position.coords.accuracy; 
-  // var longitude = position.coords.longitude;
-  // var latitude = position.coords.latitude; 
-  // $('.button_to').append('<input type="hidden" name="mark" value="accuracy=' + accuracy + '" ></input>', '<input type="hidden" name="mark" value="longitude=' + longitude + '" ></input>', '<input type="hidden" name="mark" value="latitu' + latitude + '" ></input>');
-  // }
-
-
-  // navigator.geolocation.getCurrentPosition(onSuccessAddParamsToButton, onError);
-
-  // $('.button_to').on('click', function(event){
-  // })
 
 // MARK BUTTON
   $(".mark").on('click', function(event){

@@ -8,6 +8,15 @@ class Walk < ActiveRecord::Base
     updated_at - created_at
   end
 
+
+  # def self.ordered_json
+  #   order("created_at").to_json(methods: :mark_ids)
+  # end
+
+  # def mark_ids
+  #   self.marks.pluck(:id)
+  # end
+
   def complete?
     #should probably be a boolean field 'complete' defaulting to false
     #return true if self.complete
@@ -19,6 +28,7 @@ class Walk < ActiveRecord::Base
     # return whether the game followed our rules
     # (no impossible walks, obvious motor vehicle travel, etc)
   end
+
 
 
 end

@@ -11,6 +11,10 @@ class WalksController < ActionController::Base
 
       if request.xhr?
 
+
+  def show
+    walk = Walk.find_by(id: params[:id])
+
         # redirect_to @walk
         render '_buttons'
       end
@@ -20,12 +24,40 @@ class WalksController < ActionController::Base
       redirect_to :back
     end
 
-  end
 
-  def show
-    @walk = Walk.find(params[:id])
-  end
+    if walk
+      features = Array.new
+      puts walk.marks[0].longitude
+      walk.marks.each do |mark|
+         features << {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [mark.longitude.to_f, mark.latitude.to_f]
+          },
+          properties: {
+            # name:
+            # address:
+            :"marker-color" => "#00607d",
+            :"marker-symbol" => "circle",
+            :"marker-size" => "medium"
+          }
+        }
+      end
 
+      geojson = {
+        type: "FeatureCollection",
+        features: features
+      }
+
+      puts geojson
+
+      render json: geojson
+
+    else
+      render :nothing => true, status: 404
+    end
+  end
   # private
   #   def mark_params
   #     params.require(:mark).permit(:accuracy, :latitude, :longitude)
