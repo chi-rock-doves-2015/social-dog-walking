@@ -1,10 +1,10 @@
 <div id='status'>
 	<h1>Welcome!</h1>
-  <%= button_to "Start a walk!", user_walks_path(current_user), action: "post", class: "button" %>
+	<%= button_to "Start a walk!", :walks, action: "post" %>
 </div>
-<div class='row'>
-  <div id="map-canvas" class='small-12 medium-8 medium-centered'></div>
-</div>
+
+<div id="map-canvas"></div>
+
 
 <% if session[:id] == nil %>
   <%= link_to 'login', login_path  %>
@@ -14,4 +14,3 @@
 <% if session[:id] %>
   <%= link_to 'logout', logout_path  %>
 <% end %>
-

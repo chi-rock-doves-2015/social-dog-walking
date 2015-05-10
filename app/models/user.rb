@@ -10,4 +10,15 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_secure_password
+
+  def recent_walks
+    # return recent walks by some relevant data.
+    # maybe this should actually be on the Walk model?
+  end
+
+  def walking_now?
+    #returns whether the user is currently on recent walk- for showing a conditional back to walk button
+  end
+
+
 end
