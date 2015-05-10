@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+user_show_page_message = "Hello"
+
 feature "login functionality" do
   let!(:user) {User.create!(username: "user", email: 'user@user.com', password: 'password')}
 
@@ -29,6 +31,6 @@ feature "login functionality" do
     within login_form[0] do 
       click_button('')
     end
-    expect(page).to have_content "Hello"
+    expect(page).to have_content user_show_page_message
   end
 end
