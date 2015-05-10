@@ -33,7 +33,7 @@ function initialize() {
   handleNoGeolocation(false);
   };
 
-  // map.data.loadGeoJson("/walks/1");
+  map.data.loadGeoJson("/walks/1");
 
 };
 

@@ -26,39 +26,15 @@ class WalksController < ApplicationController
 
   def show
     #!needs current user validation
-    @walk = Walk.find_by(id: params[:id])
+    walk = Walk.find_by(id: params[:id])
 
-    # if walk
-    #   features = Array.new
-    #   walk.marks.each do |mark|
-    #      features << {
-    #       type: "Feature",
-    #       geometry: {
-    #         type: "Point",
-    #         coordinates: [mark.longitude.to_f, mark.latitude.to_f]
-    #       },
-    #       properties: {
-    #         # name:
-    #         # address:
-    #         :"marker-color" => "#00607d",
-    #         :"marker-symbol" => "circle",
-    #         :"marker-size" => "medium"
-    #       }
-    #     }
-    #   end
+    if walk
+      geojson = MarksHelper.geojson(walk)
+      render json: geojson
 
-    #   geojson = {
-    #     type: "FeatureCollection",
-    #     features: features
-    #   }
-
-    #   puts geojson
-
-    #   render json: geojson
-
-    # else
-    #   render :nothing => true, status: 404
-    # end
+    else
+      render :nothing => true, status: 404
+    end
   end
 
   def end_walk
