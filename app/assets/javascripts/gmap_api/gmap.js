@@ -117,25 +117,27 @@ $(document).ready(function(){
     })
   }
 
-  function ajaxMarkGeolocation(position){
-    //get current walk id as a string
-    var currentWalk = $('.mark').attr('action')
-    var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-    var geolocationMarkPost = $.ajax({
-                              url: currentWalk,
-                              type: 'post',
-                              data: geolocationData
-    })
-    geolocationMarkPost.done(function(response){
-      console.log(response);
-      alert('this mark has been saved'); 
-    })
-  }
-  // added for create walk & mark buttons
-  function onSuccessBeginWalk(position){
-    displayMap(position);
-    ajaxInitialGeolocationData(position); 
-  }
+
+function ajaxMarkGeolocation(position){
+  //get current walk id as a string
+  var currentWalk = $('.mark').attr('action')
+  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  var geolocationMarkPost = $.ajax({
+                            url: currentWalk,
+                            type: 'post',
+                            data: geolocationData
+  })
+  geolocationMarkPost.done(function(response){
+    console.log(response);
+    alert('this mark has been saved');
+  })
+}
+// added for create walk & mark buttons
+function onSuccessBeginWalk(position){
+  displayMap(position);
+  ajaxInitialGeolocationData(position);
+}
+
 
   function onSuccessMark(position){
     displayMap(position);
