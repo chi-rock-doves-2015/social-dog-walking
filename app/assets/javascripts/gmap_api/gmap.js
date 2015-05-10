@@ -2,6 +2,12 @@ $(window).load(function() {
   loadScript();
 });
 
+// google.maps.event.addDomListener(window, "resize", function() {
+//  var center = map.getCenter();
+//  google.maps.event.trigger(map, "resize");
+//  map.setCenter(center);
+// });
+
 var map;
 
 function initialize() {
@@ -12,7 +18,7 @@ function initialize() {
           zoom: 15,
           center: defaultLatLng,
           mapTypeId: google.maps.MapTypeId.NORMAL,
-          // panControl: true,
+          panControl: true,
           // scaleControl: false,
           // streetViewControl: true,
           // overviewMapControl: true
@@ -27,9 +33,14 @@ function initialize() {
   handleNoGeolocation(false);
   };
 
-  map.data.loadGeoJson("/walks/1");
+  // map.data.loadGeoJson("/walks/1");
 
 };
+
+
+// RECENT WALKS
+
+
 
 function onSuccess(position) {
   displayMap(position);
@@ -120,10 +131,15 @@ function onSuccessMark(position){
   displayMap(position);
   ajaxMarkGeolocation(position);
 }
-//
-//
-
 // AJAXIFYING BUTTONS
+
+
+// BUTTON : RECENT WALKS
+  $("#recent-walks-btn").on('click', function(event){
+    event.preventDefault();
+    map.data.loadGeoJson("/walks/1");
+    debugger;
+  })
 
 // MARK BUTTON
   $("#status").on('click', '.mark', function(event){

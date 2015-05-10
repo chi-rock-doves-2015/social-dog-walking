@@ -1,6 +1,13 @@
 class WalksController < ActionController::Base
+
+  def index
+    current_user stuff
+    walks = Array.new
+    
+  end
+
   def create
-  	user = User.find_by(id: session[:id])
+    user = User.find_by(id: session[:id])
     @walk = Walk.create(user: user)
     # keeps user who created walk logged into walk until walk
     # is ended.
@@ -12,11 +19,11 @@ class WalksController < ActionController::Base
   end
 
   def show
+    #!needs current user validation
     walk = Walk.find_by(id: params[:id])
 
     if walk
       features = Array.new
-      puts walk.marks[0].longitude
       walk.marks.each do |mark|
          features << {
           type: "Feature",
