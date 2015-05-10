@@ -48,6 +48,16 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
+  #S3 Material
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AKIAIR7ATUOM3FV5GDDQ'],
+    :secret_access_key => ENV['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']
+  }
+}
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
