@@ -1,4 +1,4 @@
-class WalksController < ActionController::Base
+class WalksController < ApplicationController
 
   def index
     # recent walks will be in this route
@@ -8,15 +8,18 @@ class WalksController < ActionController::Base
   end
 
   def create
-    user = User.find_by(id: session[:id])
-    @walk = Walk.create(user: user)
+    @walk = Walk.create(user: current_user)
     # keeps user who created walk logged into walk until walk
     # is ended.
-    @walk.marks << Mark.create!(mark_params)
-    session[:walk_id] = @walk.id
+
+    #Not plotting a mark on start for the time being
+    # @walk.marks << Mark.create!(mark_params)
+    # session[:walk_id] = @walk.id
 
     # redirect_to @walk
-    render '_buttons'
+    if request.xhr?
+      render "walk_in_progress", layout: false
+    end
   end
 
   def show

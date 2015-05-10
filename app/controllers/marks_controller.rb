@@ -1,4 +1,4 @@
-class MarksController < ActionController::Base
+class MarksController < ApplicationController
   respond_to :json
   def create
     @walk = Walk.find_by(id: params[:walk_id])
