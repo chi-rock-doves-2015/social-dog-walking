@@ -9,10 +9,8 @@ class WalksController < ApplicationController
 
   def create
     @walk = Walk.create(user: current_user)
-    # keeps user who created walk logged into walk until walk
-    # is ended.
 
-    #Not plotting a mark on start for the time being
+    # Not plotting a mark on start for the time being
     # @walk.marks << Mark.create!(mark_params)
     # session[:walk_id] = @walk.id
 
@@ -61,9 +59,4 @@ class WalksController < ApplicationController
       render :nothing => true, status: 404
     end
   end
-
-  # private
-  #   def mark_params
-  #     params.require(:mark).permit(:accuracy, :latitude, :longitude)
-  #   end
 end

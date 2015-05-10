@@ -40,7 +40,7 @@ function markWalk(event){
   }
 }
 
-//// wrote this when i was being redirected to index. i don't know why
+//// wrote this when i was being redirected to index. i don't know why i think the url was not scoping right.
 // function markWalk(event){
 //   event.preventDefault();
 

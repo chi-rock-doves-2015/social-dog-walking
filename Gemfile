@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'responders', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
@@ -32,11 +32,15 @@ gem 'rails_12factor', group: :production
 # Foundation front-end framework
 gem 'foundation-rails'
 
+
+#Alows for S3 capabailities"
+gem "aws-sdk"
 # For file attachments
 gem "paperclip", "~> 4.2"
 
 # to enable respond_to
 gem 'responders', '~> 2.0'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
