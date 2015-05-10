@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   # get 'walks/in-progress' => 'walks#in_progress'
 
+  get '/dashboard' => 'users#dashboard', as: 'dashboard' 
+
   get '/login' => 'sessions#new'
 
   post '/login' => 'sessions#create'
