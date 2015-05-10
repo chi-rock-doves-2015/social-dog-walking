@@ -1,16 +1,22 @@
-class MarksController < ActionController::Base
-  respond_to :json
+
+class MarksController < ApplicationController
+  # respond_to :json
 
   def create
     @walk = Walk.find_by(id: params[:walk_id])
     if request.xhr?
+      puts "XHR RECEIVED"
       @mark = Mark.new(mark_params)
       if @walk.marks << @mark
-        format.json {render json: {response: 'this mark has been saved'}.to_json}
-       render nothing
+
+        # format.json {render json: {response: 'this mark has been saved'}.to_json}
+       render partial: 'walks/stats'
+
       else
-        {response: 'mark has not been saved'}.to_json
+        # figure out how to send an error.
       end
+    else
+      puts "NON XHR RECEIVED SOMEHOW!"
     end
   end
 

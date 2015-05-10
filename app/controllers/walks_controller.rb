@@ -1,22 +1,34 @@
-class WalksController < ActionController::Base
+class WalksController < ApplicationController
+
+  def index
+    # recent walks will be in this route
+    # current_user stuff
+    walks = Array.new
+
+  end
+
   def create
-    user = User.find_by(id: session[:id])
-    @walk = Walk.create(user: user)
-    # keeps user who created walk logged into walk until walk
-    # is ended.
-    @walk.marks << Mark.create!(mark_params)
-    session[:walk_id] = @walk.id
+    @walk = Walk.create(user: current_user)
+
+    # Not plotting a mark on start for the time being
+    # @walk.marks << Mark.create!(mark_params)
+    # session[:walk_id] = @walk.id
 
     # redirect_to @walk
-    render '_buttons'
+    if request.xhr?
+      render "walk_in_progress", layout: false
+    end
+
+    # redirect_to ""
+    # A restful route could be added here
   end
 
   def show
+    #!needs current user validation
     walk = Walk.find_by(id: params[:id])
 
     if walk
       features = Array.new
-      puts walk.marks[0].longitude
       walk.marks.each do |mark|
          features << {
           type: "Feature",

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Social Dog Walking</title>
-  <%= stylesheet_link_tag    'application', media: 'all'%>
-  <%= javascript_include_tag 'application'%>
-  <%= csrf_meta_tags %>
-
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "SDWa" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -17,11 +14,12 @@
 
 
   <body>
-  <%= render 'shared/header' %>
-  <%= render 'shared/errors' if @errors %>
-  <div class="container">
-    <%= yield %>
-  </div>
+    <%= render 'shared/header' %>
+    <%= render 'shared/errors' if @errors %>
+
+    <div class="container" id = "the-yield">
+      <%= yield %>
+    </div>
 
   </body>
 
