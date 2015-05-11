@@ -7,14 +7,10 @@ class DogsController < ApplicationController
   end
 
   def create
-    puts "DOG PARAMS"
-    puts params
     @user = User.find_by(id: session[:user_id])
     @dog = Dog.new(dog_params)
     @dog.owner = @user
     if @dog.save
-      puts @dog 
-      # redirect_to user_dog_path(@dog)
       redirect_to "/users/#{@user.id}/dogs/#{@dog.id}"
     else
       @errors = @dog.errors.full_messages
