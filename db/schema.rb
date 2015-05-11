@@ -32,11 +32,10 @@ ActiveRecord::Schema.define(version: 20150509021033) do
 
   create_table "marks", force: :cascade do |t|
     t.integer  "walk_id"
-    t.decimal  "latitude",   precision: 10, scale: 6
-    t.decimal  "longitude",  precision: 10, scale: 6
+    t.geometry "coords",     limit: {:srid=>0, :type=>"point"}
     t.integer  "accuracy"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   create_table "users", force: :cascade do |t|
