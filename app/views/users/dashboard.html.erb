@@ -1,17 +1,27 @@
-<h1> <%= @user.username %> </h1>
 
-<%= image_tag @user.avatar.url %>
+<div class = "row">
+	<div class = "medium-10 medium-centered columns large-8">
+		<h1> <%= @user.username %> </h1>
+		<%= image_tag @user.avatar.url %>
+	</div>
+</div>
 
-<h2><%= @user.username %>'s dogs</h2>
-<% @user.dogs.each do |dog| %>
-	<p><a href="dogs/<%= dog.id %>"><%= dog.name %></a><p>
-	<p><%= image_tag dog.avatar.url(:thumb) %></p>
-<% end %>
+<div class = "row">
+  <div class = "medium-10 medium-centered columns large-8">
+	<h3><%= @user.username %>'s dogs</h3>
+	<% @user.dogs.each do |dog| %>
+		<div>
+			<a href="dogs/<%= dog.id %>"><%= dog.name %></a>
+			<%= image_tag dog.avatar.url(:medium) %>
+		</div>
+		<% end %>
+	</div>
+</div>
 
-<a onclick="startWalk()" class="button" >Take a walk</a>
-
-
-<h2><%= @user.username %>'s stats</h2>
-
-
-<a href="users/<%= @user.id%>/edit"><%= @user.username %> edit</a>
+<div class = "row">
+	<div class = "medium-10 medium-centered columns large-8"
+		<a onclick="startWalk()" class="button" >Take a walk</a>
+			<h3><%= @user.username %>'s stats</h3>
+			<a href="users/<%= @user.id%>/edit"><%= @user.username %> edit</a>
+	</div>
+</div>
