@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :dogs
-
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -19,6 +17,8 @@ Rails.application.routes.draw do
   end
 
   # get 'walks/in-progress' => 'walks#in_progress'
+
+  get '/dashboard' => 'users#dashboard', as: 'dashboard'
 
   get '/login' => 'sessions#new'
 

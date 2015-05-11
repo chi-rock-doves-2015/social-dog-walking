@@ -20,14 +20,30 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+
   def update
+    @user = User.find_by(id: params[:id])
+    @user = @user.update(user_params)
+    redirect_to user_path
   end
 
   def delete
   end
 
-  private
-    def user_params
-       params.require(:user).permit(:username, :email, :avatar, :password)
+  def dashboard
+    @user = User.find_by(id: session[:user_id])
+    if session[:user_id]
+      render 'dashboard'
+    else
+      redirect_to '/'
     end
+  end
+
+  private
+  def user_params
+     params.require(:user).permit(:username, :email, :avatar, :password)
+  end
 end

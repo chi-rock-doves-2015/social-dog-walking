@@ -29,6 +29,10 @@ class Walk < ActiveRecord::Base
     # (no impossible walks, obvious motor vehicle travel, etc)
   end
 
+  def distance_traveled
+    #need to make calculations that interact with google maps api
+  end
+
 
 
 end

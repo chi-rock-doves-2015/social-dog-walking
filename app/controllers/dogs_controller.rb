@@ -13,11 +13,22 @@ class DogsController < ApplicationController
     @dog = Dog.new(dog_params)
     @dog.owner_id = params[:user_id]
     if @dog.save
-      redirect_to dog_path(@dog)
+      redirect_to user_dog_path(@dog)
     else
       @errors = @dog.errors.full_messages
       render 'new'
     end
+  end
+
+  def edit
+    @user = User.find_by(id: params[:user_id])
+    @dog = Dog.find_by(id: params[:id])
+  end
+
+  def update
+    @dog = Dog.find_by(id: params[:id])
+    @dog = @dog.update(dog_params)
+    redirect_to user_dog_path
   end
 
   def show

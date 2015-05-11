@@ -23,24 +23,32 @@ function initialize() {
           // streetViewControl: true,
           // overviewMapControl: true
         };
-        // initializing map
-        map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+
+  map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
   if (navigator.geolocation) {
    navigator.geolocation.getCurrentPosition(onSuccess, onError)
    } else {
-    // Browser doesn't support Geolocation
   handleNoGeolocation(false);
   };
 
-  // map.data.loadGeoJson("/walks/1");
+  loadGeo(function(data) {
+    map.data.addGeoJson(data)
+  });
 
 };
 
+// var walkShow = 
+
+// if ($())
+function loadGeo (callback) {
+  $.getJSON("/walks/"+$("#map-canvas").attr("data-show-id"), callback)
+}
+
+// $(".walks.show").ready ->
+//   alert "Fuck yo shit"
 
 // RECENT WALKS
-
-
 
 function onSuccess(position) {
   displayMap(position);
@@ -150,4 +158,3 @@ function onSuccessMark(position){
     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
   })
 });
-
