@@ -10,9 +10,6 @@ $(window).load(function() {
 
 var map;
 
-var userPolygonStyle = {
-  strokeWeight: 0
-};
 
 function initialize() {
 
@@ -43,7 +40,8 @@ function initialize() {
   var featureStyle = {
     fillColor: "red",
     strokeWeight: 0
-  }
+  };
+
   map.data.setStyle(featureStyle);
 
 };
