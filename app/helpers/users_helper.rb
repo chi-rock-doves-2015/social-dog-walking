@@ -9,12 +9,13 @@ module UsersHelper
       end
     end
 
-      features = [
-        { type: "Feature",
-          geometry: { type: geotype, coordinates: [coordinates] },
-          properties: { }
-        }
-      ]
+      features = [{
+          type: "Feature",
+          geometry: {
+            type: geotype,
+            coordinates: [coordinates]
+          }
+        }]
 
     geojson = { type: "FeatureCollection",
                 features: features
