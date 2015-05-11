@@ -52,7 +52,7 @@ function loadGeo (callback) {
 
 function onSuccess(position) {
   displayMap(position);
-  console.log(position.coords);
+  // console.log(position.coords);
   // ajaxGeolocation(position);
 }
 
@@ -60,11 +60,11 @@ function displayMap(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                         position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: "Wherever you go, there you are."
-      });
+      // var infowindow = new google.maps.InfoWindow({
+      //   map: map,
+      //   position: pos,
+      //   content: "Wherever you go, there you are."
+      // });
 
       map.setCenter(pos);
 }
