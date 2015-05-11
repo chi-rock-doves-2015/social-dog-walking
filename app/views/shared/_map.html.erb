@@ -1,3 +1,3 @@
 <div class="row" id='map'>
-  <div data-controller-name="<%= controller_name %>" data-show-id="<%= params[:id] %>" id="map-canvas"></div>
+  <div data-controller-name="<%= controller_name %>" data-show-id="<%= params[:id] || @walk.id %>" id="map-canvas"></div>
 </div>

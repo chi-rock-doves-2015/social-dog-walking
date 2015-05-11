@@ -34,7 +34,7 @@ class WalksController < ApplicationController
 
     if @walk
       if request.xhr?
-        geojson = MarksHelper.geojson(@walk, "Polygon")
+        geojson = MarksHelper.geojson(@walk, "Point")
         render json: geojson
       else
         render "show"
