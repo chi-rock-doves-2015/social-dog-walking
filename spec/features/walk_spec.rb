@@ -15,7 +15,7 @@ feature 'user can take a walk' do
     end
   end 
 
-	scenario 'walk link exists' do
+	xscenario 'walk link exists' do
 		links = page.all('a', text: walk_link)
 		links.each do |link|
 		 	puts link.text

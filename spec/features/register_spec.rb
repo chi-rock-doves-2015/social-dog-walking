@@ -1,7 +1,9 @@
 require 'rails_helper'
 
+
+#need to come back and clean these up. A lot of repetition. 
+
 feature 'user registration' do
-	user_show_page_message = "Hello"
 
 	let!(:user) {User.create!(username: "user", email: 'user@user.com', password: 'password')}
 
@@ -67,6 +69,7 @@ feature 'user registration' do
       click_button('')
     end
 
-    expect(page).to have_content user_show_page_message
+
+    expect(page).to have_content "newuser"
 	end
 end
