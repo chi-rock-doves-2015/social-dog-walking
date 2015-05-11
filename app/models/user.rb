@@ -23,13 +23,13 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def recent_walks
-    # return recent walks by some relevant data.
-    # maybe this should actually be on the Walk model?
+    self.walks.order(:created_at).limit(5)
   end
 
-  def walking_now?
-    #returns whether the user is currently on recent walk- for showing a conditional back to walk button
-  end
+  # def walking_now?
+  #   #returns whether the user is currently on recent walk- for showing a conditional back to walk button
+  # end
+
 
 
 end
