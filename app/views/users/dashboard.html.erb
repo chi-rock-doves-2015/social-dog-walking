@@ -1,17 +1,40 @@
-<h1> <%= @user.username %> </h1>
-
-<%= image_tag @user.avatar.url %>
-
-<h2><%= @user.username %>'s dogs</h2>
-<% @user.dogs.each do |dog| %>
-	<p><a href="dogs/<%= dog.id %>"><%= dog.name %></a><p>
-	<p><%= image_tag dog.avatar.url(:thumb) %></p>
-<% end %>
-
-<a onclick="startWalk()" class="button" >Take a walk</a>
+<div class = "row">
+	  <div class = "medium-10 medium-centered columns large-8">
+		<h1> <%= @user.username %> </h1>
+		<%= image_tag @user.avatar.url(:medium) %>
+		<a href="users/<%= @user.id%>/edit">edit</a>
+		</div>
+</div>
 
 
-<h2><%= @user.username %>'s stats</h2>
+<div class = "row">
+  <div class = "medium-10 medium-centered columns large-8">
+  <h2>Your dogs:</h2>
+
+  <% @user.dogs.each do |dog| %>
+    <div>
+      <a href = "/dogs/<%=dog.id%>"><%= dog.name %></a>
+      <p><%= dog.name %>'s birthday <%= dog.birthday.strftime("%B %d, %Y") %></p>
+      <%= image_tag dog.avatar.url(:medium) %>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<div class = "row">
+	<div class = "medium-10 medium-centered columns large-8">
+		<h2>Your stats:</h2>
+		<!-- filler -->
+			<p> Territory: 2.5 square miles</p>
+			<p> Distance Traveled: 10 miles</p>
+			<p> Points: 1250pts </p>
+		<!-- filler -->
+	</div>
+</div>
 
 
-<a href="users/<%= @user.id%>/edit"><%= @user.username %> edit</a>
+<div class = "row">
+	<div class = "medium-10 medium-centered columns large-8">
+		<a onclick="startWalk()" class="button" >Take a walk</a>
+	</div>
+</div>
