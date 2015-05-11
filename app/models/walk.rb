@@ -30,9 +30,12 @@ class Walk < ActiveRecord::Base
   end
 
   def distance_traveled
-    #need to make calculations that interact with google maps api
+    distance = 0 
+    if self.marks.count > 0
+      self.marks.each do |mark|
+        distance += mark.distance_from_last_mark
+      end
+    end
+    distance
   end
-
-
-
 end
