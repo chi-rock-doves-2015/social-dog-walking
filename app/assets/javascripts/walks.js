@@ -59,7 +59,7 @@ function markWalk(event){
 function postMark(position, url){
   // debugger;
   // var url = $('#mark-button').attr('href')
-  var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+  var geolocationData = {mark: {coords: "POINT(" + position.coords.latitude + " " + position.coords.longitude + ")", accuracy: position.coords.accuracy}};
   var createRequest = $.ajax({
     url: url,
     type: 'post',
