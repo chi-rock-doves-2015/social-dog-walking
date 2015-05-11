@@ -42,7 +42,7 @@ function initialize() {
 
 // if ($())
 function loadGeo (callback) {
-  $.getJSON("/walks/"+$("#map-canvas").attr("data-show-id"), callback)
+  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
 }
 
 // $(".walks.show").ready ->
