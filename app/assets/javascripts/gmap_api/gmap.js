@@ -32,12 +32,9 @@ function initialize() {
   handleNoGeolocation(false);
   };
 
-  map.data.loadGeoJson("https://storage.googleapis.com/maps-devrel/google.json://storage.googleapis.com/maps-devrel/google.json");
-  // map.data.loadGeoJson("/walks/1");
+  map.data.loadGeoJson("/walks/1");
 
 };
-
-google.maps.event.addDomListener(window, 'load', initialize);
 
 // RECENT WALKS
 

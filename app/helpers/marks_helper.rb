@@ -8,8 +8,6 @@ module MarksHelper
         geometry: {
           type: "Point",
           coordinates: [mark.longitude.to_f, mark.latitude.to_f]
-        },
-        properties: {
         }
       }
     end

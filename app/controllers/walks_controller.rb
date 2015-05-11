@@ -26,12 +26,12 @@ class WalksController < ApplicationController
 
   def show
     #!needs current user validation
-    walk = Walk.find_by(id: params[:id])
+    @walk = Walk.find_by(id: params[:id])
 
-    if walk
-      geojson = MarksHelper.geojson(walk)
-      render json: geojson
-
+    if @walk
+      geojson = MarksHelper.geojson(@walk)
+      render "show"
+      # render json: geojson
     else
       render :nothing => true, status: 404
     end
