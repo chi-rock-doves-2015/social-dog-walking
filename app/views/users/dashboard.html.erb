@@ -1,0 +1,17 @@
+<h1> <%= @user.username %> </h1>
+
+<%= image_tag @user.avatar.url %>
+
+<h2><%= @user.username %>'s dogs</h2>
+<% @user.dogs.each do |dog| %>
+	<p><a href="dogs/<%= dog.id %>"><%= dog.name %></a><p>
+	<p><%= image_tag dog.avatar.url(:thumb) %></p>
+<% end %>
+
+<a onclick="startWalk()" class="button" >Take a walk</a>
+
+
+<h2><%= @user.username %>'s stats</h2>
+
+
+<a href="users/<%= @user.id%>/edit"><%= @user.username %> edit</a>
