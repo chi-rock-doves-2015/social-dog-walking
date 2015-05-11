@@ -1,6 +1,7 @@
 module MarksHelper
 
   def self.geojson(walk)
+
     features = Array.new
     walk.marks.each do |mark|
        features << {

@@ -32,9 +32,21 @@ function initialize() {
   handleNoGeolocation(false);
   };
 
-  map.data.loadGeoJson("/walks/1");
+  loadGeo(function(data) {
+    map.data.addGeoJson(data)
+  });
 
 };
+
+// var walkShow = 
+
+// if ($())
+function loadGeo (callback) {
+  $.getJSON("/walks/"+$("#map-canvas").attr("data-show-id"), callback)
+}
+
+// $(".walks.show").ready ->
+//   alert "Fuck yo shit"
 
 // RECENT WALKS
 
@@ -133,12 +145,6 @@ function onSuccessMark(position){
 
 
 
-// // BUTTON : RECENT WALKS
-//   $("#test-btn").on('click', function(event){
-//     map.data.loadGeoJson("/walks/1");
-//     debugger;
-//   })
-//
 // BUTTON : RECENT WALKS
   $("#recent-walks-btn").on('click', function(event){
     event.preventDefault();
@@ -152,4 +158,3 @@ function onSuccessMark(position){
     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
   })
 });
-
