@@ -1,7 +1,7 @@
 <div class = "row">
 	  <div class = "medium-10 medium-centered columns large-8">
 		<h1> <%= @user.username %> </h1>
-		<%= image_tag @user.avatar.url(:medium) %>
+		<%= image_tag @user.avatar.url(:large) %>
 		<a href="users/<%= @user.id%>/edit">edit</a>
 		</div>
 </div>
@@ -13,7 +13,7 @@
 
   <% @user.dogs.each do |dog| %>
     <div>
-      <a href = "/dogs/<%=dog.id%>"><%= dog.name %></a>
+      <a href = "users/<%= dog.owner.id %>/dogs/<%=dog.id%>"><%= dog.name %></a>
       <p><%= dog.name %>'s birthday <%= dog.birthday.strftime("%B %d, %Y") %></p>
       <%= image_tag dog.avatar.url(:medium) %>
     </div>

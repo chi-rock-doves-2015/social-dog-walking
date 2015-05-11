@@ -1,19 +1,17 @@
 class DogsController < ApplicationController
 
   def new
-    @user = User.find_by(id: params[:user_id])
+    #may want to change params[:user_id] to session[:user_id] for security
+    @user = User.find_by(id: session[:user_id])
     @dog = Dog.new
-    @dog.owner_id = params[:user_id]
   end
 
   def create
-    puts "DOG PARAMS"
-    puts params
-
+    @user = User.find_by(id: session[:user_id])
     @dog = Dog.new(dog_params)
-    @dog.owner_id = params[:user_id]
+    @dog.owner = @user
     if @dog.save
-      redirect_to user_dog_path(@dog)
+      redirect_to "/users/#{@user.id}/dogs/#{@dog.id}"
     else
       @errors = @dog.errors.full_messages
       render 'new'
@@ -36,9 +34,8 @@ class DogsController < ApplicationController
   end
 
   private
-  def dog_params
-     params.require(:dog).permit(:name, :breed, :birthday, :avatar)
-  end
-
+    def dog_params
+       params.require(:dog).permit(:name, :breed, :birthday, :avatar)
+    end
 
 end

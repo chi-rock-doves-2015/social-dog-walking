@@ -31,7 +31,6 @@ gem 'rails_12factor', group: :production
 # Foundation front-end framework
 gem 'foundation-rails'
 
-
 #Alows for S3 capabailities"
 gem "aws-sdk"
 

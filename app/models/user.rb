@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   has_attached_file :avatar,
-  :styles => { :small => '60x60#', :large => '300x300#' }, :default_style => :large,
+  :styles => { :small => '60x60#', :large => '300x300#', :medium => '200x200#' }, :default_style => :large,
   :storage => :s3,
   :default_url => '/images/:attachment/missing_:style.png',
   :path => "users/:id/avatar/:style.:extension",
