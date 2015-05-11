@@ -22,6 +22,6 @@ class MarksController < ApplicationController
 
   private
     def mark_params
-      params.require(:mark).permit(:accuracy, :latitude, :longitude)
+      params.require(:mark).permit(:accuracy, :coords)
     end
 end

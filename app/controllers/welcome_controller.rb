@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    if session[:user_id]
+    if current_user
       redirect_to '/dashboard'
     end
   end
@@ -12,6 +12,6 @@ class WelcomeController < ApplicationController
   		redirect_to '/'
   	end
 		flash[:alert] = "Welcome to Warp Zone"
-	
+
   end
 end

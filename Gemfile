@@ -4,6 +4,10 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
+# Postgis gem
+gem 'activerecord-postgis-adapter', '3.0.0.beta5'
+#Using rgeo for postgis
+gem 'rgeo'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
