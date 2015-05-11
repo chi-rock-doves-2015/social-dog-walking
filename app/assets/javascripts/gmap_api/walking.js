@@ -19,7 +19,7 @@ function makeMap(position){
           zoom: 15,
           center: center,
           mapTypeId: google.maps.MapTypeId.NORMAL,
-          panControl: true,
+          panControl: false,
           // scaleControl: false,
           // streetViewControl: true,
           // overviewMapControl: true
