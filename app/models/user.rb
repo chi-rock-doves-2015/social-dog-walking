@@ -26,20 +26,7 @@ class User < ActiveRecord::Base
     self.walks.order(:created_at).limit(5)
   end
 
-  def walking_now?
-    #returns whether the user is currently on recent walk- for showing a conditional back to walk button
-  end
-
-  def distance_traveled
-    distance = 0
-    self.walks.each do |walk|
-      distance += walk.distance_traveled
-    end
-    distance.round(1)
-  end
-  
-
-  def distance_score
-    (distance_traveled * 250).to_i
-  end
+  # def walking_now?
+  #   #returns whether the user is currently on recent walk- for showing a conditional back to walk button
+  # end
 end

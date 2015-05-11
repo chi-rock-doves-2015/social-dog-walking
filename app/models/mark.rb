@@ -1,11 +1,5 @@
 class Mark < ActiveRecord::Base
   belongs_to :walk
-  attr_reader :distance_from_last_mark
-
-  def initialize()
-    @distance_from_previous_mark ||= distance_from_last_mark 
-    super
-  end
 
   def create
     Mark.create(latitude: 5, longitude: 5)
@@ -21,9 +15,21 @@ class Mark < ActiveRecord::Base
   end
 
   def distance_from_last_mark
-    Geocoder::Calculations.distance_between([self.walk.marks.last.longitude, self.walk.marks.last.latitude],[self.longitude, self.latitude])
+    if self.prev
+      Geocoder::Calculations.distance_between([self.prev.longitude, self.prev.latitude],[self.longitude, self.latitude])
+    else
+      0
+    end
+  end
+
+  def next
+    self.walk.marks.where("id > ?", id).first
+  end
+
+  def prev
+    self.walk.marks.where("id < ?", id).last
   end
 
 
-
 end
+
