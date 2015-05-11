@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.readyselector
 //= require_tree ./gmap_api
 //= require_tree .
 //= require foundation
