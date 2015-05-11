@@ -38,8 +38,4 @@ class Walk < ActiveRecord::Base
     end
     distance
   end
-
-  def distance(mark1, mark2)
-    Geocoder::Calculations.distance_between([mark1.latitude,mark1.longitude], [mark2.laltitude,mark2.longitude])
-  end
 end
