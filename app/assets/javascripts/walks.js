@@ -32,6 +32,10 @@ function markWalk(event){
     navigator.geolocation.getCurrentPosition(function(position){
       postMark(position, url);
       makeMap(position);
+      loadGeo(function(data) {
+        map.data.addGeoJson(data)
+      });
+
     }, onError);
   } else{
     console.log("position not supported :/");

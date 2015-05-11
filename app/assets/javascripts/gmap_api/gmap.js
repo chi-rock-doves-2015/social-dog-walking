@@ -18,7 +18,7 @@ function initialize() {
           zoom: 15,
           center: defaultLatLng,
           mapTypeId: google.maps.MapTypeId.NORMAL,
-          panControl: true,
+          panControl: false,
           // scaleControl: false,
           // streetViewControl: true,
           // overviewMapControl: true
@@ -38,7 +38,7 @@ function initialize() {
 
 };
 
-// var walkShow = 
+// var walkShow =
 
 // if ($())
 function loadGeo (callback) {
