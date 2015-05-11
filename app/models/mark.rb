@@ -14,4 +14,8 @@ class Mark < ActiveRecord::Base
     self.walk.id
   end
 
+  def distance_from_last_mark
+    Geocoder::Calculations.distance_between([self.walk.marks.last.longitude, self.walk.marks.last.latitude],[self.longitude, self.latitude])
+  end
+
 end

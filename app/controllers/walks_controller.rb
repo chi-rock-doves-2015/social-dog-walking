@@ -29,6 +29,7 @@ class WalksController < ApplicationController
   end
 
   def show
+    puts "I AM IN THE WALKS CONTROLLER SHOW METHOD"
     #!needs current user validation
     @walk = Walk.find_by(id: params[:id])
 
