@@ -10,6 +10,10 @@ $(window).load(function() {
 
 var map;
 
+var userPolygonStyle = {
+  strokeWeight: 0
+};
+
 function initialize() {
 
   var defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
@@ -22,7 +26,7 @@ function initialize() {
           // scaleControl: false,
           // streetViewControl: true,
           // overviewMapControl: true
-        };
+  };
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
@@ -36,17 +40,17 @@ function initialize() {
     map.data.addGeoJson(data)
   });
 
+  var featureStyle = {
+    fillColor: "red",
+    strokeWeight: 0
+  }
+  map.data.setStyle(featureStyle);
+
 };
 
-// var walkShow =
-
-// if ($())
 function loadGeo (callback) {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
 }
-
-// $(".walks.show").ready ->
-//   alert "Fuck yo shit"
 
 // RECENT WALKS
 

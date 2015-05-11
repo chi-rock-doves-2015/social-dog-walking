@@ -16,6 +16,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    if @user
+      if request.xhr?
+        geojson = UsersHelper.geojson(@user.walks, "Polygon")
+        render json: geojson
+      else
+        render "show"
+      end
+    else
+      render :nothing => true, status: 404
+    end
   end
 
   def edit
