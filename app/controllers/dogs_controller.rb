@@ -20,6 +20,16 @@ class DogsController < ApplicationController
     end
   end
 
+  def edit
+    @dog = Dog.find_by(id: params[:id])
+  end
+
+  def update
+    @dog = Dog.find_by(id: params[:id])
+    @dog = @dog.update(dog_params)
+    redirect_to dog_path
+  end
+
   def show
     @dog = Dog.find(params[:id])
   end
