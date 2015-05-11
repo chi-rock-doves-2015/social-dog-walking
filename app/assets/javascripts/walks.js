@@ -2,14 +2,14 @@
 
 // Create a Walk
 function startWalk() {
-  console.log("Starting walk!")
+  console.log("Starting walk!");
   var createWalk = $.ajax({
     url: "/walks",
     type: "post"
   })
 
   createWalk.done(function(response){
-    $("#the-yield").html(response);
+    $("body").html(response);
     setMapCanvasMobileHeight();
     initializeMap();
   })
@@ -32,6 +32,10 @@ function markWalk(event){
     navigator.geolocation.getCurrentPosition(function(position){
       postMark(position, url);
       makeMap(position);
+      loadGeo(function(data) {
+        map.data.addGeoJson(data)
+      });
+
     }, onError);
   } else{
     console.log("position not supported :/");

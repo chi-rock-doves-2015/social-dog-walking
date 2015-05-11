@@ -7,6 +7,10 @@ class WalksController < ApplicationController
 
   end
 
+  def new
+    #for taking a walk and choosing your dogs; also allows http request easier
+  end
+
   def create
     @walk = Walk.create(user: current_user)
     session[:walk_id] = @walk.id
@@ -17,7 +21,7 @@ class WalksController < ApplicationController
 
     # redirect_to @walk
     if request.xhr?
-      render "walk_in_progress", layout: false
+      render "walk_in_progress"
     end
 
     # redirect_to ""
@@ -31,7 +35,7 @@ class WalksController < ApplicationController
 
     if @walk
       if request.xhr?
-        geojson = MarksHelper.geojson(@walk)
+        geojson = MarksHelper.geojson(@walk, 'Polygon')
         render json: geojson
       else
         render "show"
