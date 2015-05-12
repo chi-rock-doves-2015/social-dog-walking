@@ -6,3 +6,6 @@
 
 
   <%= render "shared/map" %>
+  <% if session[:walk_id] == params[:id].to_i %>
+    <%= render "buttons" %>
+  <% end %>
