@@ -30,6 +30,14 @@ class Mark < ActiveRecord::Base
     self.walk.marks.where("id < ?", id).last
   end
 
+  def longitude
+    self.coords.y
+  end
+
+
+  def latitude
+    self.coords.x
+  end
 
 end
 
