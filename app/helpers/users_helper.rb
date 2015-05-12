@@ -7,6 +7,7 @@ module UsersHelper
       walk.marks.each do |mark|
         coordinates << [mark.longitude.to_f, mark.latitude.to_f]
       end
+      coordinates << [walks.first.marks.first.longitude, walks.first.marks.first.latitude]
     end
 
       features = [{
