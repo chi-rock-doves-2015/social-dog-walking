@@ -8,7 +8,7 @@ module MarksHelper
           type: "Feature",
           geometry: {
             type: geotype,
-            coordinates: [mark.longitude.to_f, mark.latitude.to_f]
+            coordinates: [mark.longitude, mark.latitude]
           }
         }
       end
@@ -17,7 +17,7 @@ module MarksHelper
       coordinates = Array.new
 
       walk.marks.each do |mark|
-        coordinates << [mark.longitude.to_f, mark.latitude.to_f]
+        coordinates << [mark.longitude, mark.latitude]
       end
 
       features = [{

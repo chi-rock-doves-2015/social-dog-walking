@@ -78,8 +78,7 @@ function displayMap(position) {
 function persistGeolocation(position, url) {
   var geolocationData, geolocationAjaxPost;
 
-  geolocationData = {mark: {latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
+  geolocationData = {mark: {coords: 'POINT(' + position.coords.latitude + ' ' + position.coords.longitude + ')',
                             accuracy: position.coords.accuracy}
                     };
   geolocationAjaxPost = $.ajax({
@@ -128,7 +127,7 @@ function onSuccessMark(position){
 // AJAXIFYING BUTTONS
 // added for create walk button
   function ajaxInitialGeolocationData(position){
-    var geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
+    var geolocationData = {mark: {coords: 'POINT(' + position.coords.latitude + ' ' + position.coords.longitude + ')', accuracy: position.coords.accuracy}};
     // first we need to get the walk id that was just created so that we can send the next ajax request to the server
     var geolocationPost = $.ajax({
                               url: '/walks',

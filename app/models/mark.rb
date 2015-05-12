@@ -38,5 +38,6 @@ class Mark < ActiveRecord::Base
   def latitude
     self.coords.y
   end
+
 end
 
