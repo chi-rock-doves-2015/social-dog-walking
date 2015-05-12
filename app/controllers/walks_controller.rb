@@ -29,12 +29,13 @@ class WalksController < ApplicationController
   end
 
   def show
+    puts "I AM IN THE WALKS CONTROLLER SHOW METHOD"
     #!needs current user validation
     @walk = Walk.find_by(id: params[:id])
 
     if @walk
       if request.xhr?
-        geojson = MarksHelper.geojson(@walk, 'Polygon')
+        geojson = MarksHelper.geojson(@walk, "Point")
         render json: geojson
       else
         render "show"

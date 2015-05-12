@@ -1,86 +1,95 @@
+var map;
+
 $(window).load(function() {
   loadScript();
 });
 
-// google.maps.event.addDomListener(window, "resize", function() {
-//  var center = map.getCenter();
-//  google.maps.event.trigger(map, "resize");
-//  map.setCenter(center);
-// });
+function loadScript() {
+  var script;
 
-var map;
+  console.log("map loading ...");
 
-function initialize() {
+  script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+               '&key=AIzaSyCR_ZOsj0P5_-j5UoT-L50l3ynij4eoY4c' +
+               '&libraries=drawing'+
+               '&callback=initializeMap';
+  document.body.appendChild(script);
+}
 
-  var defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
 
-  var mapOptions = {
+function initializeMap() {
+  var defaultLatLng, mapOptions, featureStyle;
+
+  defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
+
+  mapOptions = {
           zoom: 15,
           center: defaultLatLng,
           mapTypeId: google.maps.MapTypeId.NORMAL,
           panControl: false,
-          // scaleControl: false,
-          // streetViewControl: true,
-          // overviewMapControl: true
-        };
+  };
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-  if (navigator.geolocation) {
-   navigator.geolocation.getCurrentPosition(onSuccess, onError)
-   } else {
-  handleNoGeolocation(false);
-  };
+  html5Geolocation(displayMap);
 
   loadGeo(function(data) {
     map.data.addGeoJson(data)
   });
 
+  featureStyle = {
+    fillColor: "red",
+    strokeWeight: 0
+  };
+
+  map.data.setStyle(featureStyle);
+
 };
 
-// var walkShow =
-
-// if ($())
 function loadGeo (callback) {
-  $.getJSON("/walks/"+$("#map-canvas").attr("data-show-id"), callback)
+  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
 }
 
-// $(".walks.show").ready ->
-//   alert "Fuck yo shit"
+function html5Geolocation (successAction, failAction) {
+  var errorAction = failAction || onError;
 
-// RECENT WALKS
+  // function standardAction(position) {
+  //   displayMap(position);
+  //   successAction(position);
+  // }
 
-function onSuccess(position) {
-  displayMap(position);
-  // console.log(position.coords);
-  // ajaxGeolocation(position);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successAction, errorAction);
+  } else {
+    handleNoGeolocation(false);
+  };
 }
 
 function displayMap(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                        position.coords.longitude);
+  var currentGeolocation;
 
-      // var infowindow = new google.maps.InfoWindow({
-      //   map: map,
-      //   position: pos,
-      //   content: "Wherever you go, there you are."
-      // });
-
-      map.setCenter(pos);
+  currentGeolocation = new google.maps.LatLng(position.coords.latitude,
+                                              position.coords.longitude);
+  map.setCenter(currentGeolocation);
 }
-function ajaxGeolocation(position) {
-  var geolocationData, serializedData;
-  geolocationData = {mark: {latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy}};
-  // serializedData = geolocationData;
-  var geolocationPost = $.ajax({
-                            url: "/walks/1/marks",
+
+function persistGeolocation(position, url) {
+  var geolocationData, geolocationAjaxPost;
+
+  geolocationData = {mark: {latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            accuracy: position.coords.accuracy}
+                    };
+  geolocationAjaxPost = $.ajax({
+                            url: url,
                             type: "post",
                             data: geolocationData,
-
                           });
-  geolocationPost.done(function(response){
-    $('body').css('background', 'red');
-  });
+  geolocationAjaxPost.done(function(response){
+                              $('#stats').html(response)
+                          });
 
 }
 
@@ -88,35 +97,26 @@ function onError() {
       handleNoGeolocation(true);
 }
 
-
-function loadScript() {
-  console.log("map loading ...");
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-    // API KEY
-    '&key=AIzaSyCR_ZOsj0P5_-j5UoT-L50l3ynij4eoY4c' +
-    '&libraries=drawing'+
-    '&callback=initialize';
-  document.body.appendChild(script);
-}
-
 function handleNoGeolocation(errorFlag) {
+  var content, options, infowindow;
+
   if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
+    content = 'Error: The Geolocation service failed.';
   } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
+    content = 'Error: Your browser doesn\'t support geolocation.';
   }
 
-  var options = {
+  options = {
     map: map,
     position: new google.maps.LatLng(60, 105),
     content: content
   };
 
-  var infowindow = new google.maps.InfoWindow(options);
+  infowindow = new google.maps.InfoWindow(options);
+
   map.setCenter(options.position);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function(){
 

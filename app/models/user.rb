@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
 
   has_attached_file :avatar,
-  :styles => { :small => '60x60#', :medium => '150x150#', :large => '300x300#' }, :default_style => :large,
+  :styles => { :thumb => '60x60#', :medium => '200x200#', :large => '300x300#' }, :default_style => :large,
   :default_url => '/images/:attachment/missing_:style.png',
   :path => "users/:id/avatar/:style.:extension"
-
-
 
   validates :email, uniqueness: true, presence: true
   validates :username, presence: true
@@ -19,13 +17,20 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def recent_walks
-    # return recent walks by some relevant data.
-    # maybe this should actually be on the Walk model?
+    self.walks.order(:created_at).limit(5)
   end
 
-  def walking_now?
-    #returns whether the user is currently on recent walk- for showing a conditional back to walk button
-  end
+  def distance_traveled
+     distance = 0
+     self.walks.each do |walk|
+       distance += walk.distance_traveled
+     end
+     distance.round(1)
+   end
 
+
+  def distance_score
+    (distance_traveled * 250).to_i
+  end
 
 end
