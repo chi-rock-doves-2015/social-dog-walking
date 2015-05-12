@@ -36,6 +36,7 @@ function initializeMap() {
   html5Geolocation(displayMap);
 
   loadGeo(function(data) {
+    debugger;
     map.data.addGeoJson(data)
   });
 

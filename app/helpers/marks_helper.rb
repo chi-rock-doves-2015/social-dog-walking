@@ -20,6 +20,8 @@ module MarksHelper
         coordinates << [mark.longitude, mark.latitude]
       end
 
+      coordinates << [walk.marks.first.longitude, walk.marks.first.latitude]
+
       features = [{
           type: "Feature",
           geometry: {

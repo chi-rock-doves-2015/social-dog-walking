@@ -19,6 +19,8 @@ class UsersController < ApplicationController
     if @user
       if request.xhr?
         geojson = UsersHelper.geojson(@user.walks, "Polygon")
+        puts geojson
+        puts "fucker"
         render json: geojson
       else
         render "show"

@@ -5,7 +5,7 @@ Dog.create!(owner: User.find_by(username: "Bob"), name: "Spot", birthday: "Janua
 
 # DBC Walkabout
 Walk.create!(user_id: 1)
-Mark.create!(walk_id: 1, coords:'POINT(41.88912 -87.63772)', accuracy: 20)
+Mark.create!(walk_id: 1, coords:'POINT(41.88983 -87.63747)', accuracy: 20)
 Mark.create!(walk_id: 1, coords:'POINT(41.89065 -87.63912)', accuracy: 20)
 Mark.create!(walk_id: 1, coords:'POINT(41.89233 -87.64046)', accuracy: 20)
 Mark.create!(walk_id: 1, coords:'POINT(41.89237 -87.63709)', accuracy: 20)
