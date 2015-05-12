@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(version: 20150509021033) do
 
   create_table "walks", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.geometry "walk_territory", limit: {:srid=>0, :type=>"polygon"}
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
 end
