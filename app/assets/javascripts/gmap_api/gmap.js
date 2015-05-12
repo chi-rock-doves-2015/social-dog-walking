@@ -36,7 +36,6 @@ function initializeMap() {
   html5Geolocation(displayMap);
 
   loadGeo(function(data) {
-  debugger;
     map.data.addGeoJson(data)
   });
 
@@ -150,7 +149,6 @@ function onSuccessMark(position){
   $("#recent-walks-btn").on('click', function(event){
     event.preventDefault();
     map.data.loadGeoJson("/walks/1");
-    debugger;
   })
 
 // MARK BUTTON
