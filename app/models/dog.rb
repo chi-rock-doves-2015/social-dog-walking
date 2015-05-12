@@ -1,7 +1,7 @@
 class Dog < ActiveRecord::Base
 
   has_attached_file :avatar,
-  :styles => { :medium => "300x300>", :thumb => "100x100>" },
+  :styles => { :small => '60x60#', :medium => '150x150#', :large => '300x300#' }, :default_style => :large,
   :default_url => 'images/:attachment/missing_:style.png',
   :path => "users/:id/avatar/:style.:extension"
 

@@ -1,15 +1,10 @@
 class User < ActiveRecord::Base
 
   has_attached_file :avatar,
-  :styles => { :small => '60x60#', :large => '300x300#' }, :default_style => :large,
+  :styles => { :small => '60x60#', :medium => '150x150#', :large => '300x300#' }, :default_style => :large,
   :default_url => '/images/:attachment/missing_:style.png',
-  :path => "users/:id/avatar/:style.:extension"#,
-  # :storage => :file,
-  # :bucket => "scoutdoves",
-  # :s3_credentials => {
-  #   :access_key_id => "AKIAIR7ATUOM3FV5GDDQ",
-  #   :secret_access_key => "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"
-  # }
+  :path => "users/:id/avatar/:style.:extension"
+
 
 
   validates :email, uniqueness: true, presence: true
