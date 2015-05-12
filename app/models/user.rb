@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   end
 
 
+
   def distance_score
     (distance_traveled * 250).to_i
   end

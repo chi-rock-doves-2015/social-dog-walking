@@ -79,6 +79,7 @@ function persistGeolocation(position, url) {
   var geolocationData, geolocationAjaxPost;
 
   geolocationData = {mark: {coords: 'POINT(' + position.coords.latitude + ' ' + position.coords.longitude + ')',
+
                             accuracy: position.coords.accuracy}
                     };
   geolocationAjaxPost = $.ajax({

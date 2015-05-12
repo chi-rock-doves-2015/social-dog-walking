@@ -35,3 +35,4 @@ Mark.create!(walk_id: 3, coords:'POINT(41.89138 -87.64148)', accuracy: 20)
 Mark.create!(walk_id: 3, coords:'POINT(41.89159 -87.63253)', accuracy: 20)
 Mark.create!(walk_id: 3, coords:'POINT(41.89001 -87.63253)', accuracy: 20)
 Mark.create!(walk_id: 3, coords:'POINT(41.88983 -87.63747)', accuracy: 20)
+
