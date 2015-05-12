@@ -8,6 +8,7 @@ function startWalk() {
 
   createWalk.done(function(response){
     $("body").html(response);
+    $("#start-walk-btn").hide();
     setMapCanvasMobileHeight();
     initializeMap();
   })
