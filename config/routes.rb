@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :walks, only: [:create, :index]
   end
 
+  resource :local_area, only: [:show]
+
   # get 'walks/in-progress' => 'walks#in_progress'
 
   get '/dashboard' => 'users#dashboard', as: 'dashboard'

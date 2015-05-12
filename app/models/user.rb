@@ -34,4 +34,6 @@ class User < ActiveRecord::Base
     (distance_traveled * 250).to_i
   end
 
+
+
 end
