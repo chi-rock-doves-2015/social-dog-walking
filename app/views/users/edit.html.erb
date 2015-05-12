@@ -33,3 +33,10 @@
   </div>
 
 <% end %>
+
+
+<% @user.dogs.each do |dog| %>
+
+	<p><%= link_to dog.name, edit_user_dog_path(dog.owner, dog) %></p>
+
+<% end %>
