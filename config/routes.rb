@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   post 'walks/:walk_id/end_walk' => 'walks#end_walk', as: :end_walk
 
+  post '/users/:user_id/dogs/:id' => 'dogs#destroy', as: :destroy_dog
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
