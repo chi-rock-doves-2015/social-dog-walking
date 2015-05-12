@@ -28,6 +28,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def territories
+    @users = User.all
+      if request.xhr?
+        geojson = TerritoriesHelper.geojson(@users, "Polygon")
+        render json: geojson
+      else
+        render render :nothing => true, status: 404
+      end
+  end
+
   def edit
     @user = User.find_by(id: params[:id])
   end
