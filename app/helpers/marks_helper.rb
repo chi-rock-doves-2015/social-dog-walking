@@ -8,7 +8,7 @@ module MarksHelper
           type: "Feature",
           geometry: {
             type: geotype,
-            coordinates: [mark.longitude.to_f, mark.latitude.to_f]
+            coordinates: [mark.coords.x, mark.coords.y]
           }
         }
       end

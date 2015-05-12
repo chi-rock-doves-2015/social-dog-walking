@@ -1,4 +1,4 @@
-$(window).load(function() {
+adsfasfl;$(window).load(function() {
   loadScript();
 });
 
