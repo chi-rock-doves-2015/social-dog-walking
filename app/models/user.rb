@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
        distance += walk.distance_traveled
      end
      distance.round(1)
-   end
+  end
+
 
 
   def distance_score
