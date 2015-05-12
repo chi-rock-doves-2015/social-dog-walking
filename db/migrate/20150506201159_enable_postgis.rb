@@ -1,5 +1,5 @@
 class EnablePostgis < ActiveRecord::Migration
   def change
-    execute "CREATE EXTENSION IF NOT EXISTS postgis;"
+    enable_extension :postgis
   end
 end
