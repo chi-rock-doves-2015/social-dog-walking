@@ -1,5 +1,10 @@
-<li class="active"><a onclick="startWalk()">Take a walk</a></li>
-<li><%= link_to "Profile", user_path(current_user) %> </li>
+<% if !session[:walk_id] %>
+  <%= render "shared/start_walk_btn" %>
+<% else %>
+  <%= render "shared/walk_in_progress_btns" %>
+<% end %>
+
+<li class=""><%= link_to "Profile", user_path(current_user) %> </li>
 <li><a href="#">Recent Walks</a></li>
 <li><a href="#">Neighbors</a></li>
 <li><%= link_to "Log Out", logout_path %></li>

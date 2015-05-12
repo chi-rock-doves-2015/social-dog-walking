@@ -35,7 +35,6 @@ gem 'rails_12factor', group: :production
 # Foundation front-end framework
 gem 'foundation-rails'
 
-
 #Alows for S3 capabailities"
 gem "aws-sdk"
 
@@ -45,7 +44,7 @@ gem "paperclip", "~> 4.2"
 # to enable respond_to
 gem 'responders', '~> 2.0'
 
-
+gem 'geocoder'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

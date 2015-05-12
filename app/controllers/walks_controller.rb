@@ -12,29 +12,31 @@ class WalksController < ApplicationController
   end
 
   def create
-    @walk = Walk.create(user: current_user)
-    session[:walk_id] = @walk.id
+    if !session[:walk_id]
+      @walk = Walk.create(user: current_user)
+      session[:walk_id] = @walk.id
+      # Not plotting a mark on start for the time being
+      # @walk.marks << Mark.create!(mark_params)
+      # session[:walk_id] = @walk.id
 
-    # Not plotting a mark on start for the time being
-    # @walk.marks << Mark.create!(mark_params)
-    # session[:walk_id] = @walk.id
-
-    # redirect_to @walk
-    if request.xhr?
-      render "walk_in_progress"
+      # redirect_to @walk
+      if request.xhr?
+        render "walk_in_progress"
+      end
+    else
+      redirect_to @walk
     end
-
-    # redirect_to ""
     # A restful route could be added here
   end
 
   def show
+    puts "I AM IN THE WALKS CONTROLLER SHOW METHOD"
     #!needs current user validation
     @walk = Walk.find_by(id: params[:id])
 
     if @walk
       if request.xhr?
-        geojson = MarksHelper.geojson(@walk, 'Polygon')
+        geojson = MarksHelper.geojson(@walk, "Point")
         render json: geojson
       else
         render "show"
@@ -45,7 +47,6 @@ class WalksController < ApplicationController
   end
 
   def end_walk
-    puts "WORD I AM IN THE DELETE SESSION"
     @walk = Walk.find_by(id: session[:walk_id])
     session[:walk_id] = nil
     redirect_to @walk
