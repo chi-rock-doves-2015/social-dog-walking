@@ -10,6 +10,6 @@ $(document).ready(function() {
 function setMapCanvasMobileHeight(){
   var $width = document.documentElement.clientWidth;
   var $height = document.documentElement.clientHeight;
-  console.log($width);
+  // console.log($width);
   $('#map-canvas').css("height", ($width));
 };
