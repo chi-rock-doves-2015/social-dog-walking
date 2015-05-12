@@ -18,9 +18,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     if @user
       if request.xhr?
-        geojson = UsersHelper.geojson(@user.walks, "Polygon")
-        puts geojson
-        puts "fucker"
+        geojson = UsersHelper.geojson(@user.marks, "Polygon")
         render json: geojson
       else
         render "show"

@@ -1,14 +1,13 @@
 module UsersHelper
 
-  def self.geojson(walks, geotype)
+  def self.geojson(marks, geotype)
     coordinates = Array.new
 
-    walks.each do |walk|
-      walk.marks.each do |mark|
-        coordinates << [mark.longitude.to_f, mark.latitude.to_f]
+      marks.each do |mark|
+        coordinates << [mark.longitude, mark.latitude]
       end
-      coordinates << [walks.first.marks.first.longitude, walks.first.marks.first.latitude]
-    end
+
+      coordinates << [marks.first.longitude, marks.first.latitude]
 
       features = [{
           type: "Feature",
