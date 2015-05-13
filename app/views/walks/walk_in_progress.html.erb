@@ -1,12 +1,8 @@
-<div id = "stats">
-  <div class = "row">
-    Current walk_id
-    <%= session[:walk_id] %>
-  </div>
-</div>
-
-
+	<%= render "walk_in_progress_stats" %>
+<!-- maybe a div class of mobile-only would tell the page to redirect if user is not mobile? -->
+<div class='mobile-only mobile-map etc'> 
   <%= render "shared/map" %>
+d</div>	
   <%= render "buttons" %>
 
 
