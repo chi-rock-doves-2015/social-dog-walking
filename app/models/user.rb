@@ -28,6 +28,24 @@ class User < ActiveRecord::Base
      distance.round(1)
   end
 
+  def mark_coords
+    first_mark = self.marks.first
+    markcoords = ""
+    self.marks.each do |mark|
+      markcoords = markcoords + mark.coords.y.to_s + " " + mark.coords.x.to_s + ", "
+    end
+    markcoords = markcoords + first_mark.coords.y.to_s + " " + first_mark.coords.x.to_s 
+    return markcoords
+  end
+
+
+  def area
+    puts "THESE ARE THE MARK COORDS"
+    puts mark_coords
+    st_area = ActiveRecord::Base.connection.execute("select ST_Area(ST_Transform(ST_SetSRID(ST_GeomFromText('POLYGON((" +
+      mark_coords + "))'), 4326), 900913));").map {|area| area["st_area"]}
+    st_area[0]
+  end
 
 
   def distance_score
