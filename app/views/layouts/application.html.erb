@@ -21,10 +21,14 @@
       <%= yield %>
     </div>
 
+  <% if Rails.env.development? %>
 <pre>
-  Walk ID: <%= session[:walk_id]%>
-</pre>
+    <%= debug(params) %>
+    Walk: <%= session[:walk_id]%>
+    User: <%= session[:user_id] %>
 
+</pre>
+  <% end %>
   </body>
 
 
