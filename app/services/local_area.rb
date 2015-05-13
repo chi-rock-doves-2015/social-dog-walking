@@ -1,6 +1,3 @@
-#need to get current geolocation data
-
-
 class LocalArea
   attr_reader :marks, :users
 
