@@ -12,13 +12,17 @@ Rails.application.routes.draw do
   end
 
   resources :users, except: [:index] do
+    member do
+      get 'welcome'
+    end
     resources :dogs
     resources :walks, only: [:create, :index]
   end
+  resource :dashboard, only: [:show]
 
   # get 'walks/in-progress' => 'walks#in_progress'
 
-  get '/dashboard' => 'users#dashboard', as: 'dashboard'
+  # get '/dashboard' => 'users#dashboard', as: 'dashboard'
 
   get '/login' => 'sessions#new'
 
