@@ -10,7 +10,7 @@
   <div class = "medium-10 medium-centered columns large-8">
     <h2>Your stats:</h2>
     <!-- filler -->
-      <p> Territory: 2.5 square miles</p>
+      <p> Territory: <%= @user.area.round(1) %> square meters </p>
       <p> Distance Traveled: <%= @user.distance_traveled %> miles</p>
       <p> Score: <%= @user.distance_score %>pts </p>
     <!-- filler -->
