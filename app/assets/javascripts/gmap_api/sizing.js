@@ -3,8 +3,12 @@ $(document).ready(function() {
   var $windowHeight = document.documentElement.clientHeight;
   var $topBarHeight = $('.top-bar').height();
   var $bodyHeight = $windowHeight - $topBarHeight;
-  debugger;
-  setMapCanvasMobileHeight($bodyHeight);
+
+  // $(document).on('load', '#walk-in-progress',(function(){
+  // debugger;
+  setMapCanvasMobileHeight($bodyHeight, $topBarHeight);
+
+  // }))
 });
 
 //for now this is setting map canvas to be square.
@@ -12,15 +16,21 @@ $(document).ready(function() {
 //but we need it to be square to have room to display buttons during a walk.
 //there has been talk of a sticky/fixed footer button bar
 //that would be positioned above any map for a full-screen floating buttons effect.
-function setMapCanvasMobileHeight(bodyHeight){
-  debugger;
+function setMapCanvasMobileHeight(bodyHeight, topBarHeight){
+  // debugger;
   setStatsHeight(bodyHeight);
   setButtonsHeight(bodyHeight);
-  $('#map-canvas').css("height", bodyHeight * 0.45);
+  $('#map-canvas').css({
+    "height": bodyHeight * 0.75
+  });
 }
 
-function setStatsHeight(bodyHeight){
-  $('#stats').css("height", bodyHeight * 0.3);
+function setStatsHeight(bodyHeight, topBarHeight){
+  $('#stats').css({
+    "height": bodyHeight * 0.25//,
+    // "position": "fixed",
+    // "top": topBarHeight
+  });
 }
 
 
@@ -28,6 +38,7 @@ function setButtonsHeight(bodyHeight){
   $('#walk-buttons').css({
     "height" : bodyHeight * 0.15,
     "position": "fixed",
-    "bottom": 0
+    "bottom": bodyHeight * 0.04,
+    ""
   });
 }
