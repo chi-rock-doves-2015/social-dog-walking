@@ -38,4 +38,21 @@ class Walk < ActiveRecord::Base
     end
     distance
   end
+
+  def mark_coords
+    first_mark = self.marks.first
+    markcoords = ""
+    self.marks.each do |mark|
+      markcoords = markcoords + mark.coords.y.to_s + " " + mark.coords.x.to_s + ", "
+    end
+    markcoords = markcoords + first_mark.coords.y.to_s + " " + first_mark.coords.x.to_s 
+    return markcoords
+  end
+
+  def area_of_walk
+    puts "THESE ARE THE MARK COORDS"
+    puts mark_coords
+    ActiveRecord::Base.connection.execute("select ST_Area(ST_Transform(ST_SetSRID(ST_GeomFromText('POLYGON((" +
+      mark_coords + "))'), 4326), 900913));").each {|area| puts area["st_area"]}
+  end
 end
