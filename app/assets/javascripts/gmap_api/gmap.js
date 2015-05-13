@@ -22,21 +22,27 @@ function loadScript() {
 function initializeMap() {
   var defaultLatLng, mapOptions, featureStyle;
 
-  defaultLatLng = new google.maps.LatLng(30.055487, 31.279766);
+  // defaultLatLng = new google.maps.LatLng(30.055487, 31.279766);
 
   mapOptions = {
-          zoom: 15,
-          center: defaultLatLng,
+          // zoom: 15,
+          // center: defaultLatLng,
           mapTypeId: google.maps.MapTypeId.NORMAL,
-          panControl: false,
+          // panControl: false,
   };
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-  if (document.getElementById("user-show-flag")) {
+  if ($("body").hasClass("show")) {
     loadGeo(function(geojson_data) {
-      map.data.addGeoJson(geojson_data);
-      extendBounds(geojson_data);
+      if ($("body").hasClass("users")) {
+        map.data.addGeoJson(geojson_data);
+        extendBounds(geojson_data, "Polygon");
+      }
+      else {
+        map.data.addGeoJson(geojson_data);
+        extendBounds(geojson_data, "Point");
+      };
     });
   } else {
     html5Geolocation(displayMap);
@@ -55,16 +61,28 @@ function loadGeo (callback) {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
 }
 
-function extendBounds (geojson_data) {
+function extendBounds (geojson_data, geotype) {
   var bounds, coordinates;
   bounds = new google.maps.LatLngBounds();
-  coordinates = geojson_data.features[0].geometry.coordinates[0];
 
-  coordinates.forEach( function(coordinate) {
-    bounds.extend(new google.maps.LatLng(coordinate[0], coordinate[1]));
-  });
-  center = bounds.getCenter();
-  map.setCenter({lat: center.F, lng: center.A});
+  switch (geotype) {
+    case "Polygon":
+      coordinates = geojson_data.features[0].geometry.coordinates[0];
+      coordinates.forEach( function(coordinate) {
+        bounds.extend(new google.maps.LatLng(coordinate[1], coordinate[0]));
+        });
+      break;
+    case "Point":
+      markers = geojson_data.features;
+      // debugger;
+      markers.forEach( function(point) {
+        bounds.extend(new google.maps.LatLng(point.geometry.coordinates[1], point.geometry.coordinates[0]));
+        });
+      break;
+  }
+
+  map.fitBounds(bounds);
+  map.panToBounds(bounds);
 }
 
 function html5Geolocation (successAction, failAction) {
@@ -84,6 +102,8 @@ function html5Geolocation (successAction, failAction) {
 
 function displayMap(position) {
   var currentGeolocation;
+
+  map.setZoom(15);
 
   currentGeolocation = new google.maps.LatLng(position.coords.latitude,
                                               position.coords.longitude);
