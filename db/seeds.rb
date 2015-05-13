@@ -1,8 +1,10 @@
 User.create!(username: "Bob", email: "bob@gmail.com", password: "password")
 User.create!(username: "Foobar", email: "foo@bar.com", password: "password")
+User.create!(username: "Mrs. O'Leary", email: "cat@oleary.com", password: "password")
 
 Dog.create!(owner: User.find_by(username: "Bob"), name: "Spot", birthday: "January 5, 1999", breed: "Sheltie")
 Dog.create!(owner: User.find_by(username: "Foobar"), name: "Fido", birthday: "January 1, 1999", breed: "German Shepherd")
+Dog.create!(owner: User.find_by(username: "Mrs. O'Leary"), name: "Jalapeno", birthday: "October 10, 1871", breed: "Cow")
 
 
 # DBC Walkabout
@@ -63,4 +65,14 @@ Mark.create!(walk_id: 6, coords:'POINT(41.88983 -87.63747)', accuracy: 20)
 Mark.create!(walk_id: 6, coords:'POINT(41.88450 -87.63679)', accuracy: 20)
 Mark.create!(walk_id: 6, coords:'POINT(41.88450 -87.64420)', accuracy: 20)
 Mark.create!(walk_id: 6, coords:'POINT(41.89234 -87.64438)', accuracy: 20)
+
+Walk.create!(user_id: 3)
+Mark.create!(walk_id: 7, coords:'POINT(41.88440 -87.62444)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.86747 -87.62411)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.86748 -87.62045)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.87830 -87.62066)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.87835 -87.61731)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.88087 -87.61746)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.88087 -87.62072)', accuracy: 20)
+Mark.create!(walk_id: 7, coords:'POINT(41.88424 -87.62066)', accuracy: 20)
 

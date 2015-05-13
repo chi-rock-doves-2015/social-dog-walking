@@ -1,4 +1,4 @@
-module UsersHelper
+module TerritoriesHelper
 
   def self.geojson(users, geotype)
 

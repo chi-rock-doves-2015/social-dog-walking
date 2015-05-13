@@ -33,12 +33,14 @@ function initializeMap() {
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-  html5Geolocation(displayMap);
-
-  loadGeo(function(geojson_data) {
-    map.data.addGeoJson(geojson_data);
-    extendBounds(geojson_data);
-  });
+  if (document.getElementById("user-show-flag")) {
+    loadGeo(function(geojson_data) {
+      map.data.addGeoJson(geojson_data);
+      extendBounds(geojson_data);
+    });
+  } else {
+    html5Geolocation(displayMap);
+  }
 
   featureStyle = {
     fillColor: "red",
