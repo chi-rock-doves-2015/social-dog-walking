@@ -18,11 +18,14 @@ Rails.application.routes.draw do
     resources :dogs
     resources :walks, only: [:create, :index]
   end
-  resource :dashboard, only: [:show]
+
+  # resource :dashboard, only: [:show]
 
   # get 'walks/in-progress' => 'walks#in_progress'
 
   # get '/dashboard' => 'users#dashboard', as: 'dashboard'
+
+  get '/dashboard' => 'users#dashboard'
 
   get '/login' => 'sessions#new'
 
