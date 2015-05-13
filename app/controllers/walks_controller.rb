@@ -8,6 +8,8 @@ class WalksController < ApplicationController
   end
 
   def new
+    @walk = Walk.new
+    @dogs = current_user.dogs
     #for taking a walk and choosing your dogs; also allows http request easier
   end
 

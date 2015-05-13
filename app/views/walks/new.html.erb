@@ -1,0 +1,24 @@
+<h1>Choose Dogs</h1>
+
+<%= form_for @walk, html: {id: "new_walk_form"} do |f| %>
+
+  <% @dogs each do |dog| %>
+    <div class = "row">
+      <div class = "large-4 medium-8 columns">
+        <%= f.label dog.name %>
+        <%= f.text_field :dog_name %>
+    </div>
+  <% end %>
+
+  
+  <div class = "row">
+    <div class='medium-3 columns'>
+      <%= f.label :something %>
+      <%= f.file_field :avatar %>
+    </div>
+    <div class='medium-3 columns'>
+      <%= f.submit "register", {class: "button"} %>
+    </div>
+  </div>
+
+<% end %>
