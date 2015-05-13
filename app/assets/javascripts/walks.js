@@ -1,6 +1,7 @@
-$("#start-walk-button").on('click', function())
+$("#start-walk-button").on('click', function(startWalk(event))
 
 function startWalk() {
+  event.preventDefault();
   var createWalk;
 
   createWalk = $.ajax({
