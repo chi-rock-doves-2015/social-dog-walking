@@ -7,20 +7,23 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_path(@user)
+      redirect_to new_user_welcome(@user)
     else
       @errors = @user.errors.full_messages
       render 'new'
     end
   end
 
+  def welcome
+    @user = User.find_by(id: params[:id])
+  end
+
   def show
+    puts 'SHOWWwWWWWWW'
     @user = User.find_by(id: params[:id])
     if @user
       if request.xhr?
-        geojson = UsersHelper.geojson(@user.walks, "Polygon")
-        puts geojson
-        puts "fucker"
+        geojson = UsersHelper.geojson(@user.marks, "Polygon")
         render json: geojson
       else
         render "show"
@@ -30,8 +33,13 @@ class UsersController < ApplicationController
     end
   end
 
+
   def edit
+    puts "EDDDDDDIIIIIITTTTTTT"
+    puts params
     @user = User.find_by(id: params[:id])
+    puts "USERRRRRRRR"
+    puts @user.username
   end
 
   def update
