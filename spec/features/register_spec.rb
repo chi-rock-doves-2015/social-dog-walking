@@ -58,7 +58,7 @@ feature 'user registration' do
     expect(page).to have_content "Email has already been taken"
 	end
 
-	scenario 'if valid credentials are filled in, it will send you to the user show page' do 
+	xscenario 'if valid credentials are filled in, it will send you to the user show page' do 
 		visit '/users/new'
 		registration_form = page.all('form#registration_form')
 		fill_in 'Username', with: 'newuser'

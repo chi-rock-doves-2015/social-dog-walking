@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 20150509021033) do
   end
 
   create_table "marks", force: :cascade do |t|
-    t.integer  "walk_id"
-    t.geometry "coords",     limit: {:srid=>0, :type=>"point"}
-    t.integer  "accuracy"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.integer   "walk_id"
+    t.geography "coords",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.integer   "accuracy"
+    t.datetime  "created_at",                                                          null: false
+    t.datetime  "updated_at",                                                          null: false
   end
 
   create_table "users", force: :cascade do |t|
