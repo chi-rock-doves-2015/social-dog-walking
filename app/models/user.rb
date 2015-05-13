@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
     (distance_traveled * 250).to_i
   end
 
+
   def area
     area = 0
     self.walks.each do |walk|
@@ -40,5 +41,6 @@ class User < ActiveRecord::Base
     end
     area 
   end
+
 
 end
