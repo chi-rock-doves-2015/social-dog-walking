@@ -10,7 +10,7 @@
 	  </div>
 	</div>
 
-	
+
 <% else %>
 	<div id="stats">
 	  <div class="row">
