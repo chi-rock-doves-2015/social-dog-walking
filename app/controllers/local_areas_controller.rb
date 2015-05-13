@@ -6,6 +6,8 @@ class LocalAreasController < ApplicationController
     # puts "CURRENT POSITION"
     # puts current_position
     puts params
+
+    @local_area_users = local_area.users
     # lat = params[:latitude]
     # lon = params[:longitude]
 
@@ -24,14 +26,6 @@ class LocalAreasController < ApplicationController
     # puts "QUERY"
     # puts sql
     # puts "QUERY TEXT DONE"
-
-    # records_array = ActiveRecord::Base.connection.execute(sql)
-
-    # puts records_array
-
-    # @marks = records_array.map do |mark_data|
-    #   Mark.new(mark_data)
-    # end
 
 
     # sql = "SELECT * FROM marks WHERE ST_DWithin(ST_GeogFromText('SRID=4326;POINT(-3.165356 55.926665)'),

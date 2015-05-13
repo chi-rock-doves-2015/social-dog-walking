@@ -1,4 +1,6 @@
 Local area show!
 
-<div id = "pumpkin">
-</div>
+<% @local_area_users.each do |user| %>
+  <a href = "/users/<%=user.id%>"><%= user.username %></a>
+
+<% end %>
