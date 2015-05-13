@@ -54,7 +54,6 @@ function loadGeo (callback) {
 
 function html5Geolocation (successAction, failAction) {
   var errorAction = failAction || onError;
-
   // function standardAction(position) {
   //   displayMap(position);
   //   successAction(position);
