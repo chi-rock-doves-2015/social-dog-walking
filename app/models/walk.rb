@@ -50,10 +50,12 @@ class Walk < ActiveRecord::Base
   end
 
   def area
-    puts "THESE ARE THE MARK COORDS"
-    puts mark_coords
-    st_area = ActiveRecord::Base.connection.execute("select ST_Area(ST_Transform(ST_SetSRID(ST_GeomFromText('POLYGON((" +
-      mark_coords + "))'), 4326), 900913));").map {|area| area["st_area"]}
-    st_area[0]
+    if self.marks.count > 2
+      st_area = ActiveRecord::Base.connection.execute("select ST_Area(ST_Transform(ST_SetSRID(ST_GeomFromText('POLYGON((" +
+        mark_coords + "))'), 4326), 900913));").map {|area| area["st_area"]}
+      st_area[0].to_f
+    else
+      0 
+    end
   end
 end

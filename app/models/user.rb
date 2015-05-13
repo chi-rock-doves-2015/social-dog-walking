@@ -29,9 +29,16 @@ class User < ActiveRecord::Base
   end
 
 
-
   def distance_score
     (distance_traveled * 250).to_i
+  end
+
+  def area
+    area = 0
+    self.walks.each do |walk|
+      area += walk.area.to_f
+    end
+    area 
   end
 
 end
