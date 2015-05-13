@@ -2,6 +2,7 @@
 
 <div id = "stats">
   <div class = "row">
+  <p>Your walk on <%=@walk.created_at%>. </p>
    Walk <%= params[:id] %>
   </div>
 </div>
@@ -11,3 +12,4 @@
   <% if session[:walk_id] == params[:id].to_i %>
     <%= render "buttons" %>
   <% end %>
+
