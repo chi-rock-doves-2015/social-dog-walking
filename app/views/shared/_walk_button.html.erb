@@ -1,0 +1,6 @@
+<% if session[:walk_id] %>
+  <li class="active" id="continue-walk-btn"><a href="<%= walk_path(session[:walk_id]) %>"> Walking</a></li>
+<% else %>
+  <li class="active" id="start-walk-btn"><a href="users/<%= current_user.id %>/walks">Take a walk</a></li>
+<% end %>
+

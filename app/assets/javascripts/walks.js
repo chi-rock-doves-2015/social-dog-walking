@@ -1,3 +1,5 @@
+$("#start-walk-button").on('click', function())
+
 function startWalk() {
   var createWalk;
 
