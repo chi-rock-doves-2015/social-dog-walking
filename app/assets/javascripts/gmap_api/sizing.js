@@ -11,6 +11,7 @@ $(document).ready(function() {
   // }))
 });
 
+//ignore this note
 //for now this is setting map canvas to be square.
 //we should  set this to load in a better way than by default on every map.
 //but we need it to be square to have room to display buttons during a walk.
@@ -21,15 +22,13 @@ function setMapCanvasMobileHeight(bodyHeight, topBarHeight){
   setStatsHeight(bodyHeight);
   setButtonsHeight(bodyHeight);
   $('#map-canvas').css({
-    "height": bodyHeight * 0.75
+    "height": bodyHeight * 0.82
   });
 }
 
 function setStatsHeight(bodyHeight, topBarHeight){
   $('#stats').css({
-    "height": bodyHeight * 0.25//,
-    // "position": "fixed",
-    // "top": topBarHeight
+    "height": bodyHeight * 0.18
   });
 }
 
@@ -38,7 +37,6 @@ function setButtonsHeight(bodyHeight){
   $('#walk-buttons').css({
     "height" : bodyHeight * 0.15,
     "position": "fixed",
-    "bottom": bodyHeight * 0.04,
-    ""
+    "bottom": bodyHeight * 0.04
   });
 }
