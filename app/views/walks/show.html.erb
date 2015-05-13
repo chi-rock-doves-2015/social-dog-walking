@@ -1,6 +1,6 @@
 <div id = "stats">
   <%= render "complete_walk_stats" %>
-  </div>
+</div>
 
   <div id='square-map'>
     <%= render "shared/map" %>
@@ -9,3 +9,4 @@
   <% if session[:walk_id] == params[:id].to_i %>
     <%= render "buttons" %>
   <% end %>
+
