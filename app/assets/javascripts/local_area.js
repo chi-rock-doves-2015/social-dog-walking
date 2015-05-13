@@ -6,7 +6,7 @@ function sendLocationToServer(pos){
   $.ajax({
     url: '/local_area',
     method: "GET",
-    data: {current_position: pos},
+    data: {latitude: pos.coords.latitude, longitude: pos.coords.longitude},
     dataType: "html"
   });
 }
