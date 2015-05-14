@@ -14,4 +14,17 @@ class Dog < ActiveRecord::Base
   validates :owner, presence: true
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   validates_with AttachmentSizeValidator, :attributes => :avatar, :less_than => 10.megabytes
+
+
+  def happy? 
+    #based on how recent the last walk was and how long the walk was
+    #add method to caluclate the length of the last walk. 
+    if self.owner.walks.last.created_at.to_i < Time.now.to_i - 86400
+      return false
+    else
+      return true
+    end
+  end
+
+
 end
