@@ -19,7 +19,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts 'SHOWWwWWWWWW'
     @user = User.find_by(id: params[:id])
     if @user
       if request.xhr?
@@ -33,10 +32,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def territories
+  def territory
+    "Hi"
     @users = User.all
       if request.xhr?
         geojson = TerritoriesHelper.geojson(@users, "Polygon")
+        puts geojson
         render json: geojson
       else
         render render :nothing => true, status: 404
@@ -44,11 +45,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    puts "EDDDDDDIIIIIITTTTTTT"
-    puts params
     @user = User.find_by(id: params[:id])
-    puts "USERRRRRRRR"
-    puts @user.username
   end
 
   def update

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :marks, only: [:create]
   end
 
+  get '/users/territory' => 'users#territory'
   resources :users, except: [:index] do
     member do
       get 'welcome'
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
   post 'walks/:walk_id/end_walk' => 'walks#end_walk', as: :end_walk
 
   post '/users/:user_id/dogs/:id' => 'dogs#destroy', as: :destroy_dog
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
