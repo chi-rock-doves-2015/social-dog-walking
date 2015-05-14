@@ -1,4 +1,8 @@
-var map;
+var map, infoWindow;
+
+  // infoWindow = new google.maps.InfoWindow({
+  //   content: ""
+  // });
 
 $(window).load(function() {
   loadScript();
@@ -20,7 +24,7 @@ function loadScript() {
 
 
 function initializeMap() {
-  var defaultLatLng, mapOptions, featureStyle;
+  var defaultLatLng, mapOptions, colorValues;
 
   // defaultLatLng = new google.maps.LatLng(30.055487, 31.279766);
 
@@ -34,31 +38,53 @@ function initializeMap() {
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
   if ($("body").hasClass("show")) {
-    loadGeo(function(geojson_data) {
-      if ($("body").hasClass("users")) {
-        map.data.addGeoJson(geojson_data);
-        extendBounds(geojson_data, "Polygon");
-      }
-      else {
-        map.data.addGeoJson(geojson_data);
-        extendBounds(geojson_data, "Point");
-      };
-    });
-  } else {
-    html5Geolocation(displayMap);
-  }
-
-  featureStyle = {
-    fillColor: "red",
-    strokeWeight: 0
+    debugger;
+    if ($("#stats").attr("data-walk-mark-count") === "0") {
+      html5Geolocation(displayMap);
+    } else {
+      loadGeo(function(geojson_data) {
+        if ($("body").hasClass("users")) {
+          map.data.addGeoJson(geojson_data);
+          extendBounds(geojson_data, "Polygon");
+        }
+        else {
+          map.data.addGeoJson(geojson_data);
+          extendBounds(geojson_data, "Point");
+        }
+      })
+    }
   };
 
-  map.data.setStyle(featureStyle);
+  map.data.addListener('addfeature', function (event) {
+    map.data.overrideStyle(event.feature, { fillColor: event.feature.getProperty('color'),
+                                            strokeWeight: 0,
+                                            zIndex: event.feature.getProperty('zIndex')});
+  })
+
+
+  $("#load-territories-geo-layer").click(function() {
+    loadTerritoriesGeoLayer(function(geojson_data) {
+    map.data.addGeoJson(geojson_data);
+    // extendBounds(geojson_data, "Polygon");
+    })
+  })
 
 };
 
+  // function setColorStyle (feature) {
+//   debugger;
+//   return {
+//     fillColor: feature.getProperty('color'),
+//     strokeWeight: 0
+//   };
+// }
+
 function loadGeo (callback) {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
+}
+
+function loadTerritoriesGeoLayer (callback) {
+  $.getJSON("/users/territory", callback)
 }
 
 function extendBounds (geojson_data, geotype) {
@@ -74,7 +100,6 @@ function extendBounds (geojson_data, geotype) {
       break;
     case "Point":
       markers = geojson_data.features;
-      // debugger;
       markers.forEach( function(point) {
         bounds.extend(new google.maps.LatLng(point.geometry.coordinates[1], point.geometry.coordinates[0]));
         });
@@ -103,7 +128,6 @@ function displayMap(position) {
   var currentGeolocation;
 
   map.setZoom(15);
-
   currentGeolocation = new google.maps.LatLng(position.coords.latitude,
                                               position.coords.longitude);
   map.setCenter(currentGeolocation);
@@ -155,37 +179,37 @@ function handleNoGeolocation(errorFlag) {
 $(document).ready(function(){
 
 
-function onSuccessMark(position){
-  displayMap(position);
-  ajaxMarkGeolocation(position);
-}
-// AJAXIFYING BUTTONS
-// added for create walk button
-  function ajaxInitialGeolocationData(position){
-    var geolocationData = {mark: {coords: 'POINT(' + position.coords.latitude + ' ' + position.coords.longitude + ')', accuracy: position.coords.accuracy}};
-    // first we need to get the walk id that was just created so that we can send the next ajax request to the server
-    var geolocationPost = $.ajax({
-                              url: '/walks',
-                              type: 'post',
-                              data: geolocationData
-    })
-
-    geolocationPost.done(function(response){
-      console.log(response);
-      $('#status').children().remove();
-      $('#status').append(response);
-    })
+  function onSuccessMark(position){
+    displayMap(position);
+    ajaxMarkGeolocation(position);
   }
+  // AJAXIFYING BUTTONS
+  // added for create walk button
+    function ajaxInitialGeolocationData(position){
+      var geolocationData = {mark: {coords: 'POINT(' + position.coords.latitude + ' ' + position.coords.longitude + ')', accuracy: position.coords.accuracy}};
+      // first we need to get the walk id that was just created so that we can send the next ajax request to the server
+      var geolocationPost = $.ajax({
+                                url: '/walks',
+                                type: 'post',
+                                data: geolocationData
+      })
+
+      geolocationPost.done(function(response){
+        console.log(response);
+        $('#status').children().remove();
+        $('#status').append(response);
+      })
+    }
 
 
 
-// BUTTON : RECENT WALKS
+  // BUTTON : RECENT WALKS
   $("#recent-walks-btn").on('click', function(event){
     event.preventDefault();
     map.data.loadGeoJson("/walks/1");
   })
 
-// MARK BUTTON
+  // MARK BUTTON
   $(".mark").on('click', function(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);

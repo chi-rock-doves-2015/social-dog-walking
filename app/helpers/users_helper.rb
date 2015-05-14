@@ -14,6 +14,10 @@ module UsersHelper
           geometry: {
             type: geotype,
             coordinates: [coordinates]
+          },
+          properties: {
+            color: "red",
+            zIndex: 9999
           }
         }]
 
