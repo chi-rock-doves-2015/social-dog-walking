@@ -1,5 +1,5 @@
 <% if @walk.marks.any? %>
-	<div id="stats">
+<div id = "stats" data-walk-mark-count="<%= @walk.marks.count %>">
 	  <div class="row">
 	    <div class="small-4 columns">Distance: 1 mi <%= nil %> </div>
 	    <div class="small-4 columns">Area: 1 sqmi <%= nil %> </div>
@@ -12,7 +12,7 @@
 
 
 <% else %>
-	<div id="stats">
+  <div id = "stats" data-walk-mark-count="<%= @walk.marks.count %>">
 	  <div class="row">
 	  	<div class="small-10 small-centered columns">Let's <span>Mark</span> something!</div>
 	  </div>
