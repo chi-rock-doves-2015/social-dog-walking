@@ -23,8 +23,9 @@ module TerritoriesHelper
             },
             properties: {
               geometry: "Polygon",
-              color: "#" + ("%06x" % (rand * 0xffffff)).to_s,
-              strokeWeight: 0
+              fillColor: "#" + ("%06x" % (rand * 0xffffff)).to_s,
+              strokeWeight: 0,
+              fillOpacity: 0.35
               # strokeColor: k.user.id ? "red" : ("#" + ("%06x" % (rand * 0xffffff)).to_s)
             }
           }
