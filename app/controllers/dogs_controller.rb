@@ -11,7 +11,7 @@ class DogsController < ApplicationController
     @dog = Dog.new(dog_params)
     @dog.owner = @user
     if @dog.save
-      redirect_to "/users/#{@user.id}/dogs/#{@dog.id}"
+      redirect_to @user
     else
       @errors = @dog.errors.full_messages
       render 'new'
