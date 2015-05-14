@@ -38,7 +38,6 @@ function initializeMap() {
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
   if ($("body").hasClass("show")) {
-    debugger;
     if ($("#stats").attr("data-walk-mark-count") === "0") {
       html5Geolocation(displayMap);
     } else {
