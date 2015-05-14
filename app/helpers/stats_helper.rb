@@ -16,6 +16,14 @@ module StatsHelper
     (distance_traveled * 250).to_i
   end
 
+  # def area_score
+  #   (area * 250).to_i
+  # end
+
+  # def combined_score
+    
+  # end
+
 
   def area
     area = 0
