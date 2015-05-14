@@ -22,7 +22,7 @@ function loadScript() {
 function initializeMap() {
   var defaultLatLng, mapOptions, featureStyle;
 
-  defaultLatLng = new google.maps.LatLng(30.055487, 31.279766)
+  defaultLatLng = new google.maps.LatLng(30.055487, 31.279766);
 
   mapOptions = {
           zoom: 15,
@@ -35,8 +35,9 @@ function initializeMap() {
 
   html5Geolocation(displayMap);
 
-  loadGeo(function(data) {
-    map.data.addGeoJson(data)
+  loadGeo(function(geojson_data) {
+    map.data.addGeoJson(geojson_data);
+    extendBounds(geojson_data);
   });
 
   featureStyle = {
@@ -52,9 +53,20 @@ function loadGeo (callback) {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
 }
 
+function extendBounds (geojson_data) {
+  var bounds, coordinates;
+  bounds = new google.maps.LatLngBounds();
+  coordinates = geojson_data.features[0].geometry.coordinates[0];
+
+  coordinates.forEach( function(coordinate) {
+    bounds.extend(new google.maps.LatLng(coordinate[0], coordinate[1]));
+  });
+  center = bounds.getCenter();
+  map.setCenter({lat: center.F, lng: center.A});
+}
+
 function html5Geolocation (successAction, failAction) {
   var errorAction = failAction || onError;
-
   // function standardAction(position) {
   //   displayMap(position);
   //   successAction(position);
