@@ -20,7 +20,11 @@ class WalksController < ApplicationController
   def create
     puts params
       @walk = Walk.new(user: current_user)
-      params[:current_user][:dog_ids].each {|id| @walk.dogs << Dog.find_by(id: id)}
+      if params[:current_user] && params[:current_user][:dog_ids]
+            dogs = params[:current_user][:dog_ids]
+            puts dogs
+            dogs.each {|id| @walk.dogs << Dog.find_by(id: id)}
+      end
       if @walk.save
         session[:walk_id] = @walk.id
         if request.xhr?
