@@ -13,3 +13,15 @@
     </div>
   </div>
 </div>
+
+<div class = "row">
+  <div class = "medium-10 medium-centered columns large-8">
+    <div>
+    	<% if @dog.happy? %>
+      	<h1>Good job! <%= @dog.name %> is happy because you have been taking <%= @dog.name %> on walks and getting lots of excercise! </h1>
+      <% else %>
+      	<h1><%= dog.name %> is unhappy! You need to take more walks dog walks and get more territory! %> </h1>
+      <% end %>
+    </div>
+  </div>
+</div>

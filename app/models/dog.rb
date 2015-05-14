@@ -19,7 +19,7 @@ class Dog < ActiveRecord::Base
   def happy? 
     #based on how recent the last walk was and how long the walk was
     #add method to caluclate the length of the last walk. 
-    if self.owner.walk.last.created_at.to_i < Time.now.to_i - 86400
+    if self.owner.walks.last.created_at.to_i < Time.now.to_i - 86400
       return false
     else
       return true
