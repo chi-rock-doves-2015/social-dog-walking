@@ -38,27 +38,38 @@ function initializeMap() {
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-  if ($("body").hasClass("show")) {
-    if ($("#stats").attr("data-walk-mark-count") === "0") {
+  if ($("body").hasClass("dashboard")) {
+    if ($("#square-map").attr("data-user-walk-count") === "0") {
       html5Geolocation(displayMap);
     } else {
       loadGeo(function(geojson_data) {
-        if ($("body").hasClass("users")) {
-          map.data.addGeoJson(geojson_data);
-          extendBounds(geojson_data, "Polygon");
-        }
-        else {
-          map.data.addGeoJson(geojson_data);
-            // map.data.SetStyle(function(feature))
-          extendBounds(geojson_data, "Point");
-        }
-      })
+
+        map.data.addGeoJson(geojson_data);
+        extendBounds(geojson_data, "Polygon");
+      });
     }
-  };
+  }
+
+  // if ($("body").hasClass("show")) {
+  //   if ($("#stats").attr("data-walk-mark-count") === "0") {
+  //     html5Geolocation(displayMap);
+  //   } else {
+  //     loadGeo(function(geojson_data) {
+  //       if ($("body").hasClass("users")) {
+  //         map.data.addGeoJson(geojson_data);
+  //         extendBounds(geojson_data, "Polygon");
+  //       }
+  //       else {
+  //         map.data.addGeoJson(geojson_data);
+  //           // map.data.SetStyle(function(feature))
+  //         extendBounds(geojson_data, "Point");
+  //       }
+  //     });
+  //   }
+  // };
 
   map.data.addListener('addfeature', function (event) {
     if (event.feature.getProperty('geometry') === "Point") {
-      debugger;
       map.data.setStyle({
         icon: {
                 path: google.maps.SymbolPath.CIRCLE,
@@ -72,7 +83,6 @@ function initializeMap() {
               }
       })
     } else {
-      debugger;
       map.data.overrideStyle(event.feature, { zIndex: event.feature.getProperty('zIndex'),
                                               fillColor: event.feature.getProperty('fillColor'),
                                               strokeColor: event.feature.getProperty('strokeColor'),
@@ -88,10 +98,10 @@ function initializeMap() {
     loadTerritoriesGeoLayer(function(geojson_data) {
     map.data.addGeoJson(geojson_data);
     // extendBounds(geojson_data, "Polygon");
-    })
+    });
   })
 
-};
+}
 
   // function setColorStyle (feature) {
 //   debugger;
@@ -102,11 +112,11 @@ function initializeMap() {
 // }
 
 function loadGeo (callback) {
-  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
+  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-user-id"), callback);
 }
 
 function loadTerritoriesGeoLayer (callback) {
-  $.getJSON("/users/territory", callback)
+  $.getJSON("/users/territory", callback);
 }
 
 function extendBounds (geojson_data, geotype) {
