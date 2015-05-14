@@ -1,5 +1,9 @@
 module TerritoriesHelper
 
+  # def set_color
+  #   @walkcurrent_user.id = user.id ? "red" : "%06x" % (rand * 0xffffff)
+  # end
+
   def self.geojson(users, geotype)
 
     features = Array.new
@@ -18,7 +22,11 @@ module TerritoriesHelper
               coordinates: [coordinates]
             },
             properties: {
-              color: "yellow"
+              geometry: "Polygon",
+              fillColor: "#" + ("%06x" % (rand * 0xffffff)).to_s,
+              strokeWeight: 0,
+              fillOpacity: 0.35
+              # strokeColor: k.user.id ? "red" : ("#" + ("%06x" % (rand * 0xffffff)).to_s)
             }
           }
     end

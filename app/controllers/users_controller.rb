@@ -33,14 +33,12 @@ class UsersController < ApplicationController
   end
 
   def territory
-    "Hi"
-    @users = User.all
+    @users = User.where.not(id: current_user.id)
       if request.xhr?
         geojson = TerritoriesHelper.geojson(@users, "Polygon")
-        puts geojson
         render json: geojson
       else
-        render render :nothing => true, status: 404
+        render :nothing => true, status: 404
       end
   end
 
