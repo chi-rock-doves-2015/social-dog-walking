@@ -1,43 +1,10 @@
-<!--
-<div>
-	<a href="idOfLeftMenu" role="button" class="left-off-canvas-toggle">Left Menu</a>
-  <h1>Social Dog Walking App</h1>
-</div>
-
- -->
 
  <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
       <h1><a href="/">Terriertory</a></h1>
     </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-
-      <!-- <li class="has-dropdown">
-        <a href="#">Right Button Dropdown</a>
-        <ul class="dropdown">
-          <li><a href="/">Do we need these?</a></li>
-          <li><a href="/">Maybe for user dashboard</a></li>
-          <li><a href="/">or walks/dogs/neighbors?</a></li>
-        </ul>
-      </li> -->
-      <% if current_user %>
-        <%= render "shared/user_nav" %>
-      <% else %>
-        <%= render "shared/no_user_nav" %>
-      <% end %>
-      <li><%= link_to "About", about_path %></li>
     </ul>
 
-    <!-- Left Nav Section -->
-<!--     <ul class="left">
-      <li><a href="#">Left Nav Button</a></li>
-    </ul> -->
-  </section>
 </nav>
