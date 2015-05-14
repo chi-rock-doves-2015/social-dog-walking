@@ -14,14 +14,4 @@
   </div>
 </div>
 
-<div class = "row">
-  <div class = "medium-10 medium-centered columns large-8">
-    <div>
-    	<% if @dog.exercised? %>
-      	<h2>Good job! <%= @dog.name %> has been getting a lot of exercise! You are a good pack leader.</h2>
-      <% else %>
-      	<h2> It has been over a day since you walked <%= dog.name %>! Maybe go for a walk? %> </h2>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render '/dogs/stats' %>
