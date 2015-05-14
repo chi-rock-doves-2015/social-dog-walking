@@ -11,7 +11,8 @@ module MarksHelper
             coordinates: [mark.longitude, mark.latitude]
           },
           properties: {
-            color: "red"
+            geometry: "Point",
+            icon: "http://cdn.theatlantic.com/static/front/images/specialreports/ideas-2012/blue-dot.png"
           }
         }
       end
@@ -32,6 +33,7 @@ module MarksHelper
             coordinates: [coordinates]
           },
           properties: {
+            geometry: "Polygon",
             color: "red"
           }
         }]
