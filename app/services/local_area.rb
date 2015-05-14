@@ -15,9 +15,5 @@ class LocalArea
     @users = marks.map do |mark|
       mark.walk.user
     end.uniq
-
-    @users.each do |user|
-      puts user.username
-    end
   end
 end
