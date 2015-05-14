@@ -15,7 +15,8 @@
 
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'shared/header' %>
-    <%= render 'shared/errors' if @errors %>
+    <%= render 'shared/errors' if (@errors) %>
+    <%= render 'shared/flash' if flash %>
 
     <div class="container" id = "the-yield">
       <%= yield %>

@@ -11,7 +11,8 @@ class DogsController < ApplicationController
     @dog = Dog.new(dog_params)
     @dog.owner = @user
     if @dog.save
-      redirect_to @user
+      flash[:alert] = "Dog Created. Good dog, #{@dog.name}!"
+      redirect_to dashboard_path
     else
       @errors = @dog.errors.full_messages
       render 'new'
