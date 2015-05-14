@@ -1,0 +1,13 @@
+
+
+
+
+<div class = "row">
+	  <div class = "medium-10 medium-centered columns large-8">
+			<h2>Walks:</h2>
+			<% @walks.each_with_index do |walk, walk_index| %>
+					<p> <strong><%= walk_index + 1 %>:</strong><a href="/walks/<%= walk.id %>"> Distance: <%= walk.distance_traveled.round(1) %> miles Finished:<%= walk.marks.last.created_at.strftime("%B %d, %Y") %></a></p>
+			<% end %>
+	  </div>
+</div>
+
