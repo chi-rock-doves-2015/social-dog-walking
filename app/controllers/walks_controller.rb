@@ -10,12 +10,9 @@ class WalksController < ApplicationController
 
   def new
     @walk = Walk.new(user_id: current_user.id)
-      puts current_user.dogs
       if request.xhr?
         render "new", layout: false
       end
-    # @dogs = current_user.dogs unneccessary
-    #for taking a walk and choosing your dogs; also allows http request easier
   end
 
   def create
