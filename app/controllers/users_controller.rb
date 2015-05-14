@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to new_user_welcome(@user)
+      session[:user_id] = @user.id
+      redirect_to "/users/#{@user.id}/welcome"
     else
       @errors = @user.errors.full_messages
       render 'new'
@@ -58,10 +59,6 @@ class UsersController < ApplicationController
     else
       redirect_to '/'
     end
-  end
-
-  def new_user_welcome
-    @user = User.find_by(id: session[:id])
   end
 
   private
