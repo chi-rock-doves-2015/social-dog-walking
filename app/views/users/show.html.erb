@@ -13,7 +13,7 @@
   <div class = "medium-10 medium-centered columns large-8">
     <h2>Your stats:</h2>
     <!-- filler -->
-      <p> Territory: <%= @user.area.round(1) %> square meters </p>
+      <p> Territory: <%= number_with_delimiter(@user.area.round(1), delimiter: ',') %> square meters </p>
       <p> Distance Traveled: <%= @user.distance_traveled %> miles</p>
       <p> Score: <%= @user.distance_score %>pts </p>
     <!-- filler -->
