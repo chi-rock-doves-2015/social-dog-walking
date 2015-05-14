@@ -1,8 +1,4 @@
-<% if !session[:walk_id] %>
-  <%= render "shared/start_walk_btn" %>
-<% else %>
-  <%= render "shared/walk_in_progress_btns" %>
-<% end %>
+<%= render "shared/walk_button" %>
 
 <li class=""><%= link_to "Profile", user_path(current_user) %> </li>
 <li><a href="#">Recent Walks</a></li>
