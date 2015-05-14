@@ -4,6 +4,8 @@ class Walk < ActiveRecord::Base
   has_many   :walked_dogs
   has_many   :dogs, through: :walked_dogs
 
+  validates :user, presence: true
+
   def duration
     updated_at - created_at
   end

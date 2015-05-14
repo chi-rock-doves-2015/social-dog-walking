@@ -1,10 +1,10 @@
 class WalksController < ApplicationController
 
   def index
-    # recent walks will be in this route
-    # current_user stuff
-    walks = Array.new
-    #?????????????????? what is this for??????????
+    # # recent walks will be in this route
+    # # current_user stuff
+    # walks = Array.new
+    # #?????????????????? what is this for??????????
 
   end
 
@@ -13,8 +13,6 @@ class WalksController < ApplicationController
       if request.xhr?
         render "new", layout: false
       end
-    # @dogs = current_user.dogs unneccessary
-    #for taking a walk and choosing your dogs; also allows http request easier
   end
 
   def create

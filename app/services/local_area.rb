@@ -8,12 +8,16 @@ class LocalArea
 
     marks_object = ActiveRecord::Base.connection.execute(sql)
 
-    marks = marks_object.map do |mark_data|
+    @marks = marks_object.map do |mark_data|
       Mark.new(mark_data)
     end
 
-    @users = marks.map do |mark|
+    @users = @marks.map do |mark|
       mark.walk.user
-    end.uniq
+    end.uniq.compact
+
+    # @dogs = @marks.map do |mark|
+    #   mark.walk.user
+    # end.compact.uniq
   end
 end
