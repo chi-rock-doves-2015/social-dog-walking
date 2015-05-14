@@ -17,7 +17,7 @@ class Dog < ActiveRecord::Base
   validates_with AttachmentSizeValidator, :attributes => :avatar, :less_than => 10.megabytes
 
 
-  def happy?
+  def exercised?
     #based on how recent the last walk was and how long the walk was
     #add method to caluclate the length of the last walk.
     if self.owner.walks.last.created_at.to_i < Time.now.to_i - 86400
