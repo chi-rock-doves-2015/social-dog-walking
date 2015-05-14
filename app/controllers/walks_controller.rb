@@ -1,10 +1,6 @@
 class WalksController < ApplicationController
 
   def index
-    # # recent walks will be in this route
-    # # current_user stuff
-    # walks = Array.new
-    # #?????????????????? what is this for??????????
 
   end
 
@@ -13,13 +9,14 @@ class WalksController < ApplicationController
       if request.xhr?
         render "new", layout: false
       end
+
   end
 
   def create
-    puts params
+    puts params[:dogs]
       @walk = Walk.new(user: current_user)
-      if params[:current_user] && params[:current_user][:dog_ids]
-            dogs = params[:current_user][:dog_ids]
+      if params[:dogs].size > 0
+            dogs = params[:dogs]
             puts dogs
             dogs.each {|id| @walk.dogs << Dog.find_by(id: id)}
       end
