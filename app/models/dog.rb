@@ -1,4 +1,5 @@
 class Dog < ActiveRecord::Base
+  include StatsHelper
 
   has_attached_file :avatar,
   :styles => { :thumb => '60x60#', :medium => '200x200#', :large => '300x300#' }, :default_style => :large,
@@ -16,13 +17,15 @@ class Dog < ActiveRecord::Base
   validates_with AttachmentSizeValidator, :attributes => :avatar, :less_than => 10.megabytes
 
 
-  def happy?
+
+  def exercised?
     #based on how recent the last walk was and how long the walk was
     #add method to caluclate the length of the last walk.
-    return false unless self.walks.any? && self.walks.last.created_at.to_i < Time.now.to_i - 86400
-
-    return true
+    if self.owner.walks.last.created_at.to_i < Time.now.to_i - 86400
+      return false
+    else
+      return true
+    end
   end
-
 
 end
