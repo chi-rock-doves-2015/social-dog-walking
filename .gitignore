@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore local avatar and file storage
+/public/system

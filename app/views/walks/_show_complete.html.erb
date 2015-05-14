@@ -1,0 +1,15 @@
+<div class="show" id="show" data-controller-name="<%= controller_name %>"></div>
+<!-- -->
+
+<div id = "stats" data-walk-mark-count="<%= @walk.marks.count %>">
+  <%= render "complete_walk_stats" %>
+</div>
+
+  <div id='square-map'>
+    <%= render "shared/map" %>
+  </div>
+
+  <% if session[:walk_id] == params[:id].to_i %>
+    <%= render "buttons" %>
+  <% end %>
+

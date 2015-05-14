@@ -1,15 +1,52 @@
 $(document).ready(function() {
-  setMapCanvasMobileHeight();
+  var $windowWidth = document.documentElement.clientWidth;
+  var $windowHeight = document.documentElement.clientHeight;
+  var $topBarHeight = $('.top-bar').height();
+  var $bodyHeight = $windowHeight - $topBarHeight;
+
+if ($('#walk-in-progress-map').length) {
+  mapCanvasWalkInProgress($bodyHeight, $topBarHeight);
+}else if ($('#square-map').length ){
+  mapCanvasSquareView($windowWidth);
+}
+
 });
 
-//for now this is setting map canvas to be square.
-//we should  set this to load in a better way than by default on every map.
-//but we need it to be square to have room to display buttons during a walk.
-//there has been talk of a sticky/fixed footer button bar
-//that would be positioned above any map for a full-screen floating buttons effect.
-function setMapCanvasMobileHeight(){
-  var $width = document.documentElement.clientWidth;
-  var $height = document.documentElement.clientHeight;
+
+
+
+/////////////////////////
+
+function mapCanvasWalkInProgress(bodyHeight, topBarHeight){
+  // debugger;
+  console.log('setting walk in progress layout')
+  setStatsHeight(bodyHeight);
+  setButtonsHeight(bodyHeight);
+  $('#map-canvas').css({
+    "height": bodyHeight * 0.82
+  });
+}
+
+function setStatsHeight(bodyHeight, topBarHeight){
+  $('#stats').css({
+    "height": bodyHeight * 0.18
+  });
+}
+
+
+function setButtonsHeight(bodyHeight){
+  $('#walk-buttons').css({
+    "height" : bodyHeight * 0.15,
+    "position": "fixed",
+    "bottom": bodyHeight * 0.04
+  });
+}
+////////////////////////
+
+function mapCanvasSquareView(width){
+  console.log('setting square map layout')
+  // var $width = document.documentElement.clientWidth;
+  // var $height = document.documentElement.clientHeight;
   // console.log($width);
-  $('#map-canvas').css("height", ($width));
+  $('#map-canvas').css("height", (width));
 };

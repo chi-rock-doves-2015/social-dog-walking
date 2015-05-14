@@ -1,0 +1,20 @@
+<div id='new-walk-form'>
+<h1>Choose Dogs</h2>
+  <%= form_for @walk, html: {id: "new_walk_form"} do |f| %>
+    <div class='row'>
+      <div class='small-centered small-11 column'>
+      <%= collection_check_boxes(:current_user, :dog_ids, Dog.all, :id, :name, include_hidden: false) %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='small-centered small-4 column'>
+        <%= f.submit "Let's Go!", {class: "button"} %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+

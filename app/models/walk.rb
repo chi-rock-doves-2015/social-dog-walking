@@ -2,7 +2,7 @@ class Walk < ActiveRecord::Base
   belongs_to :user
   has_many   :marks
   has_many   :walked_dogs
-  has_many   :users, through: :walked_dogs
+  has_many   :dogs, through: :walked_dogs
 
   def duration
     updated_at - created_at
@@ -30,7 +30,7 @@ class Walk < ActiveRecord::Base
   end
 
   def distance_traveled
-    distance = 0 
+    distance = 0
     if self.marks.count > 0
       self.marks.each do |mark|
         distance += mark.distance_from_last_mark
@@ -45,7 +45,7 @@ class Walk < ActiveRecord::Base
     self.marks.each do |mark|
       markcoords = markcoords + mark.coords.y.to_s + " " + mark.coords.x.to_s + ", "
     end
-    markcoords = markcoords + first_mark.coords.y.to_s + " " + first_mark.coords.x.to_s 
+    markcoords = markcoords + first_mark.coords.y.to_s + " " + first_mark.coords.x.to_s
     return markcoords
   end
 
@@ -55,7 +55,7 @@ class Walk < ActiveRecord::Base
         mark_coords + "))'), 4326), 900913));").map {|area| area["st_area"]}
       st_area[0].to_f
     else
-      0 
+      0
     end
   end
 end

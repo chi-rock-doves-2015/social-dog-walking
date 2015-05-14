@@ -1,15 +1,2 @@
-<div class="show" id="show" data-controller-name="<%= controller_name %>"></div>
 
-<div id="stats" data-walk-mark-count="<%= @walk.marks.count %>">
-  <div class = "row">
-  <p>Your walk on <%=@walk.created_at%>. </p>
-   Walk <%= params[:id] %>
-  </div>
-</div>
-
-
-  <%= render "shared/map" %>
-  <% if session[:walk_id] == params[:id].to_i %>
-    <%= render "buttons" %>
-  <% end %>
-
+  <%= walk_in_progress? ? (render "walk_in_progress") : (render "show_complete") %>
