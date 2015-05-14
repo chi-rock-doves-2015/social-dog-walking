@@ -1486,3 +1486,8 @@ $include-html-global-classes: $include-html-classes;
 // $include-legacy-visibility-classes: true;
 
 @import 'foundation';
+
+#map-canvas{
+  max-width: 720px;
+  max-height: 720px;
+}
