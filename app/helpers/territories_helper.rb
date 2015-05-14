@@ -18,6 +18,8 @@ module TerritoriesHelper
               coordinates: [coordinates]
             },
             properties: {
+              geometry: "Polygon",
+              shape: "circle",
               color: "yellow"
             }
           }

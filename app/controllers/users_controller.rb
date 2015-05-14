@@ -33,8 +33,8 @@ class UsersController < ApplicationController
   end
 
   def territory
-    "Hi"
     @users = User.all
+    # @users = User.find(:all, :conditions => ["id != ?", current_user.id])
       if request.xhr?
         geojson = TerritoriesHelper.geojson(@users, "Polygon")
         puts geojson

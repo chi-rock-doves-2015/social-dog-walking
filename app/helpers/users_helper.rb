@@ -16,6 +16,7 @@ module UsersHelper
             coordinates: [coordinates]
           },
           properties: {
+            geometry: "Polygon",
             color: "red",
             zIndex: 9999
           }
