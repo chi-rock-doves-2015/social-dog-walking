@@ -4,6 +4,8 @@
     <% if current_user.dogs.any? %>
       <% current_user.dogs.each do |dog| %>
       <label><input type='checkbox' name='walk[:dog_id]' value='<%=dog.id%>' checked ><%= dog.name %></label>
+
+    <input type='submit' value="Let's Go!" class='button'>
       <% end %>
     <% end %>
 
