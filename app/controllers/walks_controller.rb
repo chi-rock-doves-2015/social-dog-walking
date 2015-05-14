@@ -4,31 +4,34 @@ class WalksController < ApplicationController
     # recent walks will be in this route
     # current_user stuff
     walks = Array.new
+    #?????????????????? what is this for??????????
 
   end
 
   def new
-    @walk = Walk.new
-    @dogs = current_user.dogs
+    @walk = Walk.new(user_id: current_user.id)
+      if request.xhr?
+        render "new", layout: false
+      end
+    # @dogs = current_user.dogs unneccessary
     #for taking a walk and choosing your dogs; also allows http request easier
   end
 
   def create
-    if !session[:walk_id]
-      @walk = Walk.create(user: current_user)
-      session[:walk_id] = @walk.id
-      # Not plotting a mark on start for the time being
-      # @walk.marks << Mark.create!(mark_params)
-      # session[:walk_id] = @walk.id
-
-      # redirect_to @walk
-      if request.xhr?
-        render "walk_in_progress"
+    puts params
+      @walk = Walk.new(user: current_user)
+      params[:current_user][:dog_ids].each {|id| @walk.dogs << Dog.find_by(id: id)}
+      if @walk.save
+        session[:walk_id] = @walk.id
+        if request.xhr?
+          render @walk
+        else
+          redirect_to @walk
+        end
+      else
+        @errors = @walk.errors.full_messages
+        redirect_to new_walk_path
       end
-    else
-      redirect_to @walk
-    end
-    # A restful route could be added here
   end
 
   def show
