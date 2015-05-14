@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar,
   :styles => { :thumb => '60x60#', :medium => '200x200#', :large => '300x300#' }, :default_style => :large,
-  :default_url => '/images/:attachment/missing_:style.png',
+  :default_url => "missing_avatar.png",
   :path => "users/:id/avatar/:style.:extension"
 
   validates :email, uniqueness: true, presence: true
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     self.walks.each do |walk|
       area += walk.area.to_f
     end
-    area 
+    area
   end
 
 
