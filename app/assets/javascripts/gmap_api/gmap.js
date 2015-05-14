@@ -34,7 +34,7 @@ function initializeMap() {
           mapTypeId: google.maps.MapTypeId.NORMAL,
           disableDefaultUI: true,
           // panControl: false,
-          styles:[{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"weight":1}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"weight":0.8}]},{"featureType":"landscape","stylers":[{"color":"#f5f5f4"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text","stylers":[{"visibility":"on"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#000000"}]},{"elementType":"labels.icon","stylers":[{"visibility":"on"}]}] };
+          styles:[{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#01051d"},{"weight":1}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#01051d"},{"weight":0.8}]},{"featureType":"landscape","stylers":[{"color":"#f5f5f4"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text","stylers":[{"visibility":"on"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#000000"}]},{"elementType":"labels.icon","stylers":[{"visibility":"on"}]}] };
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
@@ -63,7 +63,7 @@ function initializeMap() {
         icon: {
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 10,
-                strokeColor: "red",
+                strokeColor: event.feature.getProperty('strokeColor'),
                 strokeWeight: 8,
                 // fillColor: "black"
                 // scaledSize: new google.maps.Size(32, 32),
@@ -73,9 +73,11 @@ function initializeMap() {
       })
     } else {
       debugger;
-      map.data.overrideStyle(event.feature, { fillColor: event.feature.getProperty('color'),
-                                              strokeWeight: 0,
-                                              zIndex: event.feature.getProperty('zIndex')
+      map.data.overrideStyle(event.feature, { zIndex: event.feature.getProperty('zIndex'),
+                                              fillColor: event.feature.getProperty('fillColor'),
+                                              strokeColor: event.feature.getProperty('strokeColor'),
+                                              strokeWeight: event.feature.getProperty('strokeWeight'),
+                                              fillOpacity: event.feature.getProperty('fillOpacity')
                                               // icon:
                                             });
       }
