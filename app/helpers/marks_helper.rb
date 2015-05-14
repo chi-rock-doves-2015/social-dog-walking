@@ -9,6 +9,9 @@ module MarksHelper
           geometry: {
             type: geotype,
             coordinates: [mark.longitude, mark.latitude]
+          },
+          properties: {
+            color: "red"
           }
         }
       end
@@ -27,6 +30,9 @@ module MarksHelper
           geometry: {
             type: geotype,
             coordinates: [coordinates]
+          },
+          properties: {
+            color: "red"
           }
         }]
     end

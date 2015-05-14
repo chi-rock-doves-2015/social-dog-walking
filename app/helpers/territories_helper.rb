@@ -4,21 +4,24 @@ module TerritoriesHelper
 
     features = Array.new
 
-      users.each do |marks|
-        coordinates = Array.new
-        marks.each do |mark|
-          coordinates << [mark.longitude, mark.latitude]
-        end
-        coordinates << [marks.first.longitude, marks.first.latitude]
+    users.each do |user|
+      coordinates = Array.new
+      user.marks.each do |mark|
+        coordinates << [mark.longitude, mark.latitude]
+      end
+      coordinates << [user.marks.first.longitude, user.marks.first.latitude]
 
         features << {
             type: "Feature",
             geometry: {
               type: geotype,
               coordinates: [coordinates]
+            },
+            properties: {
+              color: "yellow"
             }
           }
-      end
+    end
 
     geojson = { type: "FeatureCollection",
                 features: features
@@ -30,4 +33,3 @@ module TerritoriesHelper
   end
 
 end
-
