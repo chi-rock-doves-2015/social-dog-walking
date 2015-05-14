@@ -1,7 +1,11 @@
 <div class="show" id="show" data-controller-name="<%= controller_name %>"></div>
 
 <div id = "stats">
-  <%= render "complete_walk_stats" %>
+  <% if walk_in_progress? %>
+    <%= render 'walk_in_progress_stats' %>
+  <% else %>
+    <%= render "complete_walk_stats" %>
+  <% end %>
 </div>
 
   <div id='square-map'>

@@ -24,7 +24,7 @@ function newWalk(event) {
 
 function startWalk(event) {
   event.preventDefault();
-  console.log('starting walk')
+  console.log('starting walk');
   event.preventDefault();
   var createWalk;
 
