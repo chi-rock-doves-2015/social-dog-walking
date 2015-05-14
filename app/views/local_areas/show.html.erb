@@ -4,7 +4,7 @@ Local area show!
   <% @local_area_users.each do |user| %>
     <div class = "row">
       <div class = "medium-10 medium-centered columns large-8">
-        <a href = "/users/<%=user.id%>"><%= user.username %></a>
+        <!-- <a href = "/users/<%=user.id%>"><%= user.username %></a> -->
         <p>User Distance Score: <%= user.distance_score %></p>
         <%= image_tag user.avatar.url(:thumb) %>
       </div>
