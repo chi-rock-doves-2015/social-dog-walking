@@ -1,15 +1,26 @@
 <h1> Log in </h1>
 
 <%= form_for :user, url: '/login', html: {id: "login_form"} do |f| %>
+
+  <div class = "row">
+    <div class = "medium-3 columns">
   <%= f.label :email %>
   <%= f.text_field :email %>
+    </div>
+  </div>
 
+  <div class = "row">
+    <div class = "medium-3 columns">
   <%= f.label :password %>
   <%= f.password_field :password %>
+    </div>
+  </div>
 
-
-
+  <div class = "row">
+    <div class = "medium-3 columns">
   <%= f.submit "Log in", :class => "button" %>
+    </div>
+  </div>
 <% end %>
 
 
