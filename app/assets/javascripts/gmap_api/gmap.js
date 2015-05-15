@@ -50,6 +50,10 @@ function initializeMap() {
     }
   }
 
+  if ($("body").hasClass("walks")) {
+      html5Geolocation(displayMap);
+  }
+
   // if ($("body").hasClass("show")) {
   //   if ($("#stats").attr("data-walk-mark-count") === "0") {
   //     html5Geolocation(displayMap);
@@ -142,7 +146,11 @@ function initializeMap() {
 // }
 
 function loadGeo (callback) {
+  if ($("#map-canvas").attr("data-controller-name") === "users") {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-user-id"), callback);
+  } else {
+  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-walk-id"), callback);
+  }
 }
 
 function loadTerritoriesGeoLayer (callback) {
@@ -264,8 +272,9 @@ function handleNoGeolocation(errorFlag) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).ready(function(){
 
+
+$(document).ready(function(){
 
   function onSuccessMark(position){
     displayMap(position);
@@ -298,8 +307,8 @@ $(document).ready(function(){
   })
 
   // MARK BUTTON
-  $(".mark").on('click', function(event){
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
-  })
+//   $(".mark").on('click', function(event){
+//     event.preventDefault();
+//     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
+//   })
 });

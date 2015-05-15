@@ -37,7 +37,8 @@ class WalksController < ApplicationController
     puts "I AM IN THE WALKS CONTROLLER SHOW METHOD"
     #!needs current user validation
     @walk = Walk.find_by(id: params[:id])
-
+    puts params[:walk_id]
+    puts "*******************************!!!!"
     if @walk
       if request.xhr?
         geojson = WalksHelper.geojson(@walk, "Point")

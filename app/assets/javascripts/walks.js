@@ -1,3 +1,15 @@
+$(".walks.show").ready(function(){
+  html5Geolocation(function (position) {
+    var url = $('#mark-button').attr('data-post-route');
+    displayMap(position);
+    persistGeolocation(position, url);
+    loadGeo(function(data) {
+      map.data.addGeoJson(data);
+      // extendBounds(geojson_data, "Point");
+    });
+  });
+});
+
 $(document).ready(function(){
 
   $("#new-walk-button").on('click', newWalk);
@@ -20,8 +32,6 @@ function newWalk(event) {
 
 }
 
-
-
 function startWalk(event) {
   event.preventDefault();
   console.log('starting walk');
@@ -42,15 +52,15 @@ function startWalk(event) {
 
 function markWalk(event){
   var url;
+
   event.preventDefault();
   url = $(event.target).attr('data-post-route');
-
   html5Geolocation(function (position) {
-    var url = $(event.target).attr('data-post-route');
     displayMap(position);
     persistGeolocation(position, url);
     loadGeo(function(data) {
       map.data.addGeoJson(data);
+      // extendBounds(geojson_data, "Point");
     });
   });
 }
