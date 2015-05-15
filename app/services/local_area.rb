@@ -1,7 +1,7 @@
 class LocalArea
-  attr_reader :marks, :users
+  attr_reader :marks, :neighbors, :dogs
 
-  def initialize(lat, lon)
+  def initialize(lat, lon, current_user)
     point = "'POINT " + "(" + lat.to_s + " " + lon.to_s + ")" + "'"
 
     sql = "SELECT * FROM marks WHERE ST_DWithin(coords, #{point}, 1000);"
@@ -12,12 +12,17 @@ class LocalArea
       Mark.new(mark_data)
     end
 
-    @users = @marks.map do |mark|
+    @neighbors = @marks.map do |mark|
       mark.walk.user
     end.uniq.compact
 
-    # @dogs = @marks.map do |mark|
-    #   mark.walk.user
-    # end.compact.uniq
+
+    @dogs = @marks.map do |mark|
+      mark.walk.dogs
+    end.flatten.compact.uniq
+
+    @dogs -= current_user.dogs
+    @neighbors -= [current_user]
+
   end
 end

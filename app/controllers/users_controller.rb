@@ -57,6 +57,20 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = User.find_by(id: session[:user_id])
+    mark = @user.marks.last
+    @local_area = LocalArea.new(mark.latitude, mark.longitude, current_user)
+
+    puts' ***********************'
+    puts 'me:'
+    puts current_user.username
+    puts "my dogs:"
+    puts current_user.dogs.each{|d| puts d.name}
+
+    puts "neighborhood"
+    @local_area.neighbors.each{|u| puts u.username}
+    puts @local_area.dogs.count
+    puts' ***********************'
+
     if session[:user_id]
       render 'dashboard'
     else
