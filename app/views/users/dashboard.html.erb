@@ -26,14 +26,11 @@
           <%= render partial: "dogs/dog_stats", locals: {dog: dog} %>
         <% end %>
     </div>
-  <% elsif current_user.marks.count == 0 %>
-    <div data-alert class='alert-box warning radius' >
-      You don't have any walks yet!<a href="#" class="close">&times;</a>
   </div>
   <% else %>
   <div data-alert class='alert-box warning radius' >
       You haven't added any dogs yet!<a href="#" class="close">&times;</a>
-    </div>
+  </div>
   <% end %>
 
 
