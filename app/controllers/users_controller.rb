@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to "/users/#{@user.id}/welcome"
+      redirect_to dashboard_path
     else
       @errors = @user.errors.full_messages
       render 'new'
@@ -32,6 +32,8 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   def territory
     @user = current_user
     @users = User.where.not(id: current_user.id)
@@ -42,6 +44,8 @@ class UsersController < ApplicationController
         render :nothing => true, status: 404
       end
   end
+
+
 
   def edit
     @user = User.find_by(id: params[:id])
