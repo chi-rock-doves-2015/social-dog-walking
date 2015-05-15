@@ -53,10 +53,9 @@ if ($("#square-map").hasClass("walk-summary")) {
   html5Geolocation(function (position) {
       var url = $('#square-map').attr('data-post-route');
       displayMap(position);
-      persistGeolocation(position, url);
-      debugger;
+
       loadGeo(function(data) {
-        debugger;
+
         map.data.addGeoJson(data);
         // extendBounds(geojson_data, "Point");
       });
