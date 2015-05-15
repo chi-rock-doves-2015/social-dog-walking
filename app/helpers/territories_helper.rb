@@ -8,11 +8,13 @@ module TerritoriesHelper
     features = Array.new
     coordinates = Array.new
 
-    user.marks.each do |mark|
+    if user.marks.any?
+      user.marks.each do |mark|
         coordinates << [mark.longitude, mark.latitude]
       end
 
     coordinates << [user.marks.first.longitude, user.marks.first.latitude]
+    end
 
       features << {
           type: "Feature",
@@ -32,11 +34,12 @@ module TerritoriesHelper
 
     users.each do |user|
       coordinates = Array.new
-      user.marks.each do |mark|
-        coordinates << [mark.longitude, mark.latitude]
+      if user.marks.any?
+        user.marks.each do |mark|
+          coordinates << [mark.longitude, mark.latitude]
+        end
+        coordinates << [user.marks.first.longitude, user.marks.first.latitude]
       end
-      coordinates << [user.marks.first.longitude, user.marks.first.latitude]
-
         features << {
             type: "Feature",
             geometry: {

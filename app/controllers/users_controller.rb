@@ -32,6 +32,8 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   def territory
     @user = current_user
     @users = User.where.not(id: current_user.id)
@@ -42,6 +44,8 @@ class UsersController < ApplicationController
         render :nothing => true, status: 404
       end
   end
+
+
 
   def edit
     @user = User.find_by(id: params[:id])
