@@ -7,6 +7,7 @@ module TerritoriesHelper
   def self.geojson(user, users, geotype)
     features = Array.new
     coordinates = Array.new
+    colors = ["#FFFF00", "#9900FF", "#CC6600", "#009933", "#FF00FF", "#669999", "#CC3300", "#FF33CC", "#00CC99", "#333399", "#660066", "#993333", "#996633", "#333300", "#33CCFF"]
 
     if user.marks.any?
       user.marks.each do |mark|
@@ -48,7 +49,7 @@ module TerritoriesHelper
             },
             properties: {
               geometry: "Polygon",
-              fillColor: "#" + ("%06x" % (rand * 0xffffff)).to_s,
+              fillColor: colors.shift,
               strokeWeight: 0,
               fillOpacity: 0.35
               # strokeColor: k.user.id ? "red" : ("#" + ("%06x" % (rand * 0xffffff)).to_s)
