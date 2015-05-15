@@ -53,9 +53,9 @@ class WalksController < ApplicationController
         geojson = WalksHelper.geojson(@walk, "Point")
         render json: geojson
       else
-        render "show"
+      redirect_to @walk
+        # render "show"
     # if @walk.save
-    #   redirect_to @walk
     # else
     #   @errors = @walk.errors
     #   redirect_to dashboard_path
