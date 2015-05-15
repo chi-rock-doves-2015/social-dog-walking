@@ -1,5 +1,11 @@
+<div class="button-bar small-centered column">
+  <ul class="button-group">
+      <span><a id="load-territory-geo-layer">My Territory</a></span>
+      <span><a id="load-neighborhood-geo-layer">Neighborhood</a></span>
+      <span><a id="load-local-area-geo-layer">Local Area</a></span>
+  </ul>
+</div>
 
-<li><a id="load-territories-geo-layer">Territories</a></li>
 </div>
 <div id='square-map' data-user-walk-count="<%= @user.walks.count %>">
   <%= render "shared/map" %>
