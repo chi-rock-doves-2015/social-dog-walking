@@ -12,7 +12,6 @@ module MarksHelper
           },
           properties: {
             geometry: "Point",
-            icon: "http://cdn.theatlantic.com/static/front/images/specialreports/ideas-2012/blue-dot.png"
           }
         }
       end

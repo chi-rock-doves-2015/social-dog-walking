@@ -4,8 +4,9 @@ class MarksController < ApplicationController
 
   def create
     @walk = Walk.find_by(id: params[:walk_id])
+    puts params[:walk_id]
+    puts "***************************************"
     if request.xhr?
-      puts "XHR RECEIVED"
       @mark = Mark.new(mark_params)
       if @walk.marks << @mark
 

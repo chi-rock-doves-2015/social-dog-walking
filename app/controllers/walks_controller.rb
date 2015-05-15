@@ -24,7 +24,6 @@ class WalksController < ApplicationController
         if request.xhr?
           render @walk
         else
-          flash[:page_message] = "Let's Go!"
           redirect_to @walk
         end
       else
@@ -34,10 +33,7 @@ class WalksController < ApplicationController
   end
 
   def show
-    puts "I AM IN THE WALKS CONTROLLER SHOW METHOD"
-    #!needs current user validation
     @walk = Walk.find_by(id: params[:id])
-
     if @walk
       if request.xhr?
         geojson = WalksHelper.geojson(@walk, "Point")
@@ -53,11 +49,16 @@ class WalksController < ApplicationController
   def end_walk
     @walk = Walk.find_by(id: session[:walk_id])
     session[:walk_id] = nil
-    if @walk.save
+      if request.xhr?
+        geojson = WalksHelper.geojson(@walk, "Point")
+        render json: geojson
+      else
       redirect_to @walk
-    else
-      @errors = @walk.errors
-      redirect_to dashboard_path
+        # render "show"
+    # if @walk.save
+    # else
+    #   @errors = @walk.errors
+    #   redirect_to dashboard_path
     end
   end
 end
