@@ -37,7 +37,6 @@ function initializeMap() {
           styles:[{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#01051d"},{"weight":1}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#01051d"},{"weight":0.8}]},{"featureType":"landscape","stylers":[{"color":"#f5f5f4"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text","stylers":[{"visibility":"on"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#000000"}]},{"elementType":"labels.icon","stylers":[{"visibility":"on"}]}] };
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-
   if ($("body").hasClass("dashboard")) {
     if ($("#square-map").attr("data-user-walk-count") === "0") {
       html5Geolocation(displayMap);
@@ -49,6 +48,20 @@ function initializeMap() {
       });
     }
   }
+
+if ($("#square-map").hasClass("walk-summary")) {
+  html5Geolocation(function (position) {
+      var url = $('#square-map').attr('data-post-route');
+      displayMap(position);
+      persistGeolocation(position, url);
+      debugger;
+      loadGeo(function(data) {
+        debugger;
+        map.data.addGeoJson(data);
+        // extendBounds(geojson_data, "Point");
+      });
+  });
+}
 
   if ($("body").hasClass("walks")) {
       html5Geolocation(displayMap);
@@ -148,6 +161,8 @@ function initializeMap() {
 function loadGeo (callback) {
   if ($("#map-canvas").attr("data-controller-name") === "users") {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-user-id"), callback);
+  } else if ($("#square-map").hasClass("walk-summary")) {
+    $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#square-map").attr("data-walk-id"), callback);
   } else {
   $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-walk-id"), callback);
   }

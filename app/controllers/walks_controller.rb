@@ -49,16 +49,16 @@ class WalksController < ApplicationController
   def end_walk
     @walk = Walk.find_by(id: session[:walk_id])
     session[:walk_id] = nil
-      if request.xhr?
-        geojson = WalksHelper.geojson(@walk, "Point")
-        render json: geojson
-      else
+      # if request.xhr?
+      #   geojson = WalksHelper.geojson(@walk, "Point")
+      #   render json: geojson
+      # else
       redirect_to @walk
         # render "show"
     # if @walk.save
     # else
     #   @errors = @walk.errors
     #   redirect_to dashboard_path
-    end
+    # end
   end
 end
