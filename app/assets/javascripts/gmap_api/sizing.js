@@ -19,7 +19,7 @@ if ($('#walk-in-progress-map').length) {
 
 function mapCanvasWalkInProgress(bodyHeight, topBarHeight){
   // debugger;
-  console.log('setting walk in progress layout')
+  console.log('setting walk in progress layout');
   setStatsHeight(bodyHeight);
   setButtonsHeight(bodyHeight);
   $('#map-canvas').css({
