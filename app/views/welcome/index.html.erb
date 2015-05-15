@@ -1,18 +1,19 @@
 
-<div class='rows'>
-  <div class="small-10 columns small-centered">
-    <%= link_to "Log In", login_path, class: "button columns small-6 " %>
-    <%= link_to "Sign Up", new_user_path, class: "button columns small-6" %>
-  </div>
+<div class='row'>
+  <img src = "/assets/terriertory_maps_example.png">
 </div>
 
-<div id='status'>
-  <div class = "row">
-    <div class = "medium-10 medium-centered columns large-8">
-      <p>Welcome to Terriertory! Go on walks with your dog and claim territory by making marks in your neighborhood. </p>
-    </div>
+
+  <div id="stats" data-alert class='alert-box primary success centered radius' >
+    Welcome to Terriertory! Join your dog in the competition to mark territory in your neighborhood.
   </div>
-  <img src = "/assets/terriertory_maps_example.png">
+
+
+<div class='row'>
+  <div class="small-10 columns small-centered">
+    <%= link_to "Log In", login_path, class: "button radius columns small-6 " %>
+    <%= link_to "Sign Up", new_user_path, class: "button radius columns small-6" %>
+  </div>
 </div>
 
 
