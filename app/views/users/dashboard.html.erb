@@ -5,9 +5,16 @@
   <%= render "shared/map" %>
 </div>
 
+<form class = "button" action = "/users/<%=@user.id%>/walks" method = "post">
+  <% if @user.dogs %>
+    <% @user.dogs.each do |dog| %>
+      <input type = "hidden" name="dogs[<%=dog.id%>]" value='<%=dog.id%>'></input>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <% end %>
+  <% end %>
+  <input class = "button" type = "submit" value = "Take A Walk!"></input>
+</form>
 
-
-
-
-
-
+<form class = "button" action = "/logout" method = "get">
+  <input class = "button" type = "submit" value = "Logout"></input>
+</form>
