@@ -24,7 +24,7 @@ class WalksController < ApplicationController
         if request.xhr?
           render @walk
         else
-          flash[:page_message] = "Let's Get Ploppin!"
+          flash[:page_message] = "Let's Go!"
           redirect_to @walk
         end
       else
