@@ -11,26 +11,32 @@
   <%= render "shared/map" %>
 </div>
 
-<div id="message" class="row">
-  <% if @errors %>
-    <div data-alert class='alert-box alert radius' >
-      <% @errors.each do |error| %>
-        <%= error %>
-      <% end %>
-      <a href="#" class="close">&times;</a>
-    </div>
-  <% elsif flash[:message] %>
-    <div data-alert class='alert-box warning radius' >
-      <%= flash[:message] %><a href="#" class="close">&times;</a>
-    </div>
-  <% elsif current_user.marks.length == 0 %>
-    <div data-alert class='alert-box warning radius' >
-      You don't have any walks yet!<a href="#" class="close">&times;</a>
-    </div>
-  <% end %>
+<div id="messages" class="row">
+  <%= render 'shared/notifications' %>
+  <%= render 'shared/dashboard_greeting_banner' %>
 </div>
 
   <%= render "shared/start_walk_button" %>
+
+<% if current_user.dogs.any? %>
+  <div class = "row">
+    <div class = "small-centered columns">
+      <h3>My Dogs</h3>
+        <% current_user.dogs.each do |dog| %>
+          <%= render partial: "dogs/dog_stats", locals: {dog: dog} %>
+        <% end %>
+    </div>
+  <% elsif current_user.marks.count == 0 %>
+    <div data-alert class='alert-box warning radius' >
+      You don't have any walks yet!<a href="#" class="close">&times;</a>
+  </div>
+  <% else %>
+  <div data-alert class='alert-box warning radius' >
+      You haven't added any dogs yet!<a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+
+
 
 <div class = "row">
   <div class = "small-centered columns">

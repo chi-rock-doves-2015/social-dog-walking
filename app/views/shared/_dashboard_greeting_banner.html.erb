@@ -1,0 +1,9 @@
+  <% if current_user.walks.length == 0 %>
+    <div data-alert class='alert-box warning radius' >
+      You don't have any walks yet!
+    </div>
+  <% else %>
+    <div data-alert class='alert-box primary radius' >
+      Nice day for a walk!
+    </div>
+  <% end %>
