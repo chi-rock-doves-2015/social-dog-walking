@@ -4,6 +4,7 @@ class DogsController < ApplicationController
     #may want to change params[:user_id] to session[:user_id] for security
     @user = User.find_by(id: session[:user_id])
     @dog = Dog.new
+    flash[:page_message] = "Please tell us about your dog!"
   end
 
   def create
