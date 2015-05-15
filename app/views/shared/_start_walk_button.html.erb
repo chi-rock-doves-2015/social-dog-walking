@@ -1,0 +1,15 @@
+<div class='row'>
+  <form action = "/users/<%=@user.id%>/walks" method = "post">
+    <% if @user.dogs %>
+      <% @user.dogs.each do |dog| %>
+        <input type = "hidden" name="dogs[<%=dog.id%>]" value='<%=dog.id%>'></input>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <% end %>
+    <% end %>
+    <div class='row'>
+      <div class='small-10 small-centered columns'>
+        <input class = "button small expand radius success " type = "submit" value = "Take A Walk!"></input>
+    </div>
+    </div>
+  </form>
+</div>

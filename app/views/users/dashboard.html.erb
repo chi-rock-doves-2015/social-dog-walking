@@ -11,9 +11,38 @@
   <%= render "shared/map" %>
 </div>
 
+<div id="message" class="row">
+  <% if @errors %>
+    <div data-alert class='alert-box alert radius' >
+      <% @errors.each do |error| %>
+        <%= error %>
+      <% end %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% elsif flash[:message] %>
+    <div data-alert class='alert-box warning radius' >
+      <%= flash[:message] %><a href="#" class="close">&times;</a>
+    </div>
+  <% elsif current_user.walks.length == 0 %>
+    <div data-alert class='alert-box warning radius' >
+      You don't have any walks yet!<a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+</div>
 
+  <%= render "shared/start_walk_button" %>
 
+<div class = "row">
+  <div class = "small-centered columns">
+    <h3>Neighborhood Leaders</h3>
+      <% @local_area.neighbors.each do |neighbor| %>
+        <%= render partial: "user_stats", locals: {user: neighbor} %>
+      <% end %>
+  </div>
+</div>
 
+<div class="row">
+  <%= render "shared/logout_button" %>
 
-
+</div>
 
