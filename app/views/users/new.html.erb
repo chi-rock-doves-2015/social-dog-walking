@@ -3,11 +3,12 @@
 <%= form_for @user, html: {id: "registration_form"} do |f| %>
 
   <div class = "row">
-    <div class = "large-4 medium-8 columns">
+    <div class = "medium-3 columns">
       <%= f.label :username %>
       <%= f.text_field :username %>
 
-    <div class = "large-4 medium-8 columns">
+  <div class = "row">
+    <div class = "medium-3 columns">
       <%= f.label :email %>
       <%= f.email_field :email %>
     </div>
