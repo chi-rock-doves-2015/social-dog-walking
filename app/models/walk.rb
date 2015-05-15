@@ -38,7 +38,7 @@ class Walk < ActiveRecord::Base
         distance += mark.distance_from_last_mark
       end
     end
-    distance
+    distance.round(1)
   end
 
   def mark_coords

@@ -5,11 +5,12 @@
     <%= render "shared/map" %>
   </div>
 
-<form action = "/logout" method = "get">
-  <div class='row'>
-    <div class='small-6 small-centered columns'>
-      <input class = "button small expand radius alert" type = "submit" value = "Logout"></input>
-    </div>
+  <div data-alert class='alert-box success radius' >
+      <% if @walk.distance_traveled > 0.1 %>
+        You walked <%= @walk.distance_traveled %> miles!
+      <% else %>
+        You didn't walk very far at all.
+      <% end %>
   </div>
-</form>
 
+<%= render "shared/done_button" %>
