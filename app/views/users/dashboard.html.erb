@@ -1,39 +1,54 @@
-<div class = "row">
-	  <div class = "medium-10 medium-centered columns large-8">
-		<h1> <%= @user.username %> </h1>
-		<%= image_tag @user.avatar.url(:large) %>
-		<a href="users/<%= @user.id%>/edit">edit</a>
-		</div>
-</div>
-
-<div class = "row">
-  <div class = "medium-10 medium-centered columns large-8">
-  <h2>Your dogs:</h2>
-
-  <% @user.dogs.each do |dog| %>
-    <div>
-      <a href = "users/<%= dog.owner.id %>/dogs/<%=dog.id%>"><%= dog.name %></a>
-      <p><%= dog.name %>'s birthday <%= dog.birthday.strftime("%B %d, %Y") %></p>
-      <%= image_tag dog.avatar.url(:medium) %>
-    </div>
-  <% end %>
+<div class='row'>
+  <div class="small-12 small-centered columns">
+    <!-- <ul class="button-group radius"> -->
+        <a class='button small radius left ' id="load-territory-geo-layer">My Territory</a>
+   <!--      <a class='button small' id="load-neighborhood-geo-layer">Neighborhood</a> -->
+        <a class='button small radius right' id="load-local-area-geo-layer">Local Area</a>
+    </ul>
   </div>
 </div>
 
-<div class = "row">
-	<div class = "medium-10 medium-centered columns large-8">
-		<h2>Your stats:</h2>
-		<!-- filler -->
-			<p> Territory: <%= @user.area %> square meters </p>
-			<p> Distance Traveled: <%= @user.distance_traveled %> miles</p>
-			<p> Score: <%= @user.distance_score %>pts </p>
-		<!-- filler -->
-	</div>
 </div>
+<div id='square-map' data-user-walk-count="<%= @user.marks.count %>">
+  <%= render "shared/map" %>
+</div>
+
+<div id="messages" class="row">
+  <%= render 'shared/notifications' %>
+  <%= render 'shared/dashboard_greeting_banner' %>
+</div>
+
+  <%= render "shared/start_walk_button" %>
+
+<% if current_user.dogs.any? %>
+  <div class = "row">
+    <div class = "small-centered columns">
+      <h3>My Dogs</h3>
+        <% current_user.dogs.each do |dog| %>
+          <%= render partial: "dogs/dog_stats", locals: {dog: dog} %>
+        <% end %>
+    </div>
+  </div>
+  <% else %>
+  <div data-alert class='alert-box warning radius' >
+      You haven't added any dogs yet!<a href="#" class="close">&times;</a>
+  </div>
+<% end %>
+
+
 
 
 <div class = "row">
-	<div class = "medium-10 medium-centered columns large-8">
-		<a onclick="startWalk()" class="button" >Take a walk</a>
-	</div>
+  <div class = "small-centered columns">
+    <h3>Neighborhood Leaders</h3>
+      <% @local_area.neighbors.each do |neighbor| %>
+        <%= render partial: "user_stats", locals: {user: neighbor} %>
+      <% end %>
+  </div>
 </div>
+
+<div class="row">
+  <%= render "shared/logout_button" %>
+
+</div>
+

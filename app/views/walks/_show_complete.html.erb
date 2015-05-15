@@ -1,15 +1,16 @@
 <div class="show" id="show" data-controller-name="<%= controller_name %>"></div>
 <!-- -->
 
-<div id = "stats" data-walk-mark-count="<%= @walk.marks.count %>">
-  <%= render "complete_walk_stats" %>
-</div>
-
-  <div id='square-map'>
+  <div id='square-map' class='walk-summary' data-post-route="/walks/<%= @walk.id %>/marks" data-walk-id="<%= @walk.id %>">
     <%= render "shared/map" %>
   </div>
 
-  <% if session[:walk_id] == params[:id].to_i %>
-    <%= render "buttons" %>
-  <% end %>
+  <div data-alert class='alert-box success radius' >
+      <% if @walk.distance_traveled > 0.1 %>
+        You walked <%= @walk.distance_traveled %> miles!
+      <% else %>
+        You didn't walk very far at all.
+      <% end %>
+  </div>
 
+<%= render "shared/done_button" %>

@@ -11,7 +11,7 @@ module MarksHelper
             coordinates: [mark.longitude, mark.latitude]
           },
           properties: {
-            color: "red"
+            geometry: "Point",
           }
         }
       end
@@ -32,6 +32,7 @@ module MarksHelper
             coordinates: [coordinates]
           },
           properties: {
+            geometry: "Polygon",
             color: "red"
           }
         }]

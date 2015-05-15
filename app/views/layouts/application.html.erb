@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= content_for?(:title) ? yield(:title) : "SDWa" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <title><%= content_for?(:title) ? yield(:title) : "Terriertory" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -14,8 +14,10 @@
 
 
   <body class="<%= controller_name %> <%= action_name %>">
+    <% if Rails.env.production? %>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <% end %>
     <%= render 'shared/header' %>
-    <%= render 'shared/errors' if @errors %>
 
     <div class="container" id = "the-yield">
       <%= yield %>

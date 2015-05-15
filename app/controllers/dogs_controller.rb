@@ -4,6 +4,7 @@ class DogsController < ApplicationController
     #may want to change params[:user_id] to session[:user_id] for security
     @user = User.find_by(id: session[:user_id])
     @dog = Dog.new
+    flash[:page_message] = "Please tell us about your dog!"
   end
 
   def create
@@ -11,7 +12,8 @@ class DogsController < ApplicationController
     @dog = Dog.new(dog_params)
     @dog.owner = @user
     if @dog.save
-      redirect_to "/users/#{@user.id}/dogs/#{@dog.id}"
+      flash[:alert] = "Dog Created. Good dog, #{@dog.name}!"
+      redirect_to dashboard_path
     else
       @errors = @dog.errors.full_messages
       render 'new'

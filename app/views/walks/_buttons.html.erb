@@ -1,14 +1,13 @@
-<div class='row' id='walk-buttons'>
-  <div class="button-bar small-centered column">
-    <ul class="button-group">
-
-      <li>
-        <form action = "/walks/<%= @walk.id %>/end_walk" method = "post">
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-          <input type = "submit" class = "button" value = "End Walk">
-        </form>
-      </li>
-      <li><a data-post-route="/walks/<%= @walk.id %>/marks" class="button" id='mark-button' onClick="markWalk(event)"> "Mark."</a> </li>
-    </ul>
+<div class='row'>
+  <div class='small-8 left columns'>
+    <a data-post-route="/walks/<%= @walk.id %>/marks" class="button small expand radius success" id='mark-button' onClick="markWalk(event)">Mark</a>
   </div>
+
+  <div class='small-3 right columns'>
+    <form action = "/walks/<%= @walk.id %>/end_walk" method = "post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type = "submit" class = "button small expand radius alert" value = "End">
+    </form>
+  </div>
+
 </div>

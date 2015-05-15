@@ -29,7 +29,7 @@
   <% @user.dogs.each do |dog| %>
     <div>
       <a href = "<%=@user.id%>/dogs/<%=dog.id%>"><%= dog.name %></a>
-      <p><%= dog.name %>'s birthday <%= dog.birthday.strftime("%B %d, %Y") %></p>
+      <p><%= dog.name %>'s birthday <%= dog.birthday.strftime("%B %d, %Y")%></p>
       <%= image_tag dog.avatar.url(:medium) %>
     </div>
   <% end %>

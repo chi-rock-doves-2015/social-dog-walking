@@ -4,6 +4,8 @@ class Walk < ActiveRecord::Base
   has_many   :walked_dogs
   has_many   :dogs, through: :walked_dogs
 
+  validates :user, presence: true
+
   def duration
     updated_at - created_at
   end
@@ -36,7 +38,7 @@ class Walk < ActiveRecord::Base
         distance += mark.distance_from_last_mark
       end
     end
-    distance
+    distance.round(1)
   end
 
   def mark_coords
@@ -53,7 +55,7 @@ class Walk < ActiveRecord::Base
     if self.marks.count > 2
       st_area = ActiveRecord::Base.connection.execute("select ST_Area(ST_Transform(ST_SetSRID(ST_GeomFromText('POLYGON((" +
         mark_coords + "))'), 4326), 900913));").map {|area| area["st_area"]}
-      st_area[0].to_f
+      st_area[0].to_f.round(1)
     else
       0
     end

@@ -34,45 +34,124 @@ function initializeMap() {
           mapTypeId: google.maps.MapTypeId.NORMAL,
           disableDefaultUI: true,
           // panControl: false,
-          styles:[{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"weight":1}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"weight":0.8}]},{"featureType":"landscape","stylers":[{"color":"#ffffff"}]},{"featureType":"water","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text","stylers":[{"visibility":"on"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#000000"}]},{"elementType":"labels.icon","stylers":[{"visibility":"on"}]}] };
+          styles:[{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#01051d"},{"weight":1}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#01051d"},{"weight":0.8}]},{"featureType":"landscape","stylers":[{"color":"#f5f5f4"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text","stylers":[{"visibility":"on"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#000000"}]},{"elementType":"labels.icon","stylers":[{"visibility":"on"}]}] };
 
   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-
-  if ($("body").hasClass("show")) {
-    if ($("#stats").attr("data-walk-mark-count") === "0") {
+  if ($("body").hasClass("dashboard")) {
+    if ($("#square-map").attr("data-user-walk-count") === "0") {
       html5Geolocation(displayMap);
     } else {
       loadGeo(function(geojson_data) {
-        if ($("body").hasClass("users")) {
-          map.data.addGeoJson(geojson_data);
-          extendBounds(geojson_data, "Polygon");
-        }
-        else {
-          map.data.addGeoJson(geojson_data);
-          extendBounds(geojson_data, "Point");
-        }
-      })
+
+        map.data.addGeoJson(geojson_data);
+        extendBounds(geojson_data, "Polygon");
+      });
     }
-  };
+  }
+
+if ($("#square-map").hasClass("walk-summary")) {
+  html5Geolocation(function (position) {
+      var url = $('#square-map').attr('data-post-route');
+      displayMap(position);
+      persistGeolocation(position, url);
+      debugger;
+      loadGeo(function(data) {
+        debugger;
+        map.data.addGeoJson(data);
+        // extendBounds(geojson_data, "Point");
+      });
+  });
+}
+
+  if ($("body").hasClass("walks")) {
+      html5Geolocation(displayMap);
+  }
+
+  // if ($("body").hasClass("show")) {
+  //   if ($("#stats").attr("data-walk-mark-count") === "0") {
+  //     html5Geolocation(displayMap);
+  //   } else {
+  //     loadGeo(function(geojson_data) {
+  //       if ($("body").hasClass("users")) {
+  //         map.data.addGeoJson(geojson_data);
+  //         extendBounds(geojson_data, "Polygon");
+  //       }
+  //       else {
+  //         map.data.addGeoJson(geojson_data);
+  //           // map.data.SetStyle(function(feature))
+  //         extendBounds(geojson_data, "Point");
+  //       }
+  //     });
+  //   }
+  // };
 
   map.data.addListener('addfeature', function (event) {
-    map.data.overrideStyle(event.feature, { fillColor: event.feature.getProperty('color'),
-                                            strokeWeight: 0,
-                                            zIndex: event.feature.getProperty('zIndex')});
+    if (event.feature.getProperty('geometry') === "Point") {
+      map.data.setStyle({
+        icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10,
+                strokeColor: event.feature.getProperty('strokeColor'),
+                strokeWeight: 8,
+                // fillColor: "black"
+                // scaledSize: new google.maps.Size(32, 32),
+                // url: "http://vignette2.wikia.nocookie.net/gaia/images/4/41/200px-Green-dot.svg"
+                // url: event.feature.getProperty('icon')
+              }
+      })
+    } else {
+
+      map.data.overrideStyle(event.feature, { zIndex: event.feature.getProperty('zIndex'),
+                                              fillColor: event.feature.getProperty('fillColor'),
+                                              strokeColor: event.feature.getProperty('strokeColor'),
+                                              strokeWeight: event.feature.getProperty('strokeWeight'),
+                                              fillOpacity: event.feature.getProperty('fillOpacity')
+                                              // icon:
+                                            });
+      }
+  });
+
+  $("#load-territory-geo-layer").click(function() {
+    map.data.forEach(function(feature) {
+      map.data.remove(feature);
+    });
+
+    if ($("#square-map").attr("data-user-walk-count") === "0") {
+      html5Geolocation(displayMap);
+    } else {
+      loadGeo(function(geojson_data) {
+
+        map.data.addGeoJson(geojson_data);
+        extendBounds(geojson_data, "Polygon");
+      });
+    }
   })
 
-
-  $("#load-territories-geo-layer").click(function() {
+  $("#load-neighborhood-geo-layer").click(function() {
     loadTerritoriesGeoLayer(function(geojson_data) {
-    map.data.addGeoJson(geojson_data);
-    // extendBounds(geojson_data, "Polygon");
-    })
+      map.data.forEach(function(feature) {
+        map.data.remove(feature);
+      });
+      map.data.addGeoJson(geojson_data);
+      extendBounds(geojson_data, "Polygon");
+    });
   })
 
-};
+  $("#load-local-area-geo-layer").click(function() {
 
-  // function setColorStyle (feature) {
-//   debugger;
+    loadLocalAreaGeoLayer(function(geojson_data) {
+      map.data.forEach(function(feature) {
+        map.data.remove(feature);
+      });
+      map.data.addGeoJson(geojson_data);
+      extendBounds(geojson_data, "Polygon");
+    });
+  })
+
+}
+
+// function setColorStyle (feature) {
+//
 //   return {
 //     fillColor: feature.getProperty('color'),
 //     strokeWeight: 0
@@ -80,11 +159,33 @@ function initializeMap() {
 // }
 
 function loadGeo (callback) {
-  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-show-id"), callback)
+  if ($("#map-canvas").attr("data-controller-name") === "users") {
+  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-user-id"), callback);
+  } else if ($("#square-map").hasClass("walk-summary")) {
+    $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#square-map").attr("data-walk-id"), callback);
+  } else {
+  $.getJSON("/"+$("#map-canvas").attr("data-controller-name")+"/"+$("#map-canvas").attr("data-walk-id"), callback);
+  }
 }
 
 function loadTerritoriesGeoLayer (callback) {
-  $.getJSON("/users/territory", callback)
+  $.getJSON("/users/territory", callback);
+}
+
+function loadLocalAreaGeoLayer (callback) {
+  html5Geolocation(postToServer);
+}
+
+function postToServer(position) {
+  $.post("/local_areas", returnGeolocationCoordinates(position), function(geojson_data, textStatus) {
+
+    map.data.forEach(function(feature) {
+      map.data.remove(feature);
+    });
+
+    map.data.addGeoJson(geojson_data);
+    extendBounds(geojson_data, "Polygon");
+  });
 }
 
 function extendBounds (geojson_data, geotype) {
@@ -122,6 +223,16 @@ function html5Geolocation (successAction, failAction) {
   } else {
     handleNoGeolocation(false);
   };
+}
+
+function returnGeolocationCoordinates(position) {
+
+  coordinates = {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude
+  }
+
+  return coordinates
 }
 
 function displayMap(position) {
@@ -176,8 +287,9 @@ function handleNoGeolocation(errorFlag) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).ready(function(){
 
+
+$(document).ready(function(){
 
   function onSuccessMark(position){
     displayMap(position);
@@ -210,8 +322,8 @@ $(document).ready(function(){
   })
 
   // MARK BUTTON
-  $(".mark").on('click', function(event){
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
-  })
+//   $(".mark").on('click', function(event){
+//     event.preventDefault();
+//     navigator.geolocation.getCurrentPosition(onSuccessMark, onError);
+//   })
 });

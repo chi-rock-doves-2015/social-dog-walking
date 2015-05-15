@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to "/users/#{@user.id}/welcome"
+      redirect_to new_user_dog_path(@user)
     else
       @errors = @user.errors.full_messages
       render 'new'
@@ -32,17 +32,20 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   def territory
-    "Hi"
-    @users = User.all
+    @user = current_user
+    @users = User.where.not(id: current_user.id)
       if request.xhr?
-        geojson = TerritoriesHelper.geojson(@users, "Polygon")
-        puts geojson
+        geojson = TerritoriesHelper.geojson(@user, @users, "Polygon")
         render json: geojson
       else
-        render render :nothing => true, status: 404
+        render :nothing => true, status: 404
       end
   end
+
+
 
   def edit
     @user = User.find_by(id: params[:id])
@@ -54,16 +57,24 @@ class UsersController < ApplicationController
     redirect_to user_path
   end
 
-  def delete
-  end
+
 
   def dashboard
-    @user = User.find_by(id: session[:user_id])
-    if session[:user_id]
-      render 'dashboard'
-    else
-      redirect_to '/'
+    # we could just use current_user... is something dependent on this?
+    unless @user = User.find_by(id: session[:user_id])
+      flash[:message] = "Sorry, it looks like you aren't logged in."
+      redirect_to "/"
     end
+
+    ##hacky- use location later
+    if mark = @user.marks.last
+      @local_area = LocalArea.new(mark.latitude, mark.longitude, current_user.id)
+    else
+      @local_area = LocalArea.new(42.255808, -87.549555, current_user.id)
+    end
+
+    render 'dashboard'
+
   end
 
   private

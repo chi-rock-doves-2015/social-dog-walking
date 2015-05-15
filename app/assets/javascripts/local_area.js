@@ -10,3 +10,6 @@ function sendCurrentPositionAndGoToLocalAreaRoute(pos){
 
   location.replace(query_string);
 }
+
+// current location
+// 
