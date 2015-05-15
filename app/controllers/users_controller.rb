@@ -56,7 +56,12 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    # we could just use current_user... is something dependent on this?
     @user = User.find_by(id: session[:user_id])
+    ##hacky- use location later
+    mark = @user.marks.last
+    @local_area = LocalArea.new(mark.latitude, mark.longitude, current_user.id)
+
     if session[:user_id]
       render 'dashboard'
     else

@@ -5,16 +5,37 @@
   <%= render "shared/map" %>
 </div>
 
-<form class = "button" action = "/users/<%=@user.id%>/walks" method = "post">
-  <% if @user.dogs %>
-    <% @user.dogs.each do |dog| %>
-      <input type = "hidden" name="dogs[<%=dog.id%>]" value='<%=dog.id%>'></input>
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <% end %>
+<div id="message" class="row">
+  <% if @errors %>
+    <div data-alert class='alert-box alert radius' >
+      <% @errors.each do |error| %>
+        <%= error %>
+      <% end %>
+    </div>
+  <% elsif flash[:message] %>
+    <div data-alert class='alert-box warning radius' >
+      <%= flash[:message] %>
+    </div>
+  <% elsif current_user.walks.length == 0 %>
+    <div data-alert class='alert-box warning radius' >
+      You don't have any walks yet!
+    </div>
   <% end %>
-  <input class = "button" type = "submit" value = "Take A Walk!"></input>
-</form>
+  <%= render "shared/start_walk_button" %>
+</div>
 
-<form class = "button" action = "/logout" method = "get">
-  <input class = "button" type = "submit" value = "Logout"></input>
-</form>
+
+<div class = "row">
+  <div class = "small-centered columns">
+    <h3>Neighborhood Leaders</h3>
+      <% @local_area.neighbors.each do |neighbor| %>
+        <%= render partial: "user_stats", locals: {user: neighbor} %>
+      <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <%= render "shared/logout_button" %>
+
+</div>
+
