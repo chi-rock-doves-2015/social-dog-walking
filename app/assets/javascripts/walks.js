@@ -1,14 +1,27 @@
-$(".walks.show").ready(function(){
-  html5Geolocation(function (position) {
-    var url = $('#mark-button').attr('data-post-route');
-    displayMap(position);
-    persistGeolocation(position, url);
-    loadGeo(function(data) {
-      map.data.addGeoJson(data);
-      // extendBounds(geojson_data, "Point");
-    });
-  });
-});
+// $(".walks.show").ready(function(){
+//   html5Geolocation(function (position) {
+//     var url = $('#mark-button').attr('data-post-route');
+//     displayMap(position);
+//     persistGeolocation(position, url);
+//     loadGeo(function(data) {
+//       map.data.addGeoJson(data);
+//       // extendBounds(geojson_data, "Point");
+//     });
+//   });
+// });
+
+// $(".walk-summary").ready(function(){
+//   debugger;
+//   html5Geolocation(function (position) {
+//     var url = $('#square-map').attr('data-post-route');
+//     displayMap(position);
+//     persistGeolocation(position, url);
+//     loadGeo(function(data) {
+//       map.data.addGeoJson(data);
+//       // extendBounds(geojson_data, "Point");
+//     });
+//   });
+// });
 
 $(document).ready(function(){
 

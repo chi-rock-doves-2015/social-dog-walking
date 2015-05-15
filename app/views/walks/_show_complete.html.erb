@@ -1,7 +1,7 @@
 <div class="show" id="show" data-controller-name="<%= controller_name %>"></div>
 <!-- -->
 
-  <div id='square-map'>
+  <div id='square-map' class='walk-summary' data-post-route="/walks/<%= @walk.id %>/marks" data-walk-id="<%= @walk.id %>">
     <%= render "shared/map" %>
   </div>
 
