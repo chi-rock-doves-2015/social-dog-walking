@@ -16,8 +16,12 @@ module UsersHelper
             coordinates: [coordinates]
           },
           properties: {
-            color: "red",
-            zIndex: 9999
+            geometry: "Polygon",
+            zIndex: 9999,
+            fillColor: "#ff292c",
+            strokeColor: "#ff292c",
+            strokeWeight: 8,
+            fillOpacity: 0.5
           }
         }]
 

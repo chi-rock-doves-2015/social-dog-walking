@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  console.log('new-walk');
+
   $("#new-walk-button").on('click', newWalk);
   // function(event){
   //   event.preventDefault();
