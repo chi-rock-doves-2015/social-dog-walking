@@ -5,6 +5,39 @@
   <%= render "shared/map" %>
 </div>
 
+<div id="message" class="row">
+  <% if @errors %>
+    <div data-alert class='alert-box alert radius' >
+      <% @errors.each do |error| %>
+        <%= error %>
+      <% end %>
+    </div>
+  <% elsif flash[:message] %>
+    <div data-alert class='alert-box success radius' >
+      <%= flash[:message] %>
+    </div>
+  <% elsif current_user.walks.length == 0 %>
+    <div data-alert class='alert-box success radius' >
+      Go for a walk!
+    </div>
+  <% else %>
+    <div data-alert class="alert-box success radius">
+      Go for a walk! Someday I'll be a button partial!
+    </div>
+  <% end %>
+</div>
+
+
+<div class = "row">
+  <div class = "small-centered columns">
+    <h3>Neighborhood Leaders</h3>
+      <% @local_area.neighbors.each do |neighbor| %>
+        <%= render partial: "user_stats", locals: {user: neighbor} %>
+      <% end %>
+  </div>
+</div>
+
+
 
 
 
