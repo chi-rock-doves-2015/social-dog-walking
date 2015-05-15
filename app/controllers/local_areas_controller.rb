@@ -1,6 +1,6 @@
 class LocalAreasController < ApplicationController
   # AJAX get request
-  # local_areas 
+  # local_areas
   def show
     # @local_area = LocalArea.new(params[:latitude], params[:longitude])
     # puts "*******"
@@ -9,6 +9,8 @@ class LocalAreasController < ApplicationController
     #   puts user
     #   puts user.inspect
     # end
+    @user = current_user
+
     if request.xhr?
       geojson = TerritoriesHelper.geojson(@local_area.users, "Polygon")
       puts geojson
