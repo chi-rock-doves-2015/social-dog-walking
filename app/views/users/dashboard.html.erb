@@ -7,7 +7,7 @@
 </div>
 
 </div>
-<div id='square-map' data-user-walk-count="<%= @user.walks.count %>">
+<div id='square-map' data-user-walk-count="<%= @user.marks.count %>">
   <%= render "shared/map" %>
 </div>
 
@@ -30,7 +30,7 @@
   <% else %>
   <div data-alert class='alert-box warning radius' >
       You haven't added any dogs yet!<a href="#" class="close">&times;</a>
-    </div>
+  </div>
   <% end %>
 
 
