@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to dashboard_path
+      redirect_to new_user_dog_path(@user)
     else
       @errors = @user.errors.full_messages
       render 'new'
