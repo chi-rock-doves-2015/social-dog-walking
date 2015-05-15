@@ -11,19 +11,20 @@
       <% @errors.each do |error| %>
         <%= error %>
       <% end %>
+      <a href="#" class="close">&times;</a>
     </div>
   <% elsif flash[:message] %>
     <div data-alert class='alert-box warning radius' >
-      <%= flash[:message] %>
+      <%= flash[:message] %><a href="#" class="close">&times;</a>
     </div>
   <% elsif current_user.walks.length == 0 %>
     <div data-alert class='alert-box warning radius' >
-      You don't have any walks yet!
+      You don't have any walks yet!<a href="#" class="close">&times;</a>
     </div>
   <% end %>
-  <%= render "shared/start_walk_button" %>
 </div>
 
+  <%= render "shared/start_walk_button" %>
 
 <div class = "row">
   <div class = "small-centered columns">
