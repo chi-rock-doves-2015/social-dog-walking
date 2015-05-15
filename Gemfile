@@ -51,12 +51,14 @@ gem 'geocoder'
 # group :test do
 
 
+
 # end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   gem 'factory_girl_rails'
+
   gem 'faker'
 
   gem 'jasmine-rails'
