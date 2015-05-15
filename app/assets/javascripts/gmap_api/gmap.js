@@ -83,7 +83,7 @@ function initializeMap() {
               }
       })
     } else {
-      debugger;
+
       map.data.overrideStyle(event.feature, { zIndex: event.feature.getProperty('zIndex'),
                                               fillColor: event.feature.getProperty('fillColor'),
                                               strokeColor: event.feature.getProperty('strokeColor'),
@@ -134,7 +134,7 @@ function initializeMap() {
 }
 
 // function setColorStyle (feature) {
-//   debugger;
+//
 //   return {
 //     fillColor: feature.getProperty('color'),
 //     strokeWeight: 0
@@ -155,11 +155,11 @@ function loadLocalAreaGeoLayer (callback) {
 
 function postToServer(position) {
   $.post("/local_areas", returnGeolocationCoordinates(position), function(geojson_data, textStatus) {
-    debugger;
+
     map.data.forEach(function(feature) {
       map.data.remove(feature);
     });
-    debugger;
+
     map.data.addGeoJson(geojson_data);
     extendBounds(geojson_data, "Polygon");
   });
@@ -203,12 +203,12 @@ function html5Geolocation (successAction, failAction) {
 }
 
 function returnGeolocationCoordinates(position) {
-  debugger;
+
   coordinates = {
     latitude: position.coords.latitude,
     longitude: position.coords.longitude
   }
-  debugger;
+
   return coordinates
 }
 

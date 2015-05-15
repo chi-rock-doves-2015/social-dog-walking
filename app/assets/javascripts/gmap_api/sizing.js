@@ -7,7 +7,7 @@ $(document).ready(function() {
 if ($('#walk-in-progress-map').length) {
   mapCanvasWalkInProgress($bodyHeight, $topBarHeight);
 }else if ($('#square-map').length ){
-  mapCanvasSquareView($windowWidth);
+  mapCanvasSquareView($windowWidth, $topBarHeight);
 }
 
 });
@@ -43,10 +43,14 @@ function setButtonsHeight(bodyHeight){
 }
 ////////////////////////
 
-function mapCanvasSquareView(width){
-  console.log('setting square map layout')
+function mapCanvasSquareView(width, topBarHeight){
+  console.log('setting square map layout');
   // var $width = document.documentElement.clientWidth;
   // var $height = document.documentElement.clientHeight;
   // console.log($width);
-  $('#map-canvas').css("height", (width));
-};
+  $('#map-canvas').css({
+    "height": width,
+    "position": "fixed",
+    "top": "topBarHeight"
+  });
+}
