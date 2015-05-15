@@ -1,19 +1,8 @@
 class LocalAreasController < ApplicationController
-  # AJAX get request
-  # local_areas
-  def show
-    # @local_area = LocalArea.new(params[:latitude], params[:longitude])
-    # puts "*******"
-    # puts @local_area.users
-    # @local_area.users.each do |user|
-    #   puts user
-    #   puts user.inspect
-    # end
-    @user = current_user
-
+  def create
     if request.xhr?
-      geojson = TerritoriesHelper.geojson(@local_area.users, "Polygon")
-      puts geojson
+      @local_area = LocalArea.new(params["latitude"], params["longitude"], current_user.id)
+      geojson = TerritoriesHelper.geojson(current_user, @local_area.neighbors, "Polygon")
       render json: geojson
     else
       render render :nothing => true, status: 404

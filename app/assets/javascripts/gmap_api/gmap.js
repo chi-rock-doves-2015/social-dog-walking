@@ -83,6 +83,7 @@ function initializeMap() {
               }
       })
     } else {
+      debugger;
       map.data.overrideStyle(event.feature, { zIndex: event.feature.getProperty('zIndex'),
                                               fillColor: event.feature.getProperty('fillColor'),
                                               strokeColor: event.feature.getProperty('strokeColor'),
@@ -93,17 +94,46 @@ function initializeMap() {
       }
   });
 
+  $("#load-territory-geo-layer").click(function() {
+    map.data.forEach(function(feature) {
+      map.data.remove(feature);
+    });
 
-  $("#load-territories-geo-layer").click(function() {
+    if ($("#square-map").attr("data-user-walk-count") === "0") {
+      html5Geolocation(displayMap);
+    } else {
+      loadGeo(function(geojson_data) {
+
+        map.data.addGeoJson(geojson_data);
+        extendBounds(geojson_data, "Polygon");
+      });
+    }
+  })
+
+  $("#load-neighborhood-geo-layer").click(function() {
     loadTerritoriesGeoLayer(function(geojson_data) {
-    map.data.addGeoJson(geojson_data);
-    // extendBounds(geojson_data, "Polygon");
+      map.data.forEach(function(feature) {
+        map.data.remove(feature);
+      });
+      map.data.addGeoJson(geojson_data);
+      extendBounds(geojson_data, "Polygon");
+    });
+  })
+
+  $("#load-local-area-geo-layer").click(function() {
+
+    loadLocalAreaGeoLayer(function(geojson_data) {
+      map.data.forEach(function(feature) {
+        map.data.remove(feature);
+      });
+      map.data.addGeoJson(geojson_data);
+      extendBounds(geojson_data, "Polygon");
     });
   })
 
 }
 
-  // function setColorStyle (feature) {
+// function setColorStyle (feature) {
 //   debugger;
 //   return {
 //     fillColor: feature.getProperty('color'),
@@ -117,6 +147,22 @@ function loadGeo (callback) {
 
 function loadTerritoriesGeoLayer (callback) {
   $.getJSON("/users/territory", callback);
+}
+
+function loadLocalAreaGeoLayer (callback) {
+  html5Geolocation(postToServer);
+}
+
+function postToServer(position) {
+  $.post("/local_areas", returnGeolocationCoordinates(position), function(geojson_data, textStatus) {
+    debugger;
+    map.data.forEach(function(feature) {
+      map.data.remove(feature);
+    });
+    debugger;
+    map.data.addGeoJson(geojson_data);
+    extendBounds(geojson_data, "Polygon");
+  });
 }
 
 function extendBounds (geojson_data, geotype) {
@@ -154,6 +200,16 @@ function html5Geolocation (successAction, failAction) {
   } else {
     handleNoGeolocation(false);
   };
+}
+
+function returnGeolocationCoordinates(position) {
+  debugger;
+  coordinates = {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude
+  }
+  debugger;
+  return coordinates
 }
 
 function displayMap(position) {
