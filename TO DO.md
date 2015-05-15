@@ -10,10 +10,10 @@ TO DO
 
 
 
- * [new branch]      fix-log-in-view -> origin/fix-log-in-view
+ * [new branch]      fix-log-in-view -> origin/fix-log-in-view  xxxx
  * [new branch]      fix-walks-and-markers -> origin/fix-walks-and-markers               xxxxx
- * [new branch]      fixing-bugs -> origin/fixing-bugs
- * [new branch]      full-dashboard-maps-suite -> origin/full-dashboard-maps-suite
- * [new branch]      j-routes   -> origin/j-routes
-   21f971e..19d69bd  master     -> origin/master
- * [new branch]      zoom-and-empty-walks-issues -> origin/zoom-and-empty-walks-issues
+ * [new branch]      fixing-bugs -> origin/fixing-bugs   xxxxx
+ * [new branch]      full-dashboard-maps-suite -> origin/full-dashboard-maps-suite   xxx
+ * [new branch]      j-routes   -> origin/j-routes  xxx
+   21f971e..19d69bd  master     -> origin/master  xxx
+ * [new branch]      zoom-and-empty-walks-issues -> origin/zoom-and-empty-walks-issues  xxx
