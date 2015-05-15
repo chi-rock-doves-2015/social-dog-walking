@@ -4,7 +4,6 @@
     <h3>Choose Dogs</h3>
       <% current_user.dogs.each do |dog| %>
       <label><input type='checkbox' name='dogs[<%=dog.id %>]' value='<%=dog.id%>' checked ><%= dog.name %></label>
-
       <% end %>
     <% else %>
       <h3>You don't have any dogs.</h3>

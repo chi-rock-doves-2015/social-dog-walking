@@ -13,18 +13,15 @@
       <% end %>
     </div>
   <% elsif flash[:message] %>
-    <div data-alert class='alert-box success radius' >
+    <div data-alert class='alert-box warning radius' >
       <%= flash[:message] %>
     </div>
   <% elsif current_user.walks.length == 0 %>
-    <div data-alert class='alert-box success radius' >
-      Go for a walk!
-    </div>
-  <% else %>
-    <div data-alert class="alert-box success radius">
-      Go for a walk! Someday I'll be a button partial!
+    <div data-alert class='alert-box warning radius' >
+      You don't have any walks yet!
     </div>
   <% end %>
+  <%= render "shared/start_walk_button" %>
 </div>
 
 
@@ -37,10 +34,8 @@
   </div>
 </div>
 
+<div class="row">
+  <%= render "shared/logout_button" %>
 
-
-
-
-
-
+</div>
 

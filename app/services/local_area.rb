@@ -1,7 +1,7 @@
 class LocalArea
   attr_reader :marks, :neighbors, :dogs
 
-  def initialize(lat, lon, current_user_id = current_user.id)
+  def initialize(lat, lon, current_user_id)
     point = "'POINT " + "(" + lat.to_s + " " + lon.to_s + ")" + "'"
 
     sql = "SELECT * FROM marks WHERE ST_DWithin(coords, #{point}, 1000);"
