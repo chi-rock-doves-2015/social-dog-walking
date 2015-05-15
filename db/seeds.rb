@@ -5,6 +5,8 @@ User.create!(username: "Jeff Goldblum", email: "jeff@goldblum.com", password: "p
 User.create!(username: "Nic Cage", email: "nic@cage.com", password: "password")
 User.create!(username: "Jeff Bridges", email: "jeff@bridges.com", password: "password")
 User.create!(username: "Frank Sinatra", email: "frank@sinatra.com", password: "password")
+ellen = User.create!(username: "Ellen Degeneres", email: "ellen@degeneres.com", password: "password")
+grace = User.create!(username: "Grace Hopper", email: "grace@hopper.com", password: "password")
 
 dog1 = Dog.create!(owner: User.find_by(username: "Bob"), name: "Spot", birthday: "January 5, 1999", breed: "Sheltie")
 dog2 = Dog.create!(owner: User.find_by(username: "Foobar"), name: "Fido", birthday: "January 1, 1999", breed: "German Shepherd")
@@ -13,6 +15,9 @@ dog4 = Dog.create!(owner: User.find_by(username: "Jeff Goldblum"), name: "Max", 
 dog5 = Dog.create!(owner: User.find_by(username: "Nic Cage"), name: "Ruffis", birthday: "October 23, 1903", breed: "Terrier")
 dog6 = Dog.create!(owner: User.find_by(username: "Jeff Bridges"), name: "Rover", birthday: "October 23, 1927", breed: "Impotent Dane")
 dog7 = Dog.create!(owner: User.find_by(username: "Frank Sinatra"), name: "Spike", birthday: "January 1, 1950", breed: "Little Dane")
+dog8 = Dog.create!(owner: User.find_by(username: "Ellen Degeneres"), name: "Morty", birthday: "June 1, 1660", breed: "Irish Setter")
+dog9 = Dog.create!(owner: User.find_by(username: "Grace Hopper"), name: "Rex", birthday: "July 4, 2007", breed: "Pointer")
+
 
 # DBC Walkabout
 dog1.walks << Walk.create!(user_id: 1)
@@ -124,4 +129,22 @@ Mark.create!(walk_id: 11, coords: 'POINT(41.85773 -87.62739)', accuracy: 20)
 Mark.create!(walk_id: 11, coords: 'POINT(41.85778 -87.62707)', accuracy: 20)
 Mark.create!(walk_id: 11, coords: 'POINT(41.86192 -87.62709)', accuracy: 20)
 Mark.create!(walk_id: 11, coords: 'POINT(41.86418 -87.62724)', accuracy: 20)
+
+dog8.walks << Walk.create!(user:ellen)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88187 -87.63969)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88564 -87.63909)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88564 -87.64278)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88564 -87.64424)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88443 -87.64415)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88187 -87.64415)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88053 -87.64406)', accuracy: 20)
+Mark.create!(walk_id: 12, coords: 'POINT(41.88059 -87.64123)', accuracy: 20)
+
+dog9.walks << Walk.create!(user:grace)
+Mark.create!(walk_id: 13, coords: 'POINT(41.88564 -87.64192)', accuracy: 20)
+Mark.create!(walk_id: 13, coords: 'POINT(41.88564 -87.64741)', accuracy: 20)
+Mark.create!(walk_id: 13, coords: 'POINT(41.88424 -87.64973)', accuracy: 20)
+Mark.create!(walk_id: 13, coords: 'POINT(41.88181 -87.64982)', accuracy: 20)
+Mark.create!(walk_id: 13, coords: 'POINT(41.88162 -87.64612)', accuracy: 20)
+Mark.create!(walk_id: 13, coords: 'POINT(41.88558 -87.64192)', accuracy: 20)
 
