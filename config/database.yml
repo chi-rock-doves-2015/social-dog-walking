@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: social_dog_walking_production
-  username: social_dog_walking
-  password: <%= ENV['SOCIAL_DOG_WALKING_DATABASE_PASSWORD'] %>
