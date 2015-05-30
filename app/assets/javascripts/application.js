@@ -13,6 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.readyselector
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/social_dog_walking
 //= require_tree ./gmap_api
 //= require_tree .
 //= require foundation

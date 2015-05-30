@@ -1,16 +1,17 @@
-<div class='row'>
-  <div class="small-12 small-centered columns">
-    <!-- <ul class="button-group radius"> -->
-        <a class='button small radius left ' id="load-territory-geo-layer">My Territory</a>
-   <!--      <a class='button small' id="load-neighborhood-geo-layer">Neighborhood</a> -->
-        <a class='button small radius right' id="load-local-area-geo-layer">Local Area</a>
-    </ul>
+<div id = 'map'>
+  <div class='row'>
+    <div class="small-12 small-centered columns">
+      <!-- <ul class="button-group radius"> -->
+          <a class='button small radius left ' id="load-territory-geo-layer">My Territory</a>
+     <!--      <a class='button small' id="load-neighborhood-geo-layer">Neighborhood</a> -->
+          <a class='button small radius right' id="load-local-area-geo-layer">Local Area</a>
+      <!-- </ul> -->
+    </div>
   </div>
-</div>
 
-</div>
 <div id='square-map' data-user-walk-count="<%= @user.marks.count %>">
-  <%= render "shared/map" %>
+    <%= render "shared/map" %>
+  </div>
 </div>
 
 <div id="messages" class="row">
@@ -18,37 +19,33 @@
   <%= render 'shared/dashboard_greeting_banner' %>
 </div>
 
+<div id="start-walk-button">
   <%= render "shared/start_walk_button" %>
+</div>
 
-<% if current_user.dogs.any? %>
+<div id="dogs">
+    <div data-alert class='alert-box warning radius' >
+        You haven't added any dogs yet!<a href="#" class="close">&times;</a>
+    </div>
+</div>
+
+<div id = "neighborhood-leaders">
   <div class = "row">
     <div class = "small-centered columns">
-      <h3>My Dogs</h3>
-        <% current_user.dogs.each do |dog| %>
-          <%= render partial: "dogs/dog_stats", locals: {dog: dog} %>
+      <h3>Neighborhood Leaders</h3>
+        <% @local_area.neighbors.each do |neighbor| %>
+          <%= render partial: "user_stats", locals: {user: neighbor} %>
         <% end %>
     </div>
   </div>
-  <% else %>
-  <div data-alert class='alert-box warning radius' >
-      You haven't added any dogs yet!<a href="#" class="close">&times;</a>
-  </div>
-<% end %>
-
-
-
-
-<div class = "row">
-  <div class = "small-centered columns">
-    <h3>Neighborhood Leaders</h3>
-      <% @local_area.neighbors.each do |neighbor| %>
-        <%= render partial: "user_stats", locals: {user: neighbor} %>
-      <% end %>
-  </div>
 </div>
 
-<div class="row">
-  <%= render "shared/logout_button" %>
+<footer>
+  <div id = "logout-button">
+    <div class="row">
+      <%= render "shared/logout_button" %>
+    </div>
+  </div>
+</footer>
 
-</div>
 

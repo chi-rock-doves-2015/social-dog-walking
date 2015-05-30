@@ -1,5 +1,16 @@
 class DogsController < ApplicationController
 
+  #Index route for a backbone dog fetch
+  def index
+    dogs = Dog.where(owner_id: params[:user_id])
+
+    dogs_json = dogs.map do |dog|
+      dog.as_json.merge(:distanceTraveled => dog.distance_traveled, :distanceScore => dog.distance_score, :area => dog.area)
+    end
+
+    render json: dogs_json
+  end
+
   def new
     #may want to change params[:user_id] to session[:user_id] for security
     @user = User.find_by(id: session[:user_id])
