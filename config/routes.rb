@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  # backbone experimental routes: this doesn't work bc bb needs a #hash#
+  # get '/backbone' => 'users#dashboard'
+
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
 
   resources :walks do
     resources :marks, only: [:create]
@@ -20,13 +24,15 @@ Rails.application.routes.draw do
     resources :walks, only: [:create, :index]
   end
 
-  resource :local_areas, only: [:create]
+  resource :local_areas, only: [:create, :index]
 
   # resource :dashboard, only: [:show]
 
   # get 'walks/in-progress' => 'walks#in_progress'
 
   # get '/dashboard' => 'users#dashboard', as: 'dashboard'
+
+  get 'users/:user_id/neighbors' => 'users#neighbors'
 
   get '/dashboard' => 'users#dashboard'
 

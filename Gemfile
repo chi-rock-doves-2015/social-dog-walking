@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+# Adding Backbone
+gem 'rails-backbone'
+
+# Need Underscore for Backbone
+gem 'underscore-rails'
+
+# EJS is also necessary for new file format used when adding backbone
+gem 'ejs'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
