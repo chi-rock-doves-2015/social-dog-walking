@@ -11,6 +11,7 @@ class WalksController < ApplicationController
 
   end
 
+  # For Backbone: 
   def create
     puts params[:dogs]
       @walk = Walk.new(user: current_user)

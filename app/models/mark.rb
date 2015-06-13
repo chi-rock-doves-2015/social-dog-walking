@@ -31,12 +31,12 @@ class Mark < ActiveRecord::Base
   end
 
   def longitude
-    self.coords.y
+    self.coords.x
   end
 
 
   def latitude
-    self.coords.x
+    self.coords.y
   end
 
 end

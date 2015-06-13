@@ -21,7 +21,7 @@ module StatsHelper
   # end
 
   # def combined_score
-    
+
   # end
 
 

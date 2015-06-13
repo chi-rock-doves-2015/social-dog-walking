@@ -9439,10 +9439,17 @@ th.hide-for-touch {
     display: none !important;
   }
 }
-/* line 1490, /Users/christopherbohl/Desktop/social-dog-walking/app/assets/stylesheets/foundation_and_overrides.scss */
+/* line 1490, /Users/christopherbohl/Desktop/terriertory/app/assets/stylesheets/foundation_and_overrides.scss */
 #map-canvas {
   max-width: 720px;
   max-height: 720px;
+}
+
+/* line 1495, /Users/christopherbohl/Desktop/terriertory/app/assets/stylesheets/foundation_and_overrides.scss */
+#image-header {
+  margin-top: 0.4em;
+  height: 2em;
+  width: 11em;
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files

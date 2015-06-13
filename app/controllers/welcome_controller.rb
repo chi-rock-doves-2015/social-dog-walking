@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if current_user
-      redirect_to '/dashboard'
+      redirect_to '/dashboard/#backbone'
     end
   end
 
