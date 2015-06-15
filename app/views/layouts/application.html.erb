@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <title><%= content_for?(:title) ? yield(:title) : "Terriertory" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "TerriertoryBB" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application"%>
+
     <!-- Google Maps API? -->
     <%= csrf_meta_tags %>
   </head>

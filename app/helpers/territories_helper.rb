@@ -4,6 +4,7 @@ module TerritoriesHelper
   #   @walkcurrent_user.id = user.id ? "red" : "%06x" % (rand * 0xffffff)
   # end
 
+  # Build current user's territory as geojson + others' terriertory
   def self.geojson(user, users, geotype)
     features = Array.new
     coordinates = Array.new
