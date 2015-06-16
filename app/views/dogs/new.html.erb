@@ -27,4 +27,13 @@
     </div>
   </div>
 
+  <div class = "row">
+    <div class='medium-3 columns'>
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar %>
+    </div>
+    <div class='medium-3 columns'>
+      <%= f.submit "register", {class: "button"} %>
+    </div>
+  </div>
 <% end %>

@@ -39,7 +39,10 @@ Rails.application.configure do
 
   # Sends paperclip images to computer
   # Paperclip.options[:command_path] = "/usr/local/bin/"
-
+  config.paperclip_defaults = {
+  :storage => :filesystem
+  # :path => "#{Rails.root}/public/system/images/:class/:attachment/:id_partition/:style/:filename"
+  }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

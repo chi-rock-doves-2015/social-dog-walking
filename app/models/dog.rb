@@ -3,9 +3,9 @@ class Dog < ActiveRecord::Base
 
   has_attached_file :avatar,
   :styles => { :thumb => '60x60#', :medium => '200x200#', :large => '300x300#' }, :default_style => :large,
-  :default_url => '/images/:attachment/dog-avatar.png',
-  :path => "dogs/:id/avatar/:style.:extension"
+  :default_url => '/images/:attachment/dog-avatar.png'
 
+  
   belongs_to  :owner, class_name: "User"
   has_many    :walked_dogs
   has_many    :walks, through: :walked_dogs

@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+# Adding Backbone
+gem 'rails-backbone'
+
+# Need Underscore for Backbone
+gem 'underscore-rails'
+
+# EJS is also necessary for new file format used when adding backbone
+gem 'ejs'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
@@ -35,8 +44,10 @@ gem 'rails_12factor', group: :production
 # Foundation front-end framework
 gem 'foundation-rails'
 
-#Alows for S3 capabailities"
-gem "aws-sdk"
+#Alows for S3 capabailities, termporarily going back because new version does not work"
+gem 'aws-sdk', '< 2.0'
+
+# gem "aws-sdk"
 
 # For file attachments
 gem "paperclip", "~> 4.2"

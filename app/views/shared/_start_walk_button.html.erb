@@ -1,9 +1,9 @@
 <div class='row'>
   <div class='small-9 small-centered columns'>
   <% if session[:walk_id] %>
-    <a id="continue-walk-button" class = "button small expand radius success " href="<%= walk_path(session[:walk_id]) %>"> Walking</a>
+    <a id="continue-walk-button" class = "button small expand radius warning " href="<%= walk_path(session[:walk_id]) %>/#live-walk"> Finish Your Walk!</a>
   <% else %>
-      <form action = "/users/<%=@user.id%>/walks" method = "post">
+      <form action = "/walks" method = "post">
         <% if @user.dogs %>
           <% @user.dogs.each do |dog| %>
             <input type = "hidden" name="dogs[<%=dog.id%>]" value='<%=dog.id%>'></input>

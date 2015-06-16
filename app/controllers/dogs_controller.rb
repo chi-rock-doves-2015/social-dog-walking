@@ -1,5 +1,17 @@
 class DogsController < ApplicationController
 
+  #Index route for a backbone dog fetch
+  def index
+    dogs = Dog.where(owner_id: current_user.id)
+
+    dogs_json = dogs.map do |dog|
+      dog.as_json.merge(:distanceTraveled => dog.distance_traveled, :distanceScore => dog.distance_score, :area => dog.area)
+    end
+    puts dogs_json
+
+    render json: dogs_json
+  end
+
   def new
     #may want to change params[:user_id] to session[:user_id] for security
     @user = User.find_by(id: session[:user_id])
@@ -13,7 +25,7 @@ class DogsController < ApplicationController
     @dog.owner = @user
     if @dog.save
       flash[:alert] = "Dog Created. Good dog, #{@dog.name}!"
-      redirect_to dashboard_path
+      redirect_to '/dashboard/#backbone'
     else
       @errors = @dog.errors.full_messages
       render 'new'
@@ -28,7 +40,7 @@ class DogsController < ApplicationController
   def update
     @dog = Dog.find_by(id: params[:id])
     @dog = @dog.update(dog_params)
-    redirect_to user_dog_path
+    redirect_to '/dashboard/#backbone'
   end
 
   def show

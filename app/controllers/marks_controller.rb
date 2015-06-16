@@ -5,6 +5,7 @@ class MarksController < ApplicationController
   def create
     @walk = Walk.find_by(id: params[:walk_id])
     puts params[:walk_id]
+    puts mark_params.as_json
     puts "***************************************"
     if request.xhr?
       @mark = Mark.new(mark_params)

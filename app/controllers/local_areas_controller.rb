@@ -1,4 +1,7 @@
 class LocalAreasController < ApplicationController
+	def index
+	end
+	
   def create
     if request.xhr?
       @local_area = LocalArea.new(params["latitude"], params["longitude"], current_user.id)

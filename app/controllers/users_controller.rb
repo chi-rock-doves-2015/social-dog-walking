@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :except=>[:new,:create]
+  # skip_before_filter :require_login, 
+
   def new
     @user = User.new
   end
@@ -33,17 +36,34 @@ class UsersController < ApplicationController
   end
 
 
+  #remove or replace when neighbors view is no longer needed (now) - Local area no longer works this way.
+  # def neighbors
+  #   if request.xhr?
+  #     if mark = current_user.marks.last
+  #       @local_area = LocalArea.new(mark.latitude, mark.longitude, current_user.id)
+  #     else
+  #       @local_area = LocalArea.new(42.255808, -87.549555, current_user.id)
+  #     end
+  #     neighbors_json = @local_area.neighbors.map do |neighbor|
+  #       neighbor.as_json.merge(:distanceTraveled => neighbor.distance_traveled, :distanceScore => neighbor.distance_score, :area => neighbor.area)
+  #     end
+  #   end
 
-  def territory
-    @user = current_user
-    @users = User.where.not(id: current_user.id)
-      if request.xhr?
-        geojson = TerritoriesHelper.geojson(@user, @users, "Polygon")
-        render json: geojson
-      else
-        render :nothing => true, status: 404
-      end
-  end
+  #   ##hacky- use location later
+
+  #   render json: neighbors_json
+  # end
+
+  # def territory
+  #   @user = current_user
+  #   @users = User.where.not(id: current_user.id)
+  #     if request.xhr?
+  #       geojson = TerritoriesHelper.geojson(@user, @users, "Polygon")
+  #       render json: geojson
+  #     else
+  #       render :nothing => true, status: 404
+  #     end
+  # end
 
 
 
@@ -60,20 +80,14 @@ class UsersController < ApplicationController
 
 
   def dashboard
-    # we could just use current_user... is something dependent on this?
-    unless @user = User.find_by(id: session[:user_id])
-      flash[:message] = "Sorry, it looks like you aren't logged in."
-      redirect_to "/"
-    end
-
-    ##hacky- use location later
-    if mark = @user.marks.last
-      @local_area = LocalArea.new(mark.latitude, mark.longitude, current_user.id)
+    # if backbone ajax request, build a nested dashboard json object
+    if request.xhr?
+      render json: dashboard_json_constructor
     else
-      @local_area = LocalArea.new(42.255808, -87.549555, current_user.id)
+      # else render dashboard html skeleton
+      @user = current_user
+      render 'dashboard'
     end
-
-    render 'dashboard'
 
   end
 
